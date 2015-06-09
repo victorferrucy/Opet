@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleStaffList}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+	<h:outputLabel value="#{msg.headerStaffList}" styleClass="title" />
+
+	<hr />
+
+	<h:form id="mensagem">
+		<h:outputLabel value="Lista vazia" styleClass="msgWarn"
+			rendered="#{empty employeeBean.consulta}" />
+	</h:form>
+
+	<h:form id="listagem">
+
+		<h:dataTable value="#{employeeBean.consulta}" var="employee"
+			border="1" cellpadding="3" cellspacing="3"
+			rendered="#{!empty employeeBean.consulta}">
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.employeeID}" />
+				</f:facet>
+				<h:outputText value="#{employee.employeeID}"
+					style="text-align: center; display: block" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.firstName}" />
+				</f:facet>
+				<h:outputText value="#{employee.firstName}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.lastName}" />
+				</f:facet>
+				<h:outputText value="#{employee.lastName}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.dateOfHire}" />
+				</f:facet>
+				<h:outputText value="#{employee.dataContratacao}"
+					style="text-align: center; display: block;">
+					<f:convertDateTime dateStyle="short" />
+				</h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.edit}" />
+				</f:facet>
+				<h:commandLink
+					action="#{employeeBean.editarEmployee(employee.employeeID)}"
+					style="text-align:center; display:block;">
+					<h:graphicImage library="imagens" name="editar16.png" styleClass="img"  />
+				</h:commandLink>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.delete}" />
+				</f:facet>
+				<h:commandLink
+					action="#{employeeBean.excluirEmployee(employee.employeeID)}"
+					onclick="if(!confirm('#{msg.confirmDelete} #{employee.firstName} #{employee.lastName}?')) return false"
+					style="text-align:center; display:block;">
+					<h:graphicImage library="imagens" name="excluir16.png"
+						styleClass="img" />
+				</h:commandLink>
+			</h:column>
+
+		</h:dataTable>
+
+	</h:form>
+
+	<hr />
+
+	<h:form>
+		<h:commandLink action="#{employeeBean.novo()}" value="#{msg.homepage}" />
+	</h:form>
+
+</h:body>
+</html>

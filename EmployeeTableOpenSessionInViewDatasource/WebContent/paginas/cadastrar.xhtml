@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleRegister}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+	<h:outputLabel value="#{msg.headerRegister}" styleClass="title" />
+
+	<hr />
+
+	<h:form>
+
+		<h:messages />
+
+		<h:panelGrid columns="3">
+
+			<h:outputText value="*" styleClass="msgWarn" />
+			<h:outputLabel value="#{msg.firstName}" styleClass="emphasis" />
+			<h:inputText id="firstName" label="#{msg.firstName}"
+				value="#{employeeBean.employee.firstName}" required="true" />
+
+			<h:outputText />
+			<h:outputLabel value="#{msg.lastName}" styleClass="emphasis" />
+			<h:inputText id="lastName" label="#{msg.lastName}"
+				value="#{employeeBean.employee.lastName}" required="false" />
+
+			<h:outputText />
+			<h:outputLabel value="#{msg.dateOfHire}" styleClass="emphasis" />
+			<h:inputText id="dateOfHire" label="#{msg.dateOfHire}"
+				value="#{employeeBean.employee.dataContratacao}">
+				<f:converter converterId="employee.table.util.ConverterDate" />
+				</h:inputText>
+
+			<h:outputText />
+			<h:outputText value="#{msg.requiredFields}" styleClass="msgWarn" />
+			<h:outputText />
+
+			<h:outputText />
+			<h:commandButton action="#{employeeBean.confirmarCadastro}" value="#{msg.confirmRegister}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+	<hr />
+
+	<h:form>
+		<h:commandLink action="#{employeeBean.novo()}" value="#{msg.homepage}" />
+	</h:form>
+</h:body>
+</html>

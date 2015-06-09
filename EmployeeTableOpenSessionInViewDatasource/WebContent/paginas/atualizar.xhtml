@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleUpdate}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+<h:outputLabel value="#{msg.headerUpdate}" styleClass="title" />
+
+	<hr />
+
+	<h:form>
+
+		<h:messages />
+
+		<h:panelGrid columns="3">
+
+			<h:outputText />
+			<h:outputLabel value="#{msg.employeeID}" styleClass="emphasis" />
+			<h:outputText value="#{employeeBean.employee.employeeID}" />
+
+			<h:outputText value="*" styleClass="msgWarn" />
+			<h:outputLabel value="#{msg.firstName}" styleClass="emphasis" />
+			<h:inputText id="firstName" label="#{msg.firstName}"
+				value="#{employeeBean.employee.firstName}" required="true" />
+
+			<h:outputText />
+			<h:outputLabel value="#{msg.lastName}" styleClass="emphasis" />
+			<h:inputText id="lastName" label="#{msg.lastName}"
+				value="#{employeeBean.employee.lastName}" required="false" />
+
+			<h:outputText />
+			<h:outputLabel value="#{msg.dateOfHire}" styleClass="emphasis" />
+			<h:inputText id="dateOfHire"
+				value="#{employeeBean.employee.dataContratacao}" required="false">
+				<f:convertDateTime dateStyle="short"/>
+			</h:inputText>
+
+			<h:outputText />
+			<h:outputText value="#{msg.requiredFields}" styleClass="msgWarn" />
+			<h:outputText />
+
+			<h:outputText />
+			<h:commandButton action="#{employeeBean.confirmarAtualização()}"
+				value="#{msg.confirmUpdate}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+	<hr />
+
+	<h:form>
+		<h:commandLink action="#{employeeBean.novo()}" value="#{msg.homepage}" />
+	</h:form>
+
+</h:body>
+</html>

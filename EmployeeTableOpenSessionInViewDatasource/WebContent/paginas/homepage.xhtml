@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleHome}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+	<h:outputLabel value="#{msg.headerHome}" styleClass="title" />
+	
+	<hr />
+	
+	<h:form>
+		<h:outputLabel value="#{msg.language}" />
+		<br />
+		<h:commandLink action="#{modificadorDeLocalizacao.brazilAction()}">
+			<h:graphicImage library="imagens" name="br_flag.gif" styleClass="img" />
+		</h:commandLink>
+		<h:commandLink action="#{modificadorDeLocalizacao.usaAction()}">
+			<h:graphicImage library="imagens" name="en_flag.gif" styleClass="img" />
+		</h:commandLink>
+		
+	</h:form>
+
+	<hr />
+	
+	<h:outputLabel value="#{msg.optionHome}" />
+	
+	<h:form>
+		<h:panelGrid columns="1">
+			<h:commandLink action="cadastrar" value="#{msg.titleRegister}" />
+			<h:commandLink action="consultar" value="#{msg.titleStaffList}" />
+			<h:commandLink action="pesquisar" value="#{msg.titleSearch}" />
+		</h:panelGrid>
+	</h:form>
+
+	<hr />
+	
+</h:body>
+</html>

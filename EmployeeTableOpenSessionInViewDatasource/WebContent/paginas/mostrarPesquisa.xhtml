@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleSearch}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+
+<h:body>
+
+	<h:outputLabel value="#{msg.msgSearch}" styleClass="title" />
+
+	<hr />
+
+	<h:dataTable value="#{employeeBean.resultado}" var="employee"
+		border="1" cellpadding="3" cellspacing="3">
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.employeeID}" />
+			</f:facet>
+			<h:outputText value="#{employee.employeeID}"
+				style="text-align: center; display: block;" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.firstName}" />
+			</f:facet>
+			<h:outputText value="#{employee.firstName}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.lastName}" />
+			</f:facet>
+			<h:outputText value="#{employee.lastName}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.dateOfHire}" />
+			</f:facet>
+			<h:outputText value="#{employee.dataContratacao}"
+				style="text-align: center; display: block;">
+				<f:converter converterId="employee.table.util.ConverterDate" />
+			</h:outputText>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.edit}" />
+			</f:facet>
+			<h:form>
+				<h:commandLink
+					action="#{employeeBean.editarEmployee(employee.employeeID)}"
+					style="text-align:center; display:block;">
+					<h:graphicImage library="imagens" name="editar16.png"
+						styleClass="img" />
+				</h:commandLink>
+			</h:form>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{msg.delete}" />
+			</f:facet>
+			<h:form>
+				<h:commandLink
+					action="#{employeeBean.excluirEmployee(employee.employeeID)}"
+					onclick="if(!confirm('#{msg.confirmDelete} #{employee.firstName} #{employee.lastName}?')) return false"
+					style="text-align:center; display:block;">
+					<h:graphicImage library="imagens" name="excluir16.png" />
+				</h:commandLink>
+			</h:form>
+		</h:column>
+
+	</h:dataTable>
+
+	<hr />
+
+	<h:form>
+		<h:commandLink action="#{employeeBean.novo()}" value="#{msg.homepage}" />
+	</h:form>
+
+</h:body>
+</html>

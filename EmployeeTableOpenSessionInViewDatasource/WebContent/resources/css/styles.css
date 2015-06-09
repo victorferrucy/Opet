@@ -1,0 +1,108 @@
+/* error message style */
+.error { 
+   color:red;
+}
+
+/* column header style */
+.header
+{ 
+   background-color: steelblue;
+   color: white;
+   text-align: left;
+}
+
+.msgError {
+	color: red;
+	font-size: 25px;
+}
+
+.msgInfo {
+	color: red;
+	font-size: 15px;
+}
+
+.msgWarn {
+	color: red;
+	font-size: 12px;
+}
+
+.emphasis {
+	font-style: italic;
+	fonte-size: 1.3em;
+}
+
+.img {
+	border: 0px; 
+	margin-right: 1em
+}
+
+/* row styles */
+.oddRows
+{
+   padding-left: 5px;
+   background-color: lightcyan;
+}
+.evenRows
+{
+   padding-left: 5px;
+   background-color: lightskyblue;
+}
+
+/* table style */
+.table
+{
+   width: 750px;
+}
+
+.label {
+	font-size: 1.5em; 
+	font-styel: oblique; 
+	color: brown;
+}
+
+.titleHelvetica {
+	font-family: helvetica; 
+	color: green; 
+	font-size: x-large; 
+	font-style: oblique; 
+	font-weight: 600
+}
+
+/* row styles */
+.oddRows
+{
+   padding-left: 5px;
+   background-color: lightcyan;
+}
+.evenRows
+{
+   padding-left: 5px;
+   background-color: lightskyblue;
+}
+
+/* table style */
+.table
+{
+   width: 750px;
+}
+
+.label {
+	font-size: 1.5em; 
+	font-styel: oblique; 
+	color: brown;
+}
+
+.title {
+	
+	font-size: xx-large; 
+	font-style: italic; 
+	color: blue;
+}
+
+.titleHelvetica {
+	font-family: helvetica; 
+	color: green; 
+	font-size: x-large; 
+	font-style: oblique; 
+	font-weight: 600
+}

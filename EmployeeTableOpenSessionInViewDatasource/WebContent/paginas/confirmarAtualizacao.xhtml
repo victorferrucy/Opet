@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>#{msg.titleUpdate}</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+</h:head>
+<h:body>
+
+	<h:outputLabel value="#{msg.headerConfirmUpadate}" styleClass="title" />
+
+	<hr />
+
+	<h:form>
+
+		<h:messages />
+
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="#{msg.employeeID}" styleClass="emphasis" />
+			<h:outputText value="#{employeeBean.employee.employeeID}" />
+
+			<h:outputLabel value="#{msg.firstName}" styleClass="emphasis" />
+			<h:outputText value="#{employeeBean.employee.firstName}" />
+
+			<h:outputLabel value="#{msg.lastName}" styleClass="emphasis" />
+			<h:outputText value="#{employeeBean.employee.lastName}"/>
+
+			<h:outputLabel value="#{msg.dateOfHire}" styleClass="emphasis" />
+			<h:outputText value="#{employeeBean.employee.dataContratacao}" />
+
+			<h:commandButton action="#{employeeBean.atualizar}" value="#{msg.update}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+	<hr />
+
+	<h:form>
+		<h:commandLink action="atualizar" value="#{msg.goBack}" />
+	</h:form>
+
+</h:body>
+</html>
