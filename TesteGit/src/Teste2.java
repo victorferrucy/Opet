@@ -6,6 +6,6 @@
  * @author Victor Ferrucy
  *
  */
-public class Teste {
-	private boolean teste = true;
+public class Teste2 {
+
 }
