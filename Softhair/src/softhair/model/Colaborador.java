@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-@Inheritance(strategy= InheritanceType.JOINED)
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Colaborador {
 	@Id @GeneratedValue
 	private int idColaborador;
