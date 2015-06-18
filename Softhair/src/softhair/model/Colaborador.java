@@ -2,11 +2,22 @@ package softhair.model;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
 /**
  * @author Victor Ferrucy
  *
  */
+@Entity
+@Table
+@Inheritance(strategy= InheritanceType.JOINED)
 public class Colaborador {
+	@Id @GeneratedValue
 	private int idColaborador;
 	private Contato contato;
 	private Endereco endereco;
