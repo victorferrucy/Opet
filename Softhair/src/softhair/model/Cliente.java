@@ -4,17 +4,17 @@
 package softhair.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.Table;
 
 /**
  * @author Victor Ferrucy
  *
  */
 @Entity
-@Table(appliesTo = "cliente" )
-@PrimaryKeyJoinColumn(name="idColaborador")
+@PrimaryKeyJoinColumn
 public class Cliente extends Colaborador {
 	
 }

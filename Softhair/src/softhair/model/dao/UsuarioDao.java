@@ -5,9 +5,13 @@ package softhair.model.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.internal.SessionFactoryImpl;
 
 import softhair.model.Usuario;
+import softhair.util.HibernateUtil;
 
 /**
  * @author Victor Ferrucy
@@ -15,24 +19,65 @@ import softhair.model.Usuario;
  * @version 1.3
  */
 public class UsuarioDao {
-	public Usuario salvar(){
+	Session ss;
+	Transaction tx;
+
+	public UsuarioDao() {
+		ss = HibernateUtil.getSessionFactory().openSession();
+	}
+
+	public Usuario salvar(Usuario usuario){
+		try{
+			tx = ss.beginTransaction();
+			ss.save(usuario);
+			tx.commit();
 		
+	} catch (HibernateException e) {
+		// TODO: handle exception
+
+		if (this.tx.isActive()) {
+
+			this.tx.rollback();
+		}
+
+	} finally {
+
+		try {
+
+			if (ss.isOpen()) {
+
+				ss.close();
+			}
+
+		} catch (Throwable e) {
+			// TODO: handle exception
+
+			System.out.println(e.getMessage());
+		}
+
+	
+	}
+
+		return usuario;
+	}
+
+	public List<Usuario> buscar() {
+
 		return null;
 	}
-	public List<Usuario> buscar(){
-		
-		return null;
-	}
-public Usuario buscar(Usuario usuario){
+
+	public Usuario buscar(Usuario usuario) {
 		Usuario usuario2 = null;
 		return usuario2;
 	}
-	public Usuario atualizar(){
-		
+
+	public Usuario atualizar() {
+
 		return null;
 	}
-	public boolean deletar(){
-		
+
+	public boolean deletar() {
+
 		return false;
 	}
 

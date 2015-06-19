@@ -1,11 +1,11 @@
-/**
- * 
- */
 package softhair.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -17,9 +17,14 @@ import javax.persistence.Table;
 public class Usuario {
 	@Id @GeneratedValue
 	private int idUsuario;
+	@OneToOne 
+	@PrimaryKeyJoinColumn
 	private Funcionario funcionario;
+	@Column
 	private String login;
+	@Column
 	private String senha;
+	
 	/**
 	 * @return the login
 	 */

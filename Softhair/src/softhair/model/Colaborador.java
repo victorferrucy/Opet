@@ -2,12 +2,18 @@ package softhair.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 /**
  * @author Victor Ferrucy
@@ -15,17 +21,25 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy= InheritanceType.JOINED)
 public class Colaborador {
 	@Id @GeneratedValue
 	private int idColaborador;
+	@OneToOne @PrimaryKeyJoinColumn
 	private Contato contato;
+	@OneToOne @PrimaryKeyJoinColumn
 	private Endereco endereco;
+	@Column
 	private String nome;
+	@Column
 	private String sobrenome;
+	@Column
 	private String cpf;
+	@Column
 	private String rg;
+	@Column
 	private String sexo;
+	@Column @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private Date dataNascimento;
 	
 	/**
