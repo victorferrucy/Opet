@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
+<<<<<<< HEAD
 	<session-factory name="softhair">
 		<property name="hibernate.connection.url">localhost:5432</property>
 		<property name="hibernate.connection.username">postgre</property>
@@ -20,4 +21,12 @@
 
 		<mapping package="softhair.model" />
 	</session-factory>
+=======
+ <session-factory name="softhair">
+  <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <mapping package="softhair.model"/>
+ </session-factory>
+>>>>>>> branch 'master' of https://github.com/victorferrucy/Opet.git
 </hibernate-configuration>
