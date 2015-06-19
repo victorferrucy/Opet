@@ -5,6 +5,8 @@ package softhair.model.dao;
 
 import java.util.List;
 
+import org.hibernate.internal.SessionFactoryImpl;
+
 import softhair.model.Usuario;
 
 /**
@@ -20,6 +22,10 @@ public class UsuarioDao {
 	public List<Usuario> buscar(){
 		
 		return null;
+	}
+public Usuario buscar(Usuario usuario){
+		Usuario usuario2 = null;
+		return usuario2;
 	}
 	public Usuario atualizar(){
 		
