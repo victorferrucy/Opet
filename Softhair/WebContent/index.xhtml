@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding ="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -11,15 +11,16 @@
 </h:head>
 <h:body>
 	<h1>Alle Granato</h1>
-	<h:form >
-		<h:panelGrid columns="2" cellpadding="5">
-			<h:outputText  value="Login: " />
-			<p:inputText id="login" value="#{usuarioController.usuario.login}" ></p:inputText>
-			<h:outputText value="Senha: " />
-			<p:password id="senha" value="#{usuarioController.usuario.senha}" />
-		</h:panelGrid>
-		<p:commandButton value="Entrar" action="#{usuarioController.validarUsuario(usuarioController.usuario)}" />
+
+	<h:form>
+		<p:outputLabel value="Login: " />
+		<p:inputText id="login" value="#{usuarioController.usuario.login}" />
+		<p:outputLabel value="Senha: " />
+		<p:password id="senha" value="#{usuarioController.usuario.senha}" />
 	</h:form>
+	<p:commandButton value="Entrar"
+		action="#{usuarioController.validarUsuario()}" />
+
 
 </h:body>
 </html>

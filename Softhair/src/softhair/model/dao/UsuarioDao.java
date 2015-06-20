@@ -8,7 +8,6 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.internal.SessionFactoryImpl;
 
 import softhair.model.Usuario;
 import softhair.util.HibernateUtil;

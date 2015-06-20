@@ -3,38 +3,33 @@
  */
 package softhair.controller;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import softhair.model.Usuario;
 import softhair.model.dao.UsuarioDao;
 
 /**
  * @author Victor Ferrucy
- * @since 19/06/2015
- * @version 1.3
+ *
  */
-
 @ManagedBean
 @SessionScoped
 public class UsuarioController {
 	private Usuario usuario;
 	private UsuarioDao usuarioDao;
-
+	
 	public UsuarioController(){
-		setUsuario(new Usuario());
+		usuario = new Usuario();
+		usuarioDao = new UsuarioDao();
 	}
 	
 	public Usuario buscarUsuario(Usuario usuario) {
-		usuarioDao = new UsuarioDao();
-		
 		return usuario;
 
 	}
 
-	public String validarUsuario(Usuario usuario) {
+	public String validarUsuario() {
 		/*Usuario usuarioLogando = this.buscarUsuario(usuario);
 		if (usuarioLogando == null) {
 			FacesContext.getCurrentInstance().addMessage(
@@ -49,14 +44,11 @@ public class UsuarioController {
 		System.out.println(usuario.getSenha());
 		if(usuario.getLogin().equals("victor") && usuario.getSenha().equals("victor")){
 			System.out.println("ACHOOOO");
-			return "/agenda/agenda";
-			
+			return "/agenda/agenda.xhtml?faces-redirect=true";
 		} else {
 			System.out.println("NULL");
 			return null;
 		}
-			
-		
 	}
 
 	/**
@@ -71,5 +63,19 @@ public class UsuarioController {
 	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the usuarioDao
+	 */
+	public UsuarioDao getUsuarioDao() {
+		return usuarioDao;
+	}
+
+	/**
+	 * @param usuarioDao the usuarioDao to set
+	 */
+	public void setUsuarioDao(UsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
 	}
 }

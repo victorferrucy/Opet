@@ -10,11 +10,91 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
- 
-	<h:form>
-	   <p:editor value="#{editor.value}" />
+	<ui:include src="../menu.xhtml" />
+	
+	<h1>Alterar Cliente</h1>
+ 	<h:form id="alterarClienteF">
+		<p:panelGrid id="alterarCliente" columns="2">
+			<p:outputLabel value="nome" />
+			<p:inputText id="nome" maxlength="30"
+				value="#{clienteController.cliente.nome}" />
+
+			<p:outputLabel value="sobrenome" />
+			<p:inputText id="sobrenome" maxlength="40"
+				value="#{clienteController.cliente.sobrenome}" />
+
+			<p:outputLabel value="CPF" />
+			<p:inputMask mask="999.999.999-99" id="cpf" maxlength="11"
+				value="#{clienteController.cliente.cpf}" />
+
+			<p:outputLabel value="RG" />
+			<p:inputMask mask="99.999.999-9" id="rg" maxlength="9"
+				value="#{clienteController.cliente.rg}" />
+
+			<p:outputLabel value="sexo" />
+			<p:inputText id="sexo" maxlength="10"
+				value="#{clienteController.cliente.sexo}" />
+
+			<p:outputLabel value="Data de nascimento" />
+			<p:inputMask id="dataNascimento" maxlength="8" mask="99/99/9999"
+				value="#{clienteController.cliente.dataNascimento}">
+				<f:converter converterId="dateConverter" />
+			</p:inputMask>
+
+			<p:outputLabel value="Rua" />
+			<p:inputText id="rua" maxlength="40"
+				value="#{clienteController.cliente.endereco.rua}" />
+
+			<p:outputLabel value="CEP" />
+			<p:inputMask id="cep" maxlength="7" mask="99999-99"
+				value="#{clienteController.cliente.endereco.cep}" />
+
+			<p:outputLabel value="Bairro" />
+			<p:inputText id="bairro" maxlength="40"
+				value="#{clienteController.cliente.endereco.bairro}" />
+
+			<p:outputLabel value="Numero" />
+			<p:inputText id="numero" maxlength="5"
+				value="#{clienteController.cliente.endereco.numero}" />
+
+			<p:outputLabel value="Complemento" />
+			<p:inputText id="complemento" maxlength="50"
+				value="#{clienteController.cliente.endereco.complemento}" />
+
+			<p:outputLabel value="Cidade" />
+			<p:inputText id="cidade" maxlength="20"
+				value="#{clienteController.cliente.endereco.cidade}" />
+
+			<p:outputLabel value="Estado" />
+			<p:inputText id="estado" maxlength="20"
+				value="#{clienteController.cliente.endereco.estado}" />
+
+			<p:outputLabel value="Email principal" />
+			<p:inputText id="emailPrin" maxlength="30"
+				value="#{clienteController.cliente.contato.emailPrincipal}" />
+
+			<p:outputLabel value="Email secundário" />
+			<p:inputText id="emailSec" maxlength="30"
+				value="#{clienteController.cliente.contato.emailSecundario}" />
+
+			<p:outputLabel value="Telefone Residencial" />
+			<p:inputMask mask="(99)9999-9999" maxlength="10"
+				value="#{clienteController.contato.telefoneResidencial}" />
+
+			<p:outputLabel value="Telefone Comercial" />
+			<p:inputMask mask="(99)9999-9999" maxlength="10"
+				value="#{clienteController.contato.telefoneComercial}" />
+
+			<p:outputLabel value="Celular" />
+			<p:inputMask mask="(99)9999-9999" maxlength="10"
+				value="#{clienteController.contato.celular}" />
+
+		</p:panelGrid>
 	</h:form>
- 
+
+	<p:commandButton value="Cadastrar"
+		action="#{clienteController.atualizar(clienteController.cliente)}">
+	</p:commandButton>
+ 	
 </h:body>
 </html>

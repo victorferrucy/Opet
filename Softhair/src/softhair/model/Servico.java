@@ -26,4 +26,59 @@ public class Servico {
 	private BigDecimal comissao;
 	@Column
 	private BigDecimal valor;
+	
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+	/**
+	 * @param descricao the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	/**
+	 * @return the comissao
+	 */
+	public BigDecimal getComissao() {
+		return comissao;
+	}
+	/**
+	 * @param comissao the comissao to set
+	 */
+	public void setComissao(BigDecimal comissao) {
+		this.comissao = comissao;
+	}
+	/**
+	 * @return the valor
+	 */
+	public BigDecimal getValor() {
+		return valor;
+	}
+	/**
+	 * @param valor the valor to set
+	 */
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+	/**
+	 * @return the idServico
+	 */
+	public int getIdServico() {
+		return idServico;
+	}
 }

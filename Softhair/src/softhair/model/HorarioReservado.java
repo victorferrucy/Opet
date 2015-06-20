@@ -1,5 +1,7 @@
 package softhair.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDateTime;
 /**
  * 
  * @author Victor Ferrucy
@@ -25,10 +24,10 @@ public class HorarioReservado {
 	private Cliente cliente;
 	@ManyToOne @PrimaryKeyJoinColumn
 	private Funcionario funcionario;
-	@Column @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-	private LocalDateTime  dataInicio;
-	@Column @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-	private LocalDateTime  dataFim;
+	@Column
+	private Calendar  dataInicio;
+	@Column 
+	private Calendar  dataFim;
 	@Column
 	private String descricao;
 	@Column 
@@ -60,25 +59,25 @@ public class HorarioReservado {
 	/**
 	 * @return the dataInicio
 	 */
-	public LocalDateTime getDataInicio() {
+	public Calendar getDataInicio() {
 		return dataInicio;
 	}
 	/**
 	 * @param dataInicio the dataInicio to set
 	 */
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(Calendar dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 	/**
 	 * @return the dataFim
 	 */
-	public LocalDateTime getDataFim() {
+	public Calendar getDataFim() {
 		return dataFim;
 	}
 	/**
 	 * @param dataFim the dataFim to set
 	 */
-	public void setDataFim(LocalDateTime dataFim) {
+	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
 	}
 	/**

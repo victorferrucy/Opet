@@ -6,15 +6,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
- 
+
 <h:head>
 </h:head>
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
- 
-	<h:form>
-	   <p:editor value="#{editor.value}" />
+	<ui:include src="../menu.xhtml" />
+	<h1>Clientes</h1>
+	<h:form id="cadastrarCliente">
+		<p:commandButton id="cadastrar" value="Novo Cliente"
+			action="cadastrarCliente.xhtml?faces-redirect=true" />
 	</h:form>
- 
+	<h:form id="tabelaClientes">
+
+		<p:dataTable id="clientes" var="cliente"
+			value="#{clienteController.buscar()}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{cliente.nome}" />
+			</p:column>
+
+			<p:column headerText="Sobrenome">
+				<h:outputText value="#{cliente.sobrenome}" />
+			</p:column>
+
+			<p:column headerText="Telefone Residencial">
+				<h:outputText value="#{cliente.contato.telefoneResidencial}" />
+			</p:column>
+
+			<p:column headerText="Celular">
+				<h:outputText value="#{cliente.contato.celular}" />
+			</p:column>
+
+			<p:column headerText="Detalhes">
+				<p:commandButton icon="ui-icon-contact" title="Detalhar"
+					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+			</p:column>
+
+			<p:column headerText="Alterar">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+			</p:column>
+
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

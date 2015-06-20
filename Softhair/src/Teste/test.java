@@ -16,21 +16,18 @@ import softhair.util.HibernateUtil;
  */
 public class test {
 
-	/**
+/*	*//**
 	 * @param args
-	 */
+	 *//*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
-		Usuario usuario = new Usuario();
-		usuario.setLogin("Test2e");
-		usuario.setSenha("teste2");
-		usuario.setFuncionario(new Funcionario());
-		
-		session.save(usuario);
+		Usuario us = new Usuario();
+		us.setFuncionario(new Funcionario());
+		session.save(us);
 		transaction.commit();
 	}
-
+*/
 }

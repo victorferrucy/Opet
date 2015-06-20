@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -17,8 +17,7 @@ import javax.persistence.Table;
 public class Usuario {
 	@Id @GeneratedValue
 	private int idUsuario;
-	@OneToOne 
-	@PrimaryKeyJoinColumn
+	@OneToOne @JoinColumn(name="idFuncionario")
 	private Funcionario funcionario;
 	@Column
 	private String login;

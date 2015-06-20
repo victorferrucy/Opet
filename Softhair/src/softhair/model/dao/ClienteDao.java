@@ -3,9 +3,15 @@
  */
 package softhair.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import softhair.model.Cliente;
+import softhair.util.HibernateUtil;
 
 /**
  * @author Victor Ferrucy
@@ -13,21 +19,127 @@ import softhair.model.Cliente;
  * @version 1.3
  */
 public class ClienteDao {
-	public Cliente salvar(){
-		
-		return null;
+	Session ss;
+	Transaction tx;
+
+	public ClienteDao() {
+
 	}
-	public List<Cliente> buscar(){
-		
-		return null;
+
+	public Cliente salvar(Cliente cliente) {
+		ss = HibernateUtil.getSessionFactory().openSession();
+		try {
+
+			tx = ss.beginTransaction();
+			ss.save(cliente);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return cliente;
 	}
-	public Cliente atualizar(){
-		
-		return null;
+
+	@SuppressWarnings("unchecked")
+	public List<Cliente> buscar() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		ss = HibernateUtil.getSessionFactory().openSession();
+		try {
+
+			tx = ss.beginTransaction();
+			clientes = ss.createCriteria(Cliente.class).list();
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return clientes;
 	}
-	public boolean deletar(){
-		
-		return false;
+
+	public Cliente atualizar(Cliente cliente) {
+
+		try {
+
+			tx = ss.beginTransaction();
+			ss.update(cliente);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return cliente;
+	}
+
+	public boolean deletar(Cliente cliente) {
+		boolean deletou = true;
+		try {
+
+			tx = ss.beginTransaction();
+			ss.delete(cliente);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			deletou = false;
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return deletou;
 	}
 
 }

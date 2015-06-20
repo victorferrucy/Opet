@@ -11,60 +11,57 @@
 </h:head>
 
 <h:body>
+	<ui:include src="../menu.xhtml" />
+		
+			<h:form id="agendaF">
+				<p:growl id="messages" showDetail="true" />
 
-	<h:form>
-		<p:growl id="messages" showDetail="true" />
+				<h:panelGrid columnClasses="value">
+					<h3 style="margin-top: 0">Editable Schedule</h3>
+					<p:schedule id="agenda" value="#{agendaController.horarioModel}"
+						widgetVar="minhaAgenda">
 
-		<h:panelGrid columnClasses="value">
-			<h3 style="margin-top: 0">Editable Schedule</h3>
-			<p:schedule id="schedule" value="#{agendaController.horarioModel}"
-				widgetVar="myschedule" timeZone="GMT-3">
+						<p:ajax event="dateSelect"
+							listener="#{agendaController.onHorarioReservadoNovo}"
+							update="detalhesHorario" oncomplete="PF('caixaDialog').show();" />
+						<p:ajax event="eventSelect"
+							listener="#{agendaController.onHorarioReservadoSelecionado}"
+							update="detalhesHorario" oncomplete="PF('caixaDialog').show();" />
+						<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
+							update="messages" />
+						<p:ajax event="eventResize"
+							listener="#{scheduleView.onEventResize}" update="messages" />
 
-				<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}"
-					update="eventDetails" oncomplete="PF('eventDialog').show();" />
-				<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"
-					update="eventDetails" oncomplete="PF('eventDialog').show();" />
-				<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
-					update="messages" />
-				<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}"
-					update="messages" />
+					</p:schedule>
 
-			</p:schedule>
+				</h:panelGrid>
 
-		</h:panelGrid>
+				<p:dialog widgetVar="caixaDialog" header="Detalhes do horário"
+					resizable="false" modal="true" showEffect="clip" hideEffect="clip">
+					<h:panelGrid id="detalhesHorario" columns="2">
 
-		<p:dialog widgetVar="eventDialog" header="Event Details"
-			showEffect="clip" hideEffect="clip">
-			<h:panelGrid id="eventDetails" columns="2">
-				<h:outputLabel for="title" value="Title:" />
-				<p:inputText id="title" value="#{scheduleView.event.title}"
-					required="true" />
+						<h:outputLabel for="from" value="Início:" />
+						<p:inputMask id="dataInicio"
+							value="#{agendaController.horarioReservado.dataInicio.toDate()}"
+							mask="99/99/9999">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:inputMask>
 
-				<h:outputLabel for="from" value="From:" />
-				<p:inputMask id="from" value="#{scheduleView.event.startDate}"
-					mask="99/99/9999">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
-				</p:inputMask>
-
-				<h:outputLabel for="to" value="To:" />
-				<p:inputMask id="to" value="#{scheduleView.event.endDate}"
-					mask="99/99/9999">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
-				</p:inputMask>
-
-				<h:outputLabel for="allDay" value="All Day:" />
-				<h:selectBooleanCheckbox id="allDay"
-					value="#{scheduleView.event.allDay}" />
-
-				<p:commandButton type="reset" value="Reset" />
-				<p:commandButton id="addButton" value="Save"
-					actionListener="#{scheduleView.addEvent}"
-					oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-			</h:panelGrid>
-		</p:dialog>
-	</h:form>
+						<h:outputLabel for="to" value="Fim:" />
+						<p:inputMask id="to"
+							value="#{agendaController.horarioReservado.dataFim.toDate()}"
+							mask="99/99/9999">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:inputMask>
 
 
+						<p:commandButton type="reset" value="Limpar" />
+						<p:commandButton id="addButton" value="Salvar"
+							oncomplete="PF('minhaAgenda').update();PF('caixaDialog').hide();" />
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+	
 
 </h:body>
 </html>
