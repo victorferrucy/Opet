@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import softhair.model.Cliente;
 import softhair.model.Contato;
 import softhair.util.HibernateUtil;
 
@@ -20,9 +21,9 @@ public class ContatoDao {
 	private Transaction tx;
 
 	public Contato salvar(Contato contato) {
-		ss = HibernateUtil.getSessionFactory().openSession();
+		
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(contato);
 			tx.commit();
@@ -51,9 +52,8 @@ public class ContatoDao {
 	@SuppressWarnings("unchecked")
 	public List<Contato> buscar() {
 		List<Contato> contatos = new ArrayList<Contato>();
-		ss = HibernateUtil.getSessionFactory().openSession();
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			contatos = ss.createCriteria(Contato.class).list();
 			tx.commit();
@@ -77,11 +77,38 @@ public class ContatoDao {
 
 		return contatos;
 	}
+	
+	public Contato buscar(Contato contato) {
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			contato =  (Contato) ss.get(Contato.class, contato.getIdContato());
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return contato;
+	}
 
 	public Contato atualizar(Contato contato) {
 
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.update(contato);
 			tx.commit();
@@ -109,13 +136,14 @@ public class ContatoDao {
 	public boolean deletar(Contato contato) {
 		boolean deletou = true;
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.delete(contato);
 			tx.commit();
 
 		} catch (HibernateException e) {
 			deletou = false;
+			System.out.println("ERRO DELETAR CONTATO \n" + e);
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();

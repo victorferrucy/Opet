@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 
 import softhair.model.Cliente;
 import softhair.util.HibernateUtil;
@@ -23,13 +24,12 @@ public class ClienteDao {
 	Transaction tx;
 
 	public ClienteDao() {
-
+		
 	}
 
 	public Cliente salvar(Cliente cliente) {
-		ss = HibernateUtil.getSessionFactory().openSession();
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(cliente);
 			tx.commit();
@@ -58,9 +58,8 @@ public class ClienteDao {
 	@SuppressWarnings("unchecked")
 	public List<Cliente> buscar() {
 		List<Cliente> clientes = new ArrayList<Cliente>();
-		ss = HibernateUtil.getSessionFactory().openSession();
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			clientes = ss.createCriteria(Cliente.class).list();
 			tx.commit();
@@ -88,7 +87,7 @@ public class ClienteDao {
 	public Cliente atualizar(Cliente cliente) {
 
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.update(cliente);
 			tx.commit();
@@ -116,13 +115,14 @@ public class ClienteDao {
 	public boolean deletar(Cliente cliente) {
 		boolean deletou = true;
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.delete(cliente);
 			tx.commit();
 
 		} catch (HibernateException e) {
 			deletou = false;
+			System.out.println("ERRO DELETAR" + e);
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -140,6 +140,34 @@ public class ClienteDao {
 		}
 
 		return deletou;
+	}
+
+	public Cliente buscar(Cliente clienteSel) {
+		
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			clienteSel =  (Cliente) ss.get(Cliente.class, clienteSel.getIdColaborador());
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return clienteSel;
 	}
 
 }

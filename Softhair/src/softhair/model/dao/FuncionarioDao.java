@@ -84,6 +84,40 @@ public class FuncionarioDao {
 
 		return funcionarios;
 	}
+	
+	
+	public Funcionario buscarPorId(Integer id) {
+		// Declaração de variáveis
+		Funcionario funcionario;
+		
+		// Inicialização de variáveis
+		funcionario = null;
+		
+		ss = HibernateUtil.getSessionFactory().openSession();
+		try {
+			tx = ss.beginTransaction();
+			funcionario = (Funcionario)ss.get(Funcionario.class, id);
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return funcionario;
+	}
 
 	public Funcionario atualizar(Funcionario funcionario) {
 

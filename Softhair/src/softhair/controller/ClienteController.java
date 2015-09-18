@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import softhair.model.Cliente;
 import softhair.model.Contato;
@@ -40,40 +41,55 @@ public class ClienteController {
 		cliente.setContato(contato);
 		clienteDao = new ClienteDao();
 		setEnderecoDao(new EnderecoDao());
-		contatoDao = new ContatoDao();
+		setContatoDao(new ContatoDao());
 
 	}
 
+	public String novoCliente(){
+		cliente = new Cliente();
+		cliente.setEndereco(new Endereco());
+		cliente.setContato(new Contato());
+		return "cadastrarCliente.xhtml?faces-redirect=true";
+	}
+	
+	public String atualizarCliente(Cliente cliente) {
+		this.cliente = cliente;
+		return "alterarCliente.xhtml?faces-redirect=true";
+	}
+	
+	public String visualizarCliente(Cliente cliente){
+		this.cliente = cliente;
+		return "visualizarCliente.xhtml?faces-redirect=true";
+	}
+	
 	public void salvar() {
-		enderecoDao.salvar(endereco);
-		contatoDao.salvar(contato);
 		clienteDao.salvar(cliente);
+		cliente = new Cliente();
+		cliente.setEndereco(new Endereco());
+		cliente.setContato(new Contato());
 
 	}
-
+	
 	public void atualizar(Cliente cliente) {
-		enderecoDao.atualizar(cliente.getEndereco());
-		contatoDao.atualizar(cliente.getContato());
 		clienteDao.atualizar(cliente);
-
 	}
 
 	public List<Cliente> buscar() {
 		clientes = new ArrayList<Cliente>();
 		clientes = clienteDao.buscar();
-		System.out.println(clientes.size());
-		for (Cliente cl : clientes) {
-			System.out.println(cl.getNome());
-		}
 
 		return clientes;
 	}
 
-	public void deletar(Cliente cliente) {
-		enderecoDao.atualizar(cliente.getEndereco());
-		contatoDao.atualizar(cliente.getContato());
-		clienteDao.deletar(cliente);
-
+	public List<Cliente> deletar(Cliente clienteSel) {
+		boolean deletou = false;
+		
+		deletou = clienteDao.deletar(clienteDao.buscar(clienteSel));
+				
+		if(deletou){
+			clientes = clienteDao.buscar();
+		} 
+		return clientes;
 	}
 
 	/**
@@ -129,10 +145,54 @@ public class ClienteController {
 	}
 
 	/**
-	 * @param enderecoDao the enderecoDao to set
+	 * @param enderecoDao
+	 *            the enderecoDao to set
 	 */
 	public void setEnderecoDao(EnderecoDao enderecoDao) {
 		this.enderecoDao = enderecoDao;
 	}
-	
+
+
+	/**
+	 * @return the clientes
+	 */
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	/**
+	 * @return the clienteDao
+	 */
+	public ClienteDao getClienteDao() {
+		return clienteDao;
+	}
+
+	/**
+	 * @param clienteDao the clienteDao to set
+	 */
+	public void setClienteDao(ClienteDao clienteDao) {
+		this.clienteDao = clienteDao;
+	}
+
+	/**
+	 * @return the contatoDao
+	 */
+	public ContatoDao getContatoDao() {
+		return contatoDao;
+	}
+
+	/**
+	 * @param contatoDao the contatoDao to set
+	 */
+	public void setContatoDao(ContatoDao contatoDao) {
+		this.contatoDao = contatoDao;
+	}
+
 }

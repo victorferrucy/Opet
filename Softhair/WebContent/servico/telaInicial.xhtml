@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:include src="../menu.xhtml" />
+
+	<h1>Serviços</h1>
+
+	<h:form id="cadastrarServiço">
+		<p:commandButton id="cadastrar" value="Novo Serviço"
+			action="#{servicoController.novoServico()}" />
+	</h:form>
+
+	<h:form id="tabelaServicos">
+
+		<p:dataTable id="servicos" var="servico"
+			value="#{servicoController.buscar()}">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{servico.nome}" />
+			</p:column>
+
+			<p:column headerText="Descrição">
+				<h:outputText value="#{servico.descricao}" />
+			</p:column>
+
+			<p:column headerText="Valor da comissão">
+				<h:outputText value="#{servico.comissao}" />
+			</p:column>
+
+			<p:column headerText="Valor">
+				<h:outputText value="#{servico.valor}" />
+			</p:column>
+
+			<p:column headerText="Detalhes">
+				<h:form id="detalharFuncionario">
+					<p:commandButton icon="ui-icon-contact" title="Detalhar"
+						action="#{servicoController.visualizarServico(servico)}"
+						ajax="false">
+						<f:param name="i" value="3" />
+
+					</p:commandButton>
+				</h:form>
+			</p:column>
+
+			<p:column headerText="Atualizar">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					action="#{servicoController.atualizarServico(servico)}"
+					ajax="false" />
+			</p:column>
+
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					action="#{servicoController.deletar(servico)}" update="servicos" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -14,7 +14,7 @@
 	<h1>Clientes</h1>
 	<h:form id="cadastrarCliente">
 		<p:commandButton id="cadastrar" value="Novo Cliente"
-			action="cadastrarCliente.xhtml?faces-redirect=true" />
+			action="#{clienteController.novoCliente()}" />
 	</h:form>
 	<h:form id="tabelaClientes">
 
@@ -37,18 +37,23 @@
 			</p:column>
 
 			<p:column headerText="Detalhes">
-				<p:commandButton icon="ui-icon-contact" title="Detalhar"
-					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+				<h:form id="detalharCliente">
+					<p:commandButton icon="ui-icon-contact" title="Detalhar"
+						action="#{clienteController.visualizarCliente(cliente)}"
+						ajax="false" />
+				</h:form>
 			</p:column>
 
-			<p:column headerText="Alterar">
+			<p:column headerText="Atualizar">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+					action="#{clienteController.atualizarCliente(cliente)}"
+					ajax="false" />
 			</p:column>
 
 			<p:column headerText="Deletar">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					actionListener="#{clienteController.deletar(cliente)}" ajax="false" />
+					action="#{clienteController.deletar(cliente)}"
+					update="clientes" />
 			</p:column>
 
 		</p:dataTable>

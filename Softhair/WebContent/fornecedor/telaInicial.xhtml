@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h1>Fornecedores</h1>
+
+	<h:form id="cadastrarFornecedor">
+		<p:commandButton id="cadastrar" value="Novo Fornecedor"
+			action="#{fornecedorController.novoFornecedor()}" />
+	</h:form>
+
+	<h:form id="tabelaFornecedores">
+
+		<p:dataTable id="fornecedores" var="fornecedor"
+			value="#{fornecedorController.buscar()}">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{fornecedor.nome}" />
+			</p:column>
+
+			<p:column headerText="CNPJ">
+				<h:outputText value="#{fornecedor.cnpj}" />
+			</p:column>
+
+			<p:column headerText="Telefone Comercial">
+				<h:outputText value="#{fornecedor.contato.telefoneComercial}" />
+			</p:column>
+
+			<p:column headerText="Celular">
+				<h:outputText value="#{fornecedor.contato.celular}" />
+			</p:column>
+
+			<p:column headerText="Detalhes">
+				<h:form id="detalharFuncionario">
+					<p:commandButton icon="ui-icon-contact" title="Detalhar"
+						action="#{fornecedorController.visualizarFornecedor(fornecedor)}"
+						ajax="false" />
+				</h:form>
+			</p:column>
+
+			<p:column headerText="Atualizar">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					action="#{fornecedorController.atualizarFornecedor(fornecedor)}"
+					ajax="false" />
+			</p:column>
+
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					action="#{fornecedorController.deletar(fornecedor)}"
+					update="fornecedores" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

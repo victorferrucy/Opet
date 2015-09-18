@@ -3,10 +3,14 @@
  */
 package softhair.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +19,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class Contato {
-	@Id @GeneratedValue
+@SequenceGenerator(sequenceName = Contato.CONTATO_SEQUENCE, name = Contato.CONTATO_SEQUENCE, initialValue = 0, allocationSize = 5)
+public class Contato implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6041638752094878377L;
+
+	public static final String CONTATO_SEQUENCE = "contato_sequence";
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CONTATO_SEQUENCE)
 	private int idContato;
 	@Column
 	private String emailPrincipal;
@@ -29,6 +43,62 @@ public class Contato {
 	@Column
 	private String celular;
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
+		result = prime * result + ((emailPrincipal == null) ? 0 : emailPrincipal.hashCode());
+		result = prime * result + ((emailSecundario == null) ? 0 : emailSecundario.hashCode());
+		result = prime * result + idContato;
+		result = prime * result + ((telefoneComercial == null) ? 0 : telefoneComercial.hashCode());
+		result = prime * result + ((telefoneResidencial == null) ? 0 : telefoneResidencial.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contato other = (Contato) obj;
+		if (celular == null) {
+			if (other.celular != null)
+				return false;
+		} else if (!celular.equals(other.celular))
+			return false;
+		if (emailPrincipal == null) {
+			if (other.emailPrincipal != null)
+				return false;
+		} else if (!emailPrincipal.equals(other.emailPrincipal))
+			return false;
+		if (emailSecundario == null) {
+			if (other.emailSecundario != null)
+				return false;
+		} else if (!emailSecundario.equals(other.emailSecundario))
+			return false;
+		if (idContato != other.idContato)
+			return false;
+		if (telefoneComercial == null) {
+			if (other.telefoneComercial != null)
+				return false;
+		} else if (!telefoneComercial.equals(other.telefoneComercial))
+			return false;
+		if (telefoneResidencial == null) {
+			if (other.telefoneResidencial != null)
+				return false;
+		} else if (!telefoneResidencial.equals(other.telefoneResidencial))
+			return false;
+		return true;
+	}
 	/**
 	 * @return the emailPrincipal
 	 */

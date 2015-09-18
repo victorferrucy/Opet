@@ -6,15 +6,54 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
- 
+
 <h:head>
+
 </h:head>
+
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
- 
-	<h:form>
-	   <p:editor value="#{editor.value}" />
+	<ui:include src="../menu.xhtml" />
+
+	<h:form id="cadastrarComandaF">
+		<p:panelGrid id="cadastrarComanda" columns="2">
+
+			<p:outputLabel value="Cliente" />
+			<p:selectOneMenu value="#{comandaController.buscarClientes()}">
+				<f:selectItems value="#{comandaController.clientes}" var="cliente"
+					itemValue="#{cliente.idColaborador}" itemLabel="#{cliente.nome}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Servico" />
+			<p:selectOneMenu value="#{comandaController.buscarServicos()}">
+				<f:selectItems value="#{comandaController.servicos}" var="servico"
+					itemValue="#{servico.idServico}" itemLabel="#{servico.nome}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Funcionario" />
+			<p:selectOneMenu value="#{comandaController.buscarFuncionarios()}">
+				<f:selectItems value="#{comandaController.funcionarios}"
+					var="funcionario" itemValue="#{funcionario.idColaborador}"
+					itemLabel="#{funcionario.nome}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Data de Abertura" />
+			<p:calendar id="dataAbertura" maxlength="8" mask="99/99/9999"
+				pattern="dd/MM/yyyy">
+				<f:converter converterId="dateConverter" />
+			</p:calendar>
+
+			<p:outputLabel value="Total" />
+			<p:inputMask mask="999.999,00" id="total" maxlength="10"
+				value="#{comandaController.comanda.total}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Cadastrar"
+			action="#{comandaController.salvar()}" />
+
 	</h:form>
- 
+
+
+
 </h:body>
 </html>

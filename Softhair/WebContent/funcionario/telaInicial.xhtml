@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h1>Funcionarios</h1>
+	<h:form id="cadastrarFuncionario">
+		<p:commandButton id="cadastrar" value="Novo Funcionário"
+			action="#{funcionarioController.novoFuncionario()}" />
+	</h:form>
+	<h:form id="tabelaFuncionarios">
+
+		<p:dataTable id="funcionarios" var="funcionario"
+			value="#{funcionarioController.buscar()}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{funcionario.nome}" />
+			</p:column>
+
+			<p:column headerText="Sobrenome">
+				<h:outputText value="#{funcionario.sobrenome}" />
+			</p:column>
+
+			<p:column headerText="Telefone Residencial">
+				<h:outputText value="#{funcionario.contato.telefoneResidencial}" />
+			</p:column>
+
+			<p:column headerText="Celular">
+				<h:outputText value="#{funcionario.contato.celular}" />
+			</p:column>
+
+			<p:column headerText="Detalhes">
+				<h:form id="detalharFuncionario">
+					<p:commandButton icon="ui-icon-contact" title="Detalhar"
+						action="#{funcionarioController.visualizarFuncionario(funcionario)}"
+						ajax="false" />
+				</h:form>
+			</p:column>
+
+			<p:column headerText="Atualizar">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					action="#{funcionarioController.atualizarFuncionario(funcionario)}"
+					ajax="false" />
+			</p:column>
+
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					action="#{funcionarioController.deletar(funcionario)}"
+					update="funcionarios" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

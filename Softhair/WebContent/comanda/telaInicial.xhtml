@@ -6,13 +6,61 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
- 
+
 <h:head>
-
 </h:head>
-
 <h:body>
 
+	<ui:include src="../menu.xhtml" />
 
+	<h1>Comandas</h1>
+
+	<h:form id="cadastrarComanda">
+		<p:commandButton id="cadastrar" value="Nova Comanda"
+			action="#{comandaController.novaComanda()}" />
+	</h:form>
+
+	<h:form id="tabelaComandas">
+
+		<p:dataTable id="comandas" var="comanda"
+			value="#{comandaController.buscar()}">
+
+			<p:column headerText="Código">
+				<h:outputText value="#{comanda.idComanda}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{comanda.cliente.nome}" />
+			</p:column>
+
+			<p:column headerText="Data de abertura">
+				<h:outputText value="#{comanda.dataAbertura}" />
+			</p:column>
+
+			<p:column headerText="Status">
+				<h:outputText value="#{comanda.status}" />
+			</p:column>
+
+			<p:column headerText="Detalhes">
+				<h:form id="detalharCliente">
+					<p:commandButton icon="ui-icon-contact" title="Detalhar"
+						action="#{clienteController.visualizarCliente(cliente)}"
+						ajax="false" />
+				</h:form>
+			</p:column>
+
+			<p:column headerText="Atualizar">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					action="#{clienteController.atualizarCliente(cliente)}"
+					ajax="false" />
+			</p:column>
+
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					action="#{clienteController.deletar(cliente)}" update="clientes" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

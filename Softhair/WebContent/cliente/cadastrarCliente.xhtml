@@ -79,22 +79,24 @@
 
 			<p:outputLabel value="Telefone Residencial" />
 			<p:inputMask mask="(99)9999-9999" maxlength="10"
-				value="#{clienteController.contato.telefoneResidencial}" />
+				value="#{clienteController.cliente.contato.telefoneResidencial}" />
 
 			<p:outputLabel value="Telefone Comercial" />
 			<p:inputMask mask="(99)9999-9999" maxlength="10"
-				value="#{clienteController.contato.telefoneComercial}" />
+				value="#{clienteController.cliente.contato.telefoneComercial}" />
 
 			<p:outputLabel value="Celular" />
 			<p:inputMask mask="(99)9999-9999" maxlength="10"
-				value="#{clienteController.contato.celular}" />
+				value="#{clienteController.cliente.contato.celular}" />
 
 		</p:panelGrid>
+
+		<p:commandButton value="Cadastrar"
+			action="#{clienteController.salvar()}" />
+
 	</h:form>
 
-	<p:commandButton value="Cadastrar"
-		action="#{clienteController.salvar()}">
-	</p:commandButton>
+
 
 </h:body>
 </html>

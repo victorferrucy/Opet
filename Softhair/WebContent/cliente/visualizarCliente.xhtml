@@ -13,8 +13,78 @@
 <h:body>
 	<ui:include src="../menu.xhtml" />
 	
-	<h1>Cliente</h1>
+	<p:panelGrid id="cadastrarCliente" columns="2" style="border:none;">
+		<p:outputLabel value="Nome" />
+		<p:outputLabel id="nome" value="#{clienteController.cliente.nome}" />
 
-	
+		<p:outputLabel value="Sobrenome" />
+		<p:outputLabel id="sobrenome"
+			value="#{clienteController.cliente.sobrenome}" />
+
+		<p:outputLabel value="CPF" />
+		<p:outputLabel id="cpf" value="#{clienteController.cliente.cpf}" />
+
+		<p:outputLabel value="RG" />
+		<p:outputLabel id="rg" value="#{clienteController.cliente.rg}" />
+
+		<p:outputLabel value="sexo" />
+		<p:outputLabel id="sexo" value="#{clienteController.cliente.sexo}" />
+
+		<p:outputLabel value="Data de nascimento" />
+		<p:outputLabel id="dataNascimento"
+			value="#{clienteController.cliente.dataNascimento.time}">
+		</p:outputLabel>
+
+		<p:outputLabel value="Rua" />
+		<p:outputLabel id="rua"
+			value="#{clienteController.cliente.endereco.rua}" />
+
+		<p:outputLabel value="CEP" />
+		<p:outputLabel id="cep"
+			value="#{clienteController.cliente.endereco.cep}" />
+
+		<p:outputLabel value="Bairro" />
+		<p:outputLabel id="bairro"
+			value="#{clienteController.cliente.endereco.bairro}" />
+
+		<p:outputLabel value="Numero" />
+		<p:outputLabel id="numero"
+			value="#{clienteController.cliente.endereco.numero}" />
+
+		<p:outputLabel value="Complemento" />
+		<p:outputLabel id="complemento"
+			value="#{clienteController.cliente.endereco.complemento}" />
+
+		<p:outputLabel value="Cidade" />
+		<p:outputLabel id="cidade"
+			value="#{clienteController.cliente.endereco.cidade}" />
+
+		<p:outputLabel value="Estado" />
+		<p:outputLabel id="estado"
+			value="#{clienteController.cliente.endereco.estado}" />
+
+		<p:outputLabel value="Email principal" />
+		<p:outputLabel id="emailPrin"
+			value="#{clienteController.cliente.contato.emailPrincipal}" />
+
+		<p:outputLabel value="Email secundário" />
+		<p:outputLabel id="emailSec"
+			value="#{clienteController.cliente.contato.emailSecundario}" />
+
+		<p:outputLabel value="Telefone Residencial" />
+		<p:outputLabel
+			value="#{clienteController.cliente.contato.telefoneResidencial}" />
+
+		<p:outputLabel value="Telefone Comercial" />
+		<p:outputLabel
+			value="#{clienteController.cliente.contato.telefoneComercial}" />
+
+		<p:outputLabel value="Celular" />
+		<p:outputLabel value="#{clienteController.cliente.contato.celular}" />
+
+	</p:panelGrid>
+
+
+
 </h:body>
 </html>

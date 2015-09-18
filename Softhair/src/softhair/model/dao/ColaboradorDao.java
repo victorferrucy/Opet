@@ -115,6 +115,7 @@ public class ColaboradorDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
+			System.out.println("ERRO DELETAR COLABORADOR" + e );
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();

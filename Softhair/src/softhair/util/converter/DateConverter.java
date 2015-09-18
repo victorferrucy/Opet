@@ -1,7 +1,7 @@
 /**
  * 
  */
-package softhair.util;
+package softhair.util.converter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -6,15 +6,35 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
- 
+
 <h:head>
 </h:head>
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
- 
-	<h:form>
-	   <p:editor value="#{editor.value}" />
+
+	<ui:include src="../menu.xhtml" />
+	<h:form id="cadastrarServicoF">
+
+		<p:panelGrid id="cadastrarServico" columns="2">
+
+			<p:outputLabel value="Nome" />
+			<p:inputText id="nome" maxlength="30"
+				value="#{servicoController.servico.nome}" />
+
+			<p:outputLabel value="Descrição do serviço" />
+			<p:inputTextarea id="descricao"
+				value="#{servicoController.servico.descricao}" />
+
+			<p:outputLabel value="Valor" />
+			<p:inputMask id="valor" value="#{servicoController.servico.valor}" />
+
+			<p:outputLabel value="Comissão" />
+			<p:inputMask id="comissao" value="#{servicoController.servico.comissao}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Cadastrar"
+			action="#{servicoController.salvar()}" />
+
 	</h:form>
- 
 </h:body>
 </html>

@@ -1,16 +1,14 @@
-/**
- * 
- */
 package softhair.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import softhair.model.Cliente;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import softhair.model.Contato;
 import softhair.model.Endereco;
 import softhair.model.Funcionario;
-import softhair.model.dao.ClienteDao;
 import softhair.model.dao.ContatoDao;
 import softhair.model.dao.EnderecoDao;
 import softhair.model.dao.FuncionarioDao;
@@ -20,11 +18,11 @@ import softhair.model.dao.FuncionarioDao;
  * @since 19/06/2015
  * @version 1.3
  */
+@ManagedBean
+@SessionScoped
 public class FuncionarioController {
 	private Funcionario funcionario;
 	private List<Funcionario> funcionarios;
-	
-
 	private Endereco endereco;
 	private Contato contato;
 	private FuncionarioDao funcionarioDao;
@@ -43,16 +41,32 @@ public class FuncionarioController {
 
 	}
 
+	public String novoFuncionario(){
+		funcionario = new Funcionario();
+		funcionario.setContato(new Contato());
+		funcionario.setEndereco(new Endereco());
+		return "cadastrarFuncionario.xhtml?faces-redirect=true";
+	}
+	
+	public String atualizarFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+		return "alterarFuncionario.xhtml?faces-redirect=true";
+	}
+	
+	public String visualizarFuncionario(Funcionario funcionario){
+		this.funcionario = funcionario;
+		return "visualizarFuncionario.xhtml?faces-redirect=true";
+	}
+	
 	public void salvar() {
-		enderecoDao.salvar(endereco);
-		contatoDao.salvar(contato);
 		funcionarioDao.salvar(funcionario);
+		setFuncionario(new Funcionario());
+		funcionario.setContato(new Contato());
+		funcionario.setEndereco(new Endereco());
 
 	}
 
 	public void atualizar(Funcionario funcionario) {
-		enderecoDao.atualizar(funcionario.getEndereco());
-		contatoDao.atualizar(funcionario.getContato());
 		funcionarioDao.atualizar(funcionario);
 
 	}
@@ -65,13 +79,10 @@ public class FuncionarioController {
 	}
 
 	public void deletar(Funcionario funcionario) {
-		enderecoDao.atualizar(funcionario.getEndereco());
-		contatoDao.atualizar(funcionario.getContato());
 		funcionarioDao.deletar(funcionario);
 
 	}
 
-	
 	/**
 	 * @return the endereco
 	 */
