@@ -24,7 +24,7 @@ public class ClienteDao {
 	Transaction tx;
 
 	public ClienteDao() {
-		
+
 	}
 
 	public Cliente salvar(Cliente cliente) {
@@ -84,6 +84,69 @@ public class ClienteDao {
 		return clientes;
 	}
 
+	public Cliente buscar(Cliente clienteSel) {
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			clienteSel = (Cliente) ss.get(Cliente.class, clienteSel.getIdColaborador());
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return clienteSel;
+	}
+	
+	public Cliente buscarPorId(Integer idCliente){
+		// Declaração de variáveis
+		Cliente cliente;
+		
+		// Inicialização de variáveis
+		cliente = null;
+		
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			cliente = (Cliente) ss.get(Cliente.class, idCliente);
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return cliente;
+		
+		
+	}
+
 	public Cliente atualizar(Cliente cliente) {
 
 		try {
@@ -140,34 +203,6 @@ public class ClienteDao {
 		}
 
 		return deletou;
-	}
-
-	public Cliente buscar(Cliente clienteSel) {
-		
-		try {
-			ss = HibernateUtil.getSessionFactory().openSession();
-			tx = ss.beginTransaction();
-			clienteSel =  (Cliente) ss.get(Cliente.class, clienteSel.getIdColaborador());
-			tx.commit();
-		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
-
-				this.tx.rollback();
-			}
-		} finally {
-			try {
-				if (ss.isOpen()) {
-
-					ss.close();
-				}
-			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
-			}
-		}
-
-		return clienteSel;
 	}
 
 }

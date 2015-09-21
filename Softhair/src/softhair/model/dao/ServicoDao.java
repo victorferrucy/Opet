@@ -85,6 +85,39 @@ public class ServicoDao {
 		return servicos;
 	}
 
+	public Servico buscarPorId(Integer idServico){
+		// Declaração de variáveis
+		Servico servico;
+		
+		// Inicialização de variáveis
+		servico = null;
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			servico = (Servico)ss.get(Servico.class, idServico);
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			if (this.tx.isActive()) {
+
+				this.tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return servico;
+		
+	}
+	
 	public Servico atualizar(Servico servico) {
 
 		try {

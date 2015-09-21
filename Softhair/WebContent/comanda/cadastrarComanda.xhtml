@@ -18,28 +18,28 @@
 		<p:panelGrid id="cadastrarComanda" columns="2">
 
 			<p:outputLabel value="Cliente" />
-			<p:selectOneMenu value="#{comandaController.buscarClientes()}">
-				<f:selectItems value="#{comandaController.clientes}" var="cliente"
+			<p:selectOneMenu  converter="clienteConverter" value="#{comandaController.cliente}">
+				<f:selectItems value="#{comandaController.buscarClientes()}" var="cliente"
 					itemValue="#{cliente.idColaborador}" itemLabel="#{cliente.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Servico" />
-			<p:selectOneMenu value="#{comandaController.buscarServicos()}">
-				<f:selectItems value="#{comandaController.servicos}" var="servico"
+			<p:selectOneMenu converter="servicoConverter" value="#{comandaController.servico}">
+				<f:selectItems value="#{comandaController.buscarServicos()}" var="servico"
 					itemValue="#{servico.idServico}" itemLabel="#{servico.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Funcionario" />
-			<p:selectOneMenu value="#{comandaController.buscarFuncionarios()}">
-				<f:selectItems value="#{comandaController.funcionarios}"
-					var="funcionario" itemValue="#{funcionario.idColaborador}"
+			<p:selectOneMenu  converter="funcionarioConverter" value="#{comandaController.funcionario}">
+				<f:selectItems value="#{comandaController.buscarFuncionarios()}"
+					var="funcionario" itemValue="#{funcionario}"
 					itemLabel="#{funcionario.nome}" />
+					
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Data de Abertura" />
-			<p:calendar id="dataAbertura" maxlength="8" mask="99/99/9999"
+			<p:calendar converter="calendarConverter" id="dataAbertura" maxlength="8" mask="99/99/9999"
 				pattern="dd/MM/yyyy">
-				<f:converter converterId="dateConverter" />
 			</p:calendar>
 
 			<p:outputLabel value="Total" />

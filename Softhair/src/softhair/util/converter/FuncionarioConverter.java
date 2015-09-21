@@ -15,7 +15,7 @@ import softhair.model.dao.FuncionarioDao;
  * @author Victor Ferrucy
  *
  */
-@FacesConverter(forClass = Funcionario.class)
+@FacesConverter(value = "funcionarioConverter")
 public class FuncionarioConverter implements Converter {
 
 	/*
@@ -25,9 +25,9 @@ public class FuncionarioConverter implements Converter {
 	 * FacesContext, javax.faces.component.UIComponent, java.lang.String)
 	 */
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
+	public Object getAsObject(FacesContext arg0, UIComponent arg1, String idFuncionario) {
 		FuncionarioDao funcionarioDao = new FuncionarioDao();
-		return funcionarioDao.buscarPorId(Integer.parseInt(arg2));
+		return funcionarioDao.buscarPorId(Integer.parseInt(idFuncionario));
 	}
 
 	/*

@@ -17,8 +17,8 @@ import javax.faces.convert.FacesConverter;
  * @author Victor Ferrucy
  *
  */
-@FacesConverter("dateConverter")
-public class DateConverter implements Converter{
+@FacesConverter("calendarConverter")
+public class CalendarConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
