@@ -49,6 +49,16 @@ public class Endereco implements Serializable{
 	private String estado;
 	
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Endereco [idEndereco=" + idEndereco + ", rua=" + rua + ", cep=" + cep + ", bairro=" + bairro
+				+ ", numero=" + numero + ", complemento=" + complemento + ", cidade=" + cidade + ", estado=" + estado
+				+ "]";
+	}
+	
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

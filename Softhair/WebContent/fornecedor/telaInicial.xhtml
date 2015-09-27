@@ -40,17 +40,13 @@
 			</p:column>
 
 			<p:column headerText="Detalhes">
-				<h:form id="detalharFuncionario">
 					<p:commandButton icon="ui-icon-contact" title="Detalhar"
-						action="#{fornecedorController.visualizarFornecedor(fornecedor)}"
-						ajax="false" />
-				</h:form>
+						action="#{fornecedorController.visualizarFornecedor(fornecedor)}" />
 			</p:column>
 
 			<p:column headerText="Atualizar">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{fornecedorController.atualizarFornecedor(fornecedor)}"
-					ajax="false" />
+					action="#{fornecedorController.atualizarFornecedor(fornecedor)}" />
 			</p:column>
 
 			<p:column headerText="Deletar">

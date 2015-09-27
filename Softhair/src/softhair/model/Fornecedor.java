@@ -30,9 +30,11 @@ public class Fornecedor implements Serializable{
 	
 	@Id @GeneratedValue
 	private int idFornecedor;
-	@OneToOne(cascade=CascadeType.ALL) @JoinColumn(name="idContato")
+	@OneToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="idContato")
 	private Contato contato;
-	@OneToOne(cascade=CascadeType.ALL) @JoinColumn(name="idEndereco")
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name="idEndereco")
 	private Endereco endereco;
 	@Column
 	private String nome;

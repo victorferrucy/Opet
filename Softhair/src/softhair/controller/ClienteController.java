@@ -64,6 +64,7 @@ public class ClienteController {
 	
 	public void salvar() {
 		clienteDao.salvar(cliente);
+		
 		cliente = new Cliente();
 		cliente.setEndereco(new Endereco());
 		cliente.setContato(new Contato());

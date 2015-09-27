@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import softhair.model.Colaborador;
 import softhair.model.Contato;

@@ -28,9 +28,9 @@ public class FornecedorDao {
 	}
 
 	public Fornecedor salvar(Fornecedor fornecedor) {
-		ss = HibernateUtil.getSessionFactory().openSession();
+	
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(fornecedor);
 			tx.commit();
@@ -59,9 +59,9 @@ public class FornecedorDao {
 	@SuppressWarnings("unchecked")
 	public List<Fornecedor> buscar() {
 		List<Fornecedor> clientes = new ArrayList<Fornecedor>();
-		ss = HibernateUtil.getSessionFactory().openSession();
+		
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			clientes = ss.createCriteria(Fornecedor.class).list();
 			tx.commit();
@@ -87,9 +87,9 @@ public class FornecedorDao {
 	}
 
 	public Fornecedor atualizar(Fornecedor fornecedor) {
-
+		
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.update(fornecedor);
 			tx.commit();
@@ -116,16 +116,17 @@ public class FornecedorDao {
 
 	public boolean deletar(Fornecedor fornecedor) {
 		boolean deletou = true;
+		
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.delete(fornecedor);
 			tx.commit();
 
 		} catch (HibernateException e) {
 			deletou = false;
+			e.printStackTrace();
 			if (this.tx.isActive()) {
-
 				this.tx.rollback();
 			}
 		} finally {

@@ -34,9 +34,8 @@
 			value="#{funcionarioController.funcionario.sexo}" />
 
 		<p:outputLabel value="Data de nascimento" />
-		<p:outputLabel id="dataNascimento"
-			value="#{funcionarioController.funcionario.dataNascimento.time}">
-		</p:outputLabel>
+		<p:calendar id="dataNascimento" converter="calendarConverter"
+			value="#{funcionarioController.funcionario.dataNascimento.time}" />
 
 		<p:outputLabel value="Rua" />
 		<p:outputLabel id="rua"

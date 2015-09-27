@@ -35,7 +35,7 @@ public class ClienteDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -64,7 +64,7 @@ public class ClienteDao {
 			clientes = ss.createCriteria(Cliente.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -92,7 +92,7 @@ public class ClienteDao {
 			clienteSel = (Cliente) ss.get(Cliente.class, clienteSel.getIdColaborador());
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -125,7 +125,7 @@ public class ClienteDao {
 			cliente = (Cliente) ss.get(Cliente.class, idCliente);
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -156,6 +156,7 @@ public class ClienteDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -185,7 +186,7 @@ public class ClienteDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
-			System.out.println("ERRO DELETAR" + e);
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();

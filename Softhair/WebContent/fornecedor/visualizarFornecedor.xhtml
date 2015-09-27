@@ -12,7 +12,7 @@
 <h:body>
 	<ui:include src="../menu.xhtml" />
 
-	<p:panelGrid id="cadastrarFuncionario" columns="2">
+	<p:panelGrid id="visualizarFuncionario" columns="2">
 
 		<p:outputLabel value="Nome" />
 		<p:outputLabel id="nome"
@@ -23,7 +23,7 @@
 			value="#{fornecedorController.fornecedor.cnpj}" />
 
 		<p:outputLabel value="Rua" />
-		<p:outputLabel id="rua" value="#{fornecedorController.endereco.rua}" />
+		<p:outputLabel id="rua" value="#{fornecedorController.fornecedor.endereco.rua}" />
 
 		<p:outputLabel value="CEP" />
 		<p:outputLabel id="cep"

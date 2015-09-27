@@ -36,9 +36,8 @@
 				value="#{clienteController.cliente.sexo}" />
 
 			<p:outputLabel value="Data de nascimento" />
-			<p:inputMask id="dataNascimento" maxlength="8" mask="99/99/9999"
+			<p:inputMask id="dataNascimento"  converter="calendarConverter"  maxlength="8" mask="99/99/9999"
 				value="#{clienteController.cliente.dataNascimento}">
-				<f:converter converterId="dateConverter" />
 			</p:inputMask>
 
 			<p:outputLabel value="Rua" />

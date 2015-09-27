@@ -62,15 +62,16 @@ public class FornecedorController {
 	}
 	
 	public void salvar() {
-		enderecoDao.salvar(endereco);
-		contatoDao.salvar(contato);
 		fornecedorDao.salvar(fornecedor);
+		
+		fornecedor = new Fornecedor();
+		fornecedor.setEndereco(new Endereco());
+		fornecedor.setContato(new Contato());
 
 	}
 
 	public void atualizar(Fornecedor fornecedor) {
-		enderecoDao.atualizar(fornecedor.getEndereco());
-		contatoDao.atualizar(fornecedor.getContato());
+		System.out.println(fornecedor.getEndereco().toString());
 		fornecedorDao.atualizar(fornecedor);
 
 	}
@@ -82,10 +83,16 @@ public class FornecedorController {
 		return fornecedores;
 	}
 
-	public void deletar(Fornecedor fornecedor) {
-		enderecoDao.atualizar(fornecedor.getEndereco());
-		contatoDao.atualizar(fornecedor.getContato());
-		fornecedorDao.deletar(fornecedor);
+	public List<Fornecedor> deletar(Fornecedor fornecedor) {
+		boolean deletou;
+		
+		deletou = fornecedorDao.deletar(fornecedor);
+		
+		if(deletou){
+			fornecedores = fornecedorDao.buscar();
+		}
+		
+		return fornecedores;
 
 	}
 
