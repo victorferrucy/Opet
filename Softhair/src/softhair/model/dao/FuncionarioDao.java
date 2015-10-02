@@ -23,22 +23,22 @@ public class FuncionarioDao {
 	Transaction tx;
 
 	public FuncionarioDao() {
-		
+
 	}
 
 	public Funcionario salvar(Funcionario funcionario) {
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(funcionario);
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -48,7 +48,7 @@ public class FuncionarioDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -58,17 +58,17 @@ public class FuncionarioDao {
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> buscar() {
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			funcionarios = ss.createCriteria(Funcionario.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -78,31 +78,30 @@ public class FuncionarioDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return funcionarios;
 	}
-	
-	
+
 	public Funcionario buscarPorId(Integer id) {
 		// Declaração de variáveis
 		Funcionario funcionario;
-		
+
 		// Inicialização de variáveis
 		funcionario = null;
-		
-		ss = HibernateUtil.getSessionFactory().openSession();
+
 		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			funcionario = (Funcionario)ss.get(Funcionario.class, id);
+			funcionario = (Funcionario) ss.get(Funcionario.class, id);
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -112,7 +111,7 @@ public class FuncionarioDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -122,12 +121,14 @@ public class FuncionarioDao {
 	public Funcionario atualizar(Funcionario funcionario) {
 
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.update(funcionario);
 			tx.commit();
 
 		} catch (HibernateException e) {
+
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -140,7 +141,7 @@ public class FuncionarioDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -150,16 +151,19 @@ public class FuncionarioDao {
 	public boolean deletar(Funcionario funcionario) {
 		boolean deletou = true;
 		try {
-
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.delete(funcionario);
 			tx.commit();
 
 		} catch (HibernateException e) {
 			deletou = false;
-			if (this.tx.isActive()) {
 
-				this.tx.rollback();
+			e.printStackTrace();
+
+			if (tx.isActive()) {
+
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -169,7 +173,7 @@ public class FuncionarioDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

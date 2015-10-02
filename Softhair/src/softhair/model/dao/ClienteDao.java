@@ -36,9 +36,9 @@ public class ClienteDao {
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -47,8 +47,7 @@ public class ClienteDao {
 					ss.close();
 				}
 			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -65,9 +64,8 @@ public class ClienteDao {
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			if (this.tx.isActive()) {
-
-				this.tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -76,8 +74,7 @@ public class ClienteDao {
 					ss.close();
 				}
 			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -93,9 +90,9 @@ public class ClienteDao {
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -104,8 +101,7 @@ public class ClienteDao {
 					ss.close();
 				}
 			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -126,9 +122,9 @@ public class ClienteDao {
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -137,8 +133,7 @@ public class ClienteDao {
 					ss.close();
 				}
 			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -157,9 +152,9 @@ public class ClienteDao {
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -168,8 +163,7 @@ public class ClienteDao {
 					ss.close();
 				}
 			} catch (Throwable e) {
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -187,9 +181,9 @@ public class ClienteDao {
 		} catch (HibernateException e) {
 			deletou = false;
 			e.printStackTrace();
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -199,7 +193,7 @@ public class ClienteDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

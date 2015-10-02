@@ -15,22 +15,22 @@ import softhair.util.HibernateUtil;
  * @version 1.3
  */
 public class ColaboradorDao {
-	
+
 	Session ss;
 	Transaction tx;
-	
-	public Colaborador salvar(Colaborador colaborador){
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+	public Colaborador salvar(Colaborador colaborador) {
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(colaborador);
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -46,20 +46,21 @@ public class ColaboradorDao {
 
 		return colaborador;
 	}
-	@SuppressWarnings("unchecked")
-	public List<Colaborador> buscar(){
-		List<Colaborador> colaboradores = null;
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+	@SuppressWarnings("unchecked")
+	public List<Colaborador> buscar() {
+		List<Colaborador> colaboradores = null;
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			colaboradores = ss.createCriteria(Colaborador.class).list();
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -69,25 +70,25 @@ public class ColaboradorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return colaboradores;
 	}
-	public Colaborador atualizar(Colaborador colaborador){
-		
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+	public Colaborador atualizar(Colaborador colaborador) {
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.update(colaborador);
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -97,28 +98,27 @@ public class ColaboradorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return colaborador;
 	}
 
-	public boolean deletar(Colaborador colaborador){
+	public boolean deletar(Colaborador colaborador) {
 		boolean deletou = true;
-		ss = HibernateUtil.getSessionFactory().openSession();
-		try {
 
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.delete(colaborador);
 			tx.commit();
 
 		} catch (HibernateException e) {
 			deletou = false;
-			System.out.println("ERRO DELETAR COLABORADOR" + e );
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -128,7 +128,7 @@ public class ColaboradorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

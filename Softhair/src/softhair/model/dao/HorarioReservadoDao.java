@@ -31,20 +31,20 @@ public class HorarioReservadoDao {
 		return null;
 	}
 
-	@SuppressWarnings({ "finally", "unchecked" })
 	public List<HorarioReservado> buscar() {
-		List<HorarioReservado> horariosReservados = null;
+		List<HorarioReservado> horariosReservados;
+
+		horariosReservados = null;
+
 		try {
 			tx = ss.beginTransaction();
-			horariosReservados = ss.createCriteria(HorarioReservado.class)
-					.list();
-			
+			horariosReservados = (List<HorarioReservado>) ss.createCriteria(HorarioReservado.class).list();
+
 		} catch (HibernateException e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-			if (this.tx.isActive()) {
-
-				this.tx.rollback();
+				tx.rollback();
 			}
 
 		} finally {
@@ -57,11 +57,8 @@ public class HorarioReservadoDao {
 				}
 
 			} catch (Throwable e) {
-				// TODO: handle exception
-
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
-			
 			return horariosReservados;
 		}
 

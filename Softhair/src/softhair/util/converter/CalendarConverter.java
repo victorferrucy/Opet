@@ -19,12 +19,12 @@ import javax.faces.convert.FacesConverter;
  */
 @FacesConverter("calendarConverter")
 public class CalendarConverter implements Converter{
-
+	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","BR"));
+	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		Calendar calendar = Calendar.getInstance();
-		System.out.println(arg2);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","BR"));
+		Calendar calendar = Calendar.getInstance(new Locale("pr", "BR"));
+		
 		try {
 			calendar.setTime(sdf.parse(arg2));
 
@@ -36,8 +36,9 @@ public class CalendarConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
+		Calendar calendar = ((Calendar)arg2).getInstance(new Locale("pt", "BR"));
 		
-		return arg2.toString();
+		return sdf.format(calendar.getTime());
 	}
 
 }

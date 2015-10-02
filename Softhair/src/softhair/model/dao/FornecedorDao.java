@@ -36,10 +36,10 @@ public class FornecedorDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -49,7 +49,7 @@ public class FornecedorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -66,10 +66,10 @@ public class FornecedorDao {
 			clientes = ss.createCriteria(Fornecedor.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -79,7 +79,7 @@ public class FornecedorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -95,9 +95,9 @@ public class FornecedorDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -107,7 +107,7 @@ public class FornecedorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -126,8 +126,8 @@ public class FornecedorDao {
 		} catch (HibernateException e) {
 			deletou = false;
 			e.printStackTrace();
-			if (this.tx.isActive()) {
-				this.tx.rollback();
+			if (tx.isActive()) {
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -137,7 +137,7 @@ public class FornecedorDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

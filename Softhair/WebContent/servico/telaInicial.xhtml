@@ -42,20 +42,15 @@
 			</p:column>
 
 			<p:column headerText="Detalhes">
-				<h:form id="detalharFuncionario">
 					<p:commandButton icon="ui-icon-contact" title="Detalhar"
-						action="#{servicoController.visualizarServico(servico)}"
-						ajax="false">
+						action="#{servicoController.visualizarServico(servico)}" >
 						<f:param name="i" value="3" />
-
 					</p:commandButton>
-				</h:form>
 			</p:column>
 
 			<p:column headerText="Atualizar">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{servicoController.atualizarServico(servico)}"
-					ajax="false" />
+					action="#{servicoController.atualizarServico(servico)}" />
 			</p:column>
 
 			<p:column headerText="Deletar">

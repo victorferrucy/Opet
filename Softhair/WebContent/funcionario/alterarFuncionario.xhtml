@@ -36,7 +36,7 @@
 				value="#{funcionarioController.funcionario.sexo}" />
 
 			<p:outputLabel value="Data de nascimento" />
-			<p:calendar id="dataNascimento" converter="calendarConverter"
+			<p:calendar locale="pt_BR"  readonlyInput="true" id="dataNascimento" converter="calendarConverter"
 				value="#{funcionarioController.funcionario.dataNascimento}"
 				showOn="button" />
 
@@ -95,7 +95,7 @@
 			</p:calendar>
 
 			<p:outputLabel value="Data de demissão" />
-			<p:calendar id="dataDemissao" converter="calenadarConverter"
+			<p:calendar id="dataDemissao" converter="calendarConverter"
 				value="#{funcionarioController.funcionario.dataDemissao}"
 				showOn="button" />
 

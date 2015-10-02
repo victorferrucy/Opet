@@ -1,5 +1,6 @@
 package softhair.util;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -10,25 +11,25 @@ import org.hibernate.service.ServiceRegistry;
  *
  */
 public class HibernateUtil {
-	
+
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
-	static{
+
+	static {
 		try {
 			Configuration config = new Configuration();
 			config.configure();
-			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-		            config.getProperties()).build();
+			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 			sessionFactory = config.buildSessionFactory(serviceRegistry);
-			
-		}finally{
-			
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
 		}
-		
+
 	}
-	
-	public static SessionFactory getSessionFactory(){
+
+	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
-		
+
 	}
 }

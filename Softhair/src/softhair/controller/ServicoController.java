@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import softhair.model.Servico;
 import softhair.model.dao.ServicoDao;
@@ -27,8 +26,8 @@ public class ServicoController {
 	private ServicoDao servicoDao;
 
 	public ServicoController() {
-		setServico(new Servico());
-		setServicoDao(new ServicoDao());
+		servico = new Servico();
+		servicoDao = new ServicoDao();
 	}
 
 	public String novoServico (){
@@ -53,7 +52,6 @@ public class ServicoController {
 	
 	public void salvar() {
 		servicoDao.salvar(servico);
-
 	}
 
 	public void atualizar(Servico servico) {
@@ -70,7 +68,6 @@ public class ServicoController {
 
 	public void deletar(Servico servico) {
 		servicoDao.deletar(servico);
-
 	}
 	
 	/**

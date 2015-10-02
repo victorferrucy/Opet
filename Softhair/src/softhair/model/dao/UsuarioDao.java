@@ -25,37 +25,34 @@ public class UsuarioDao {
 		ss = HibernateUtil.getSessionFactory().openSession();
 	}
 
-	public Usuario salvar(Usuario usuario){
-		try{
+	public Usuario salvar(Usuario usuario) {
+		try {
 			tx = ss.beginTransaction();
 			ss.save(usuario);
 			tx.commit();
-		
-	} catch (HibernateException e) {
-		// TODO: handle exception
 
-		if (this.tx.isActive()) {
+		} catch (HibernateException e) {
 
-			this.tx.rollback();
-		}
+			if (tx.isActive()) {
 
-	} finally {
-
-		try {
-
-			if (ss.isOpen()) {
-
-				ss.close();
+				tx.rollback();
 			}
 
-		} catch (Throwable e) {
-			// TODO: handle exception
+		} finally {
 
-			System.out.println(e.getMessage());
+			try {
+
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+
+			} catch (Throwable e) {
+
+				e.printStackTrace();
+			}
+
 		}
-
-	
-	}
 
 		return usuario;
 	}

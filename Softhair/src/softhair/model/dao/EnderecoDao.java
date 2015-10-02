@@ -14,7 +14,6 @@ import softhair.model.Contato;
 import softhair.model.Endereco;
 import softhair.util.HibernateUtil;
 
-
 /**
  * @author Victor Ferrucy
  * @since 19/06/2015
@@ -23,14 +22,12 @@ import softhair.util.HibernateUtil;
 public class EnderecoDao {
 	private Session ss;
 	private Transaction tx;
-	
-	public EnderecoDao(){
-		
-		
+
+	public EnderecoDao() {
 	}
-	
+
 	public Endereco salvar(Endereco endereco) {
-		
+
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
@@ -38,10 +35,10 @@ public class EnderecoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -51,7 +48,7 @@ public class EnderecoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -61,17 +58,17 @@ public class EnderecoDao {
 	@SuppressWarnings("unchecked")
 	public List<Endereco> buscar() {
 		List<Endereco> enderecos = new ArrayList<Endereco>();
-	
+
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			enderecos = ss.createCriteria(Endereco.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -81,7 +78,7 @@ public class EnderecoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -92,13 +89,13 @@ public class EnderecoDao {
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			endereco =  (Endereco) ss.get(Endereco.class, endereco.getIdEndereco());
+			endereco = (Endereco) ss.get(Endereco.class, endereco.getIdEndereco());
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -108,13 +105,13 @@ public class EnderecoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return endereco;
 	}
-	
+
 	public Endereco atualizar(Endereco endereco) {
 
 		try {
@@ -124,9 +121,9 @@ public class EnderecoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -136,7 +133,7 @@ public class EnderecoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -153,10 +150,10 @@ public class EnderecoDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
-			System.out.println("ERRO DELETAR ENDERECO " + e);
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -166,7 +163,7 @@ public class EnderecoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

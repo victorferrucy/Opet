@@ -36,7 +36,7 @@ public class ServicoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -49,7 +49,7 @@ public class ServicoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -65,7 +65,7 @@ public class ServicoDao {
 			servicos = ss.createCriteria(Servico.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -78,7 +78,7 @@ public class ServicoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -97,7 +97,7 @@ public class ServicoDao {
 			servico = (Servico)ss.get(Servico.class, idServico);
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -110,7 +110,7 @@ public class ServicoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -127,6 +127,7 @@ public class ServicoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -139,7 +140,7 @@ public class ServicoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -156,6 +157,7 @@ public class ServicoDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
+			e.printStackTrace();
 			if (this.tx.isActive()) {
 
 				this.tx.rollback();
@@ -168,7 +170,7 @@ public class ServicoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

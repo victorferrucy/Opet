@@ -21,7 +21,7 @@ public class ContatoDao {
 	private Transaction tx;
 
 	public Contato salvar(Contato contato) {
-		
+
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
@@ -29,10 +29,10 @@ public class ContatoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -42,7 +42,7 @@ public class ContatoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -58,10 +58,10 @@ public class ContatoDao {
 			contatos = ss.createCriteria(Contato.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -71,24 +71,24 @@ public class ContatoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return contatos;
 	}
-	
+
 	public Contato buscar(Contato contato) {
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			contato =  (Contato) ss.get(Contato.class, contato.getIdContato());
+			contato = (Contato) ss.get(Contato.class, contato.getIdContato());
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -98,7 +98,7 @@ public class ContatoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -114,9 +114,9 @@ public class ContatoDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -126,7 +126,7 @@ public class ContatoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -143,10 +143,10 @@ public class ContatoDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
-			System.out.println("ERRO DELETAR CONTATO \n" + e);
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -156,7 +156,7 @@ public class ContatoDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 

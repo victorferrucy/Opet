@@ -11,9 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import softhair.model.Comanda;
-import softhair.model.Contato;
 import softhair.util.HibernateUtil;
-
 
 /**
  * @author Victor Ferrucy
@@ -23,11 +21,12 @@ import softhair.util.HibernateUtil;
 public class ComandaDao {
 	private Session ss;
 	private Transaction tx;
-	
-	public ComandaDao(){}
-	
+
+	public ComandaDao() {
+	}
+
 	public Comanda salvar(Comanda comanda) {
-		
+
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
@@ -35,10 +34,10 @@ public class ComandaDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -48,7 +47,7 @@ public class ComandaDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -64,10 +63,10 @@ public class ComandaDao {
 			comandas = ss.createCriteria(Comanda.class).list();
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -77,24 +76,24 @@ public class ComandaDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
 		return comandas;
 	}
-	
+
 	public Comanda buscar(Comanda comanda) {
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			comanda =  (Comanda) ss.get(Comanda.class, comanda.getIdComanda());
+			comanda = (Comanda) ss.get(Comanda.class, comanda.getIdComanda());
 			tx.commit();
 		} catch (HibernateException e) {
-			System.out.println(e.getMessage());
-			if (this.tx.isActive()) {
+			e.printStackTrace();
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -104,7 +103,7 @@ public class ComandaDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -120,9 +119,9 @@ public class ComandaDao {
 			tx.commit();
 
 		} catch (HibernateException e) {
-			if (this.tx.isActive()) {
+			if (tx.isActive()) {
 
-				this.tx.rollback();
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -132,7 +131,7 @@ public class ComandaDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -149,10 +148,12 @@ public class ComandaDao {
 
 		} catch (HibernateException e) {
 			deletou = false;
-			System.out.println("ERRO DELETAR CONTATO \n" + e);
-			if (this.tx.isActive()) {
 
-				this.tx.rollback();
+			e.printStackTrace();
+
+			if (tx.isActive()) {
+
+				tx.rollback();
 			}
 		} finally {
 			try {
@@ -162,7 +163,7 @@ public class ComandaDao {
 				}
 			} catch (Throwable e) {
 
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
