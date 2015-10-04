@@ -18,29 +18,34 @@
 		<p:panelGrid id="cadastrarComanda" columns="2">
 
 			<p:outputLabel value="Cliente" />
-			<p:selectOneMenu  converter="clienteConverter" value="#{comandaController.cliente}">
-				<f:selectItems value="#{comandaController.buscarClientes()}" var="cliente"
-					itemValue="#{cliente.idColaborador}" itemLabel="#{cliente.nome}" />
+			<p:selectOneMenu converter="clienteConverter"
+				value="#{comandaController.cliente}">
+				<f:selectItems value="#{comandaController.buscarClientes()}"
+					var="cliente" itemValue="#{cliente}"
+					itemLabel="#{cliente.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Servico" />
-			<p:selectOneMenu converter="servicoConverter" value="#{comandaController.servico}">
-				<f:selectItems value="#{comandaController.buscarServicos()}" var="servico"
-					itemValue="#{servico.idServico}" itemLabel="#{servico.nome}" />
+			<p:selectOneMenu converter="servicoConverter"
+				value="#{comandaController.servicoPrestado.servico}">
+				<f:selectItems value="#{comandaController.buscarServicos()}"
+					var="servico" itemValue="#{servico}" itemLabel="#{servico.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Funcionario" />
-			<p:selectOneMenu  converter="funcionarioConverter" value="#{comandaController.funcionario}">
+			<p:selectOneMenu converter="funcionarioConverter"
+				value="#{comandaController.servicoPrestado.funcionario}">
 				<f:selectItems value="#{comandaController.buscarFuncionarios()}"
 					var="funcionario" itemValue="#{funcionario}"
 					itemLabel="#{funcionario.nome}" />
-					
+
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Data de Abertura" />
-			<p:calendar converter="calendarConverter" id="dataAbertura" maxlength="8" mask="99/99/9999"
-				pattern="dd/MM/yyyy">
-			</p:calendar>
+			<p:calendar id="dataAbertura" converter="calendarConverter"
+				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
+				showOn="button" yearRange="c-70:c"
+				value="#{comandaController.comanda.dataAbertura}" />
 
 			<p:outputLabel value="Total" />
 			<p:inputMask mask="999.999,00" id="total" maxlength="10"

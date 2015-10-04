@@ -30,11 +30,13 @@
 			</p:column>
 
 			<p:column headerText="Nome">
-				<h:outputText value="#{comanda.cliente.nome}" />
+				<h:outputText
+					value="#{comanda.cliente.nome}" />
 			</p:column>
 
 			<p:column headerText="Data de abertura">
-				<h:outputText value="#{comanda.dataAbertura}" />
+				<h:outputText converter="calendarConverter"
+					value="#{comanda.dataAbertura}" />
 			</p:column>
 
 			<p:column headerText="Status">
@@ -42,22 +44,18 @@
 			</p:column>
 
 			<p:column headerText="Detalhes">
-				<h:form id="detalharCliente">
-					<p:commandButton icon="ui-icon-contact" title="Detalhar"
-						action="#{clienteController.visualizarCliente(cliente)}"
-						ajax="false" />
-				</h:form>
+				<p:commandButton icon="ui-icon-contact" title="Detalhar"
+					action="#{comandaController.visualizarComanda(comanda)}" />
 			</p:column>
 
 			<p:column headerText="Atualizar">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{clienteController.atualizarCliente(cliente)}"
-					ajax="false" />
+					action="#{comandaController.atualizarComanda(comanda)}" />
 			</p:column>
 
 			<p:column headerText="Deletar">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{clienteController.deletar(cliente)}" update="clientes" />
+					action="#{comandaController.deletar(comanda)}" update="comandas" />
 			</p:column>
 
 		</p:dataTable>

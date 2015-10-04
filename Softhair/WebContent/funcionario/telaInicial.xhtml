@@ -37,17 +37,13 @@
 			</p:column>
 
 			<p:column headerText="Detalhes">
-				<h:form id="detalharFuncionario">
-					<p:commandButton icon="ui-icon-contact" title="Detalhar"
-						action="#{funcionarioController.visualizarFuncionario(funcionario)}"
-						ajax="false" />
-				</h:form>
+				<p:commandButton icon="ui-icon-contact" title="Detalhar"
+					action="#{funcionarioController.visualizarFuncionario(funcionario)}" />
 			</p:column>
 
 			<p:column headerText="Atualizar">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{funcionarioController.atualizarFuncionario(funcionario)}"
-					ajax="false" />
+					action="#{funcionarioController.atualizarFuncionario(funcionario)}" />
 			</p:column>
 
 			<p:column headerText="Deletar">

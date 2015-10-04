@@ -35,8 +35,9 @@
 
 			<p:outputLabel value="Data de nascimento" />
 			<p:calendar id="dataNascimento" converter="calendarConverter"
-				value="#{funcionarioController.funcionario.dataNascimento}"
-				showOn="button" />
+				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
+				showOn="button" yearRange="c-70:c"
+				value="#{funcionarioController.funcionario.dataNascimento}" />
 
 			<p:outputLabel value="Rua" />
 			<p:inputText id="rua" maxlength="40"
@@ -88,14 +89,15 @@
 
 			<p:outputLabel value="Data de contratação" />
 			<p:calendar id="dataContratacao" converter="calendarConverter"
-				value="#{funcionarioController.funcionario.dataContratacao}"
-				showOn="button">
-			</p:calendar>
+				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
+				showOn="button" yearRange="c-70:c"
+				value="#{funcionarioController.funcionario.dataContratacao}" />
 
 			<p:outputLabel value="Data de demissão" />
 			<p:calendar id="dataDemissao" converter="calendarConverter"
-				value="#{funcionarioController.funcionario.dataDemissao}"
-				showOn="button" />
+				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
+				showOn="button" yearRange="c-70:c"
+				value="#{funcionarioController.funcionario.dataDemissao}" />
 
 			<p:outputLabel value="Salário" />
 			<p:inputText maxlength="10"

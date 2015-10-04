@@ -12,7 +12,7 @@
 
 <h:body>
 	<ui:include src="../menu.xhtml" />
-	
+
 	<p:panelGrid id="visualizarCliente" columns="2">
 		<p:outputLabel value="Nome" />
 		<p:outputLabel id="nome" value="#{clienteController.cliente.nome}" />
@@ -31,9 +31,8 @@
 		<p:outputLabel id="sexo" value="#{clienteController.cliente.sexo}" />
 
 		<p:outputLabel value="Data de nascimento" />
-		<p:outputLabel id="dataNascimento"
-			value="#{clienteController.cliente.dataNascimento.time}">
-		</p:outputLabel>
+		<p:outputLabel id="dataNascimento" converter="calendarConverter"
+			value="#{clienteController.cliente.dataNascimento}" />
 
 		<p:outputLabel value="Rua" />
 		<p:outputLabel id="rua"

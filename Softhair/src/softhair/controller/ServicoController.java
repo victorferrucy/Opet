@@ -52,6 +52,7 @@ public class ServicoController {
 	
 	public void salvar() {
 		servicoDao.salvar(servico);
+		servico = new Servico();
 	}
 
 	public void atualizar(Servico servico) {

@@ -46,21 +46,20 @@ public class ComandaController {
 	private FuncionarioDao funcionarioDao;
 
 	public ComandaController() {
-		setComanda(new Comanda());
-		setCliente(new Cliente());
-		setServicoPrestado(new ServicoPrestado());
-		setServicosPrestados(new ArrayList<ServicoPrestado>());
+		comanda = new Comanda();
+		cliente = new Cliente();
+		servicoPrestado = new ServicoPrestado();
 		
+		servicosPrestados = new ArrayList<ServicoPrestado>();
 		funcionarios = new ArrayList<Funcionario>();
 		servicos = new ArrayList<Servico>();
 		clientes = new ArrayList<Cliente>();
+		comandas = new ArrayList<Comanda>();
 		
-		setComandas(new ArrayList<Comanda>());
-		
-		setClienteDao(new ClienteDao());
-		setComandaDao(new ComandaDao());
-		setServicoDao(new ServicoDao());
-		setFuncionarioDao(new FuncionarioDao());
+		clienteDao = new ClienteDao();
+		comandaDao = new ComandaDao();
+		servicoDao = new ServicoDao();
+		funcionarioDao = new FuncionarioDao();
 		
 	}
 
