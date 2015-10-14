@@ -28,10 +28,12 @@ public class ComandaDao {
 	public Comanda salvar(Comanda comanda) {
 
 		try {
+			System.out.println("SALVANDO COMANDA 1 ");
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(comanda);
 			tx.commit();
+			System.out.println("SALVANDO COMANDA 2 ");
 
 		} catch (HibernateException e) {
 			e.printStackTrace();

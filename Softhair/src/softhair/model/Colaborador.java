@@ -74,6 +74,16 @@ public class Colaborador implements Serializable{
 	}
 	
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Colaborador [idColaborador=" + idColaborador + ", contato=" + contato + ", endereco=" + endereco
+				+ ", nome=" + nome + ", sobrenome=" + sobrenome + ", cpf=" + cpf + ", rg=" + rg + ", sexo=" + sexo
+				+ ", dataNascimento=" + dataNascimento + "]";
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

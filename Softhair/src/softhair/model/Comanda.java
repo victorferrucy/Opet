@@ -11,10 +11,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -27,23 +27,23 @@ import javax.persistence.Table;
 @Entity
 @Table
 @SequenceGenerator(sequenceName = Comanda.COMANDA_SEQUENCE, name = Comanda.COMANDA_SEQUENCE, initialValue = 0, allocationSize = 10)
-public class Comanda implements Serializable{
-	
+public class Comanda implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7425291224978913179L;
 
 	public static final String COMANDA_SEQUENCE = "comanda_sequence";
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = COMANDA_SEQUENCE)
 	private int idComanda;
-	@ManyToOne(cascade=CascadeType.ALL) @JoinColumn(name="idCliente")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
-	@OneToMany(cascade=CascadeType.ALL) @JoinColumn(name="idServicoPrestado")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval= true)
 	private List<ServicoPrestado> servicosPrestados;
-	@Column 
+	@Column
 	private Calendar dataAbertura;
 	@Column
 	private Calendar dataFechamento;
@@ -51,8 +51,10 @@ public class Comanda implements Serializable{
 	private BigDecimal total;
 	@Column
 	private String status;
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -68,7 +70,10 @@ public class Comanda implements Serializable{
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -114,14 +119,17 @@ public class Comanda implements Serializable{
 			return false;
 		return true;
 	}
+
 	/**
 	 * @return the cliente
 	 */
 	public Cliente getCliente() {
 		return cliente;
 	}
+
 	/**
-	 * @param cliente the cliente to set
+	 * @param cliente
+	 *            the cliente to set
 	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
@@ -133,63 +141,77 @@ public class Comanda implements Serializable{
 	public Calendar getDataAbertura() {
 		return dataAbertura;
 	}
+
 	/**
-	 * @param dataAbertura the dataAbertura to set
+	 * @param dataAbertura
+	 *            the dataAbertura to set
 	 */
 	public void setDataAbertura(Calendar dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
+
 	/**
 	 * @return the dataFechamento
 	 */
 	public Calendar getDataFechamento() {
 		return dataFechamento;
 	}
+
 	/**
-	 * @param dataFechamento the dataFechamento to set
+	 * @param dataFechamento
+	 *            the dataFechamento to set
 	 */
 	public void setDataFechamento(Calendar dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
+
 	/**
 	 * @return the total
 	 */
 	public BigDecimal getTotal() {
 		return total;
 	}
+
 	/**
-	 * @param total the total to set
+	 * @param total
+	 *            the total to set
 	 */
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
+
 	/**
 	 * @return the status
 	 */
 	public String getStatus() {
 		return status;
 	}
+
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	/**
 	 * @return the idComanda
 	 */
 	public int getIdComanda() {
 		return idComanda;
 	}
-	
+
 	/**
 	 * @return the servicosPrestados
 	 */
 	public List<ServicoPrestado> getServicosPrestados() {
 		return servicosPrestados;
 	}
+
 	/**
-	 * @param servicosPrestados the servicosPrestados to set
+	 * @param servicosPrestados
+	 *            the servicosPrestados to set
 	 */
 	public void setServicosPrestados(List<ServicoPrestado> servicosPrestados) {
 		this.servicosPrestados = servicosPrestados;

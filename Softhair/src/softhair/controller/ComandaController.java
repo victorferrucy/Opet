@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import softhair.model.Cliente;
 import softhair.model.Comanda;
@@ -26,7 +25,7 @@ import softhair.model.dao.ServicoDao;
  * @version 1.3
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ComandaController {
 	private Comanda comanda;
 	private Cliente cliente;
@@ -47,24 +46,24 @@ public class ComandaController {
 
 	public ComandaController() {
 		comanda = new Comanda();
+		comanda.setCliente(new Cliente());
 		cliente = new Cliente();
 		servicoPrestado = new ServicoPrestado();
-		
-		servicosPrestados = new ArrayList<ServicoPrestado>();
-		funcionarios = new ArrayList<Funcionario>();
-		servicos = new ArrayList<Servico>();
-		clientes = new ArrayList<Cliente>();
-		comandas = new ArrayList<Comanda>();
 		
 		clienteDao = new ClienteDao();
 		comandaDao = new ComandaDao();
 		servicoDao = new ServicoDao();
 		funcionarioDao = new FuncionarioDao();
 		
+		servicosPrestados = new ArrayList<ServicoPrestado>();
+		funcionarios = funcionarioDao.buscar();
+		servicos = servicoDao.buscar();
+		clientes = clienteDao.buscar();
+		comandas = comandaDao.buscar();
 	}
 
 	public String novaComanda() {
-		setComanda(new Comanda());
+		comanda = new Comanda();
 		return "cadastrarComanda.xhtml?faces-redirect=true";
 	}
 
@@ -75,15 +74,17 @@ public class ComandaController {
 
 	public String visualizarComanda(Comanda comanda) {
 		this.comanda = comanda;
+		System.out.println("TOTAL COMANDA " + String.valueOf(comanda.getTotal()));
 		return "visualizarComanda.xhtml?faces-redirect=true";
 	}
 
 	public void salvar() {
-		comanda.setCliente(cliente);
+		servicosPrestados.add(servicoPrestado);
 		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.salvar(comanda);
 		comanda = new Comanda();
-
+		servicoPrestado = new ServicoPrestado();
+		servicosPrestados = new ArrayList<ServicoPrestado>();
 	}
 
 	public void atualizar(Comanda comanda) {
@@ -110,21 +111,18 @@ public class ComandaController {
 	
 	public List<Cliente> buscarClientes(){
 		clientes = clienteDao.buscar();
-		System.out.println(clientes);
 		return clientes;
 		
 	}
 	
 	public List<Funcionario> buscarFuncionarios(){
 		funcionarios = funcionarioDao.buscar();
-		System.out.println(funcionarios);
 		return funcionarios;
 		
 	}
 	
 	public List<Servico> buscarServicos(){
 		servicos = servicoDao.buscar();
-		System.out.println(servicos);
 		return servicos;
 		
 	}

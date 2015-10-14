@@ -23,22 +23,32 @@ public class CalendarConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		Calendar calendar = Calendar.getInstance(new Locale("pr", "BR"));
+		Calendar calendar = Calendar.getInstance(new Locale("pt", "BR"));
 		
 		try {
 			calendar.setTime(sdf.parse(arg2));
+			return calendar;
 
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
 		return calendar;
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		Calendar calendar = ((Calendar)arg2).getInstance(new Locale("pt", "BR"));
+		try {
+			Calendar calendar = ((Calendar)arg2);
+			
+			return sdf.format(calendar.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "";
 		
-		return sdf.format(calendar.getTime());
+		
 	}
 
 }
