@@ -12,34 +12,36 @@
 </h:head>
 
 <h:body>
-	<ui:include src="../menu.xhtml" />
 
+	<ui:include src="../menu.xhtml" />
+	
 	<h:form id="cadastrarComandaF">
 		<p:panelGrid id="cadastrarComanda" columns="2">
 
 			<p:outputLabel value="Cliente" />
-			<p:selectOneMenu converter="clienteConverter"
-				value="#{comandaController.cliente}">
-				<f:selectItems value="#{comandaController.buscarClientes()}"
-					var="cliente" itemValue="#{cliente}"
-					itemLabel="#{cliente.nome}" />
+			<p:selectOneMenu id="clientes" converter="clienteConverter"
+				value="#{comandaController.comanda.cliente}" required="true">
+				<f:selectItems value="#{comandaController.clientes}" var="cliente"
+					itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Servico" />
-			<p:selectOneMenu converter="servicoConverter"
-				value="#{comandaController.servicoPrestado.servico}">
-				<f:selectItems value="#{comandaController.buscarServicos()}"
-					var="servico" itemValue="#{servico}" itemLabel="#{servico.nome}" />
+			<p:selectOneMenu id="servicos" converter="servicoConverter"
+				value="#{comandaController.servicoPrestado.servico}" required="true">
+				<f:selectItems value="#{comandaController.servicos}" var="servico"
+					itemValue="#{servico}" itemLabel="#{servico.nome}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel value="Funcionario" />
-			<p:selectOneMenu converter="funcionarioConverter"
-				value="#{comandaController.servicoPrestado.funcionario}">
-				<f:selectItems value="#{comandaController.buscarFuncionarios()}"
+			<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
+				value="#{comandaController.servicoPrestado.funcionario}"
+				required="true">
+				<f:selectItems value="#{comandaController.funcionarios}"
 					var="funcionario" itemValue="#{funcionario}"
 					itemLabel="#{funcionario.nome}" />
 
 			</p:selectOneMenu>
+
 
 			<p:outputLabel value="Data de Abertura" />
 			<p:calendar id="dataAbertura" converter="calendarConverter"
@@ -48,8 +50,9 @@
 				value="#{comandaController.comanda.dataAbertura}" />
 
 			<p:outputLabel value="Total" />
-			<p:inputMask mask="999.999,00" id="total" maxlength="10"
-				value="#{comandaController.comanda.total}" />
+			<p:inputMask id="total" maxlength="10"
+				value="#{comandaController.comanda.total}">
+			</p:inputMask>
 
 		</p:panelGrid>
 
@@ -57,7 +60,6 @@
 			action="#{comandaController.salvar()}" />
 
 	</h:form>
-
 
 
 </h:body>

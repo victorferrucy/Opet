@@ -15,11 +15,11 @@
 		<p:panelGrid id="cadastrarFuncionario" columns="2">
 			<p:outputLabel value="nome" />
 			<p:inputText id="nome" maxlength="30"
-				value="#{clienteController.cliente.nome}" />
+				value="#{funcionarioController.funcionario.nome}" />
 
 			<p:outputLabel value="sobrenome" />
 			<p:inputText id="sobrenome" maxlength="40"
-				value="#{clienteController.cliente.sobrenome}" />
+				value="#{funcionarioController.funcionario.sobrenome}" />
 
 			<p:outputLabel value="CPF" />
 			<p:inputMask mask="999.999.999-99" id="cpf" maxlength="11"

@@ -5,11 +5,13 @@ package softhair.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,9 +34,9 @@ public class ServicoPrestado implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SERVICO_PRESTADO_SEQUENCE)
 	private Integer idServicoPrestado;
-	@OneToOne @JoinColumn(name="idFuncionario")
+	@ManyToOne @JoinColumn(name="idFuncionario")
 	private Funcionario funcionario;
-	@OneToOne @JoinColumn(name="idServico")
+	@ManyToOne @JoinColumn(name="idServico")
 	private Servico servico;
 	
 	/* (non-Javadoc)

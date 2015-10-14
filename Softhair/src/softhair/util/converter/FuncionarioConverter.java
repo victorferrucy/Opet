@@ -27,6 +27,7 @@ public class FuncionarioConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String idFuncionario) {
 		FuncionarioDao funcionarioDao = new FuncionarioDao();
+		System.out.println("ID FUNCIONARIO" + idFuncionario);
 		return funcionarioDao.buscarPorId(Integer.parseInt(idFuncionario));
 	}
 
