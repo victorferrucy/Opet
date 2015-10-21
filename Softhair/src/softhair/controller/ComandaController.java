@@ -3,6 +3,7 @@
  */
 package softhair.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +44,15 @@ public class ComandaController {
 
 	private ServicoDao servicoDao;
 	private FuncionarioDao funcionarioDao;
-
+	private String totalComanda;
+	
 	public ComandaController() {
 		comanda = new Comanda();
 		comanda.setCliente(new Cliente());
 		cliente = new Cliente();
 		servicoPrestado = new ServicoPrestado();
 		
+		totalComanda = "";
 		clienteDao = new ClienteDao();
 		comandaDao = new ComandaDao();
 		servicoDao = new ServicoDao();
@@ -74,7 +77,6 @@ public class ComandaController {
 
 	public String visualizarComanda(Comanda comanda) {
 		this.comanda = comanda;
-		System.out.println("TOTAL COMANDA " + String.valueOf(comanda.getTotal()));
 		return "visualizarComanda.xhtml?faces-redirect=true";
 	}
 
@@ -126,7 +128,27 @@ public class ComandaController {
 		return servicos;
 		
 	}
-
+	
+	public List<ServicoPrestado> adicionarServico(){
+		servicosPrestados.add(servicoPrestado);
+		servicoPrestado = new ServicoPrestado();
+		totalComanda();
+		return servicosPrestados;
+		
+	}
+	
+	public void totalComanda(){
+		BigDecimal total;
+		
+		total = new BigDecimal("0.0");
+		
+		for(ServicoPrestado sp : servicosPrestados){
+			total.add(sp.getServico().getValor());
+		}
+		
+		totalComanda = total.toString();
+	}
+	
 	/**
 	 * @return the comandaDao
 	 */
@@ -327,5 +349,19 @@ public class ComandaController {
 	 */
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+	
+	/**
+	 * @return the totalComanda
+	 */
+	public String getTotalComanda() {
+		return totalComanda;
+	}
+
+	/**
+	 * @param totalComanda the totalComanda to set
+	 */
+	public void setTotalComanda(String totalComanda) {
+		this.totalComanda = totalComanda;
 	}
 }

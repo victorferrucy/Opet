@@ -39,7 +39,7 @@ public class Comanda implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = COMANDA_SEQUENCE)
 	private int idComanda;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval= true)
 	private List<ServicoPrestado> servicosPrestados;

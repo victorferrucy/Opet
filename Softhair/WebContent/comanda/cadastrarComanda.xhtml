@@ -14,34 +14,19 @@
 <h:body>
 
 	<ui:include src="../menu.xhtml" />
-	
+
 	<h:form id="cadastrarComandaF">
+		<p:commandButton value="Modal" type="button"
+			onclick="PF('adicionarServico').show();" />
+
 		<p:panelGrid id="cadastrarComanda" columns="2">
 
 			<p:outputLabel value="Cliente" />
 			<p:selectOneMenu id="clientes" converter="clienteConverter"
 				value="#{comandaController.comanda.cliente}" required="true">
-				<f:selectItems value="#{comandaController.clientes}" var="cliente"
-					itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
+				<f:selectItems value="#{comandaController.buscarClientes()}"
+					var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
 			</p:selectOneMenu>
-
-			<p:outputLabel value="Servico" />
-			<p:selectOneMenu id="servicos" converter="servicoConverter"
-				value="#{comandaController.servicoPrestado.servico}" required="true">
-				<f:selectItems value="#{comandaController.servicos}" var="servico"
-					itemValue="#{servico}" itemLabel="#{servico.nome}" />
-			</p:selectOneMenu>
-
-			<p:outputLabel value="Funcionario" />
-			<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
-				value="#{comandaController.servicoPrestado.funcionario}"
-				required="true">
-				<f:selectItems value="#{comandaController.funcionarios}"
-					var="funcionario" itemValue="#{funcionario}"
-					itemLabel="#{funcionario.nome}" />
-
-			</p:selectOneMenu>
-
 
 			<p:outputLabel value="Data de Abertura" />
 			<p:calendar id="dataAbertura" converter="calendarConverter"
@@ -49,18 +34,68 @@
 				showOn="button" yearRange="c-70:c"
 				value="#{comandaController.comanda.dataAbertura}" />
 
-			<p:outputLabel value="Total" />
-			<p:inputMask id="total" maxlength="10"
-				value="#{comandaController.comanda.total}">
-			</p:inputMask>
-
 		</p:panelGrid>
 
+		<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
+			var="servicosPrestados"
+			value="#{comandaController.servicosPrestados}" >
+
+			<p:column headerText="Serviço">
+				<h:outputText value="#{servicosPrestados.servico.nome}" />
+			</p:column>
+
+			<p:column headerText="Funcionário">
+				<h:outputText value="#{servicosPrestados.funcionario.nome}" />
+			</p:column>
+
+			<p:column headerText="valor">
+				<h:outputText value="#{servicosPrestados.servico.valor}" />
+							
+			</p:column>
+
+		</p:dataTable>
+
 		<p:commandButton value="Cadastrar"
-			action="#{comandaController.salvar()}" />
+			action="#{comandaController.salvar()}"  />
+
+		<p:outputLabel value="Total" />
+		<p:outputLabel id="total" maxlength="10"
+			value="#{comandaController.totalComanda}"  >
+		</p:outputLabel>
 
 	</h:form>
 
+	<p:dialog header="Adicionar Serviço" widgetVar="adicionarServico"
+		modal="true" draggable="false" resizable="false">
+		<h:form id="adicionarServicoF">
+			<p:panelGrid id="adicionarServicoF" columns="2">
+
+				<p:outputLabel value="Servico" />
+				<p:selectOneMenu id="servicos" converter="servicoConverter"
+					value="#{comandaController.servicoPrestado.servico}"
+					required="true">
+					<f:selectItems value="#{comandaController.buscarServicos()}"
+						var="servico" itemValue="#{servico}" itemLabel="#{servico.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Funcionario" />
+				<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
+					value="#{comandaController.servicoPrestado.funcionario}"
+					required="true">
+					<f:selectItems value="#{comandaController.buscarFuncionarios()}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.nome}" />
+
+				</p:selectOneMenu>
+
+				<p:commandButton value="Adicionar Serviço"
+					action="#{comandaController.adicionarServico()}"
+					update=":cadastrarComandaF:servicosPrestadosT" >
+					<p:ajax  update=":cadastrarComandaF:total"></p:ajax>
+				</p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
 
 </h:body>
 </html>
