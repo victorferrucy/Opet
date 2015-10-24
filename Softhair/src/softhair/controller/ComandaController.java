@@ -5,6 +5,7 @@ package softhair.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -32,7 +33,10 @@ public class ComandaController {
 	private Cliente cliente;
 	private ServicoPrestado servicoPrestado;
 	private List<ServicoPrestado> servicosPrestados;
-	private List<Comanda> comandas;
+	/*private List<Comanda> comandas;*/
+	
+	private Collection comandas;
+	
 	private ClienteDao clienteDao;
 	private ComandaDao comandaDao;
 	
@@ -44,20 +48,17 @@ public class ComandaController {
 
 	private ServicoDao servicoDao;
 	private FuncionarioDao funcionarioDao;
-	private String totalComanda;
 	
 	public ComandaController() {
 		comanda = new Comanda();
-		comanda.setCliente(new Cliente());
 		cliente = new Cliente();
 		servicoPrestado = new ServicoPrestado();
 		
-		totalComanda = "";
 		clienteDao = new ClienteDao();
 		comandaDao = new ComandaDao();
 		servicoDao = new ServicoDao();
 		funcionarioDao = new FuncionarioDao();
-		
+	
 		servicosPrestados = new ArrayList<ServicoPrestado>();
 		funcionarios = funcionarioDao.buscar();
 		servicos = servicoDao.buscar();
@@ -81,7 +82,7 @@ public class ComandaController {
 	}
 
 	public void salvar() {
-		servicosPrestados.add(servicoPrestado);
+		comanda.setTotal(totalComanda());
 		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.salvar(comanda);
 		comanda = new Comanda();
@@ -93,14 +94,14 @@ public class ComandaController {
 		comandaDao.atualizar(comanda);
 	}
 
-	public List<Comanda> buscar() {
+	public Collection buscar() {
 		comandas = new ArrayList<Comanda>();
 		comandas = comandaDao.buscar();
 
 		return comandas;
 	}
 
-	public List<Comanda> deletar(Comanda comandaSel) {
+	public Collection deletar(Comanda comandaSel) {
 		boolean deletou = false;
 
 		deletou = comandaDao.deletar(comandaDao.buscar(comandaSel));
@@ -132,21 +133,23 @@ public class ComandaController {
 	public List<ServicoPrestado> adicionarServico(){
 		servicosPrestados.add(servicoPrestado);
 		servicoPrestado = new ServicoPrestado();
-		totalComanda();
+		comanda.setTotal(totalComanda());
 		return servicosPrestados;
 		
 	}
 	
-	public void totalComanda(){
+	public BigDecimal totalComanda(){
 		BigDecimal total;
 		
 		total = new BigDecimal("0.0");
 		
 		for(ServicoPrestado sp : servicosPrestados){
-			total.add(sp.getServico().getValor());
+			total = total.add(sp.getServico().getValor());
 		}
 		
-		totalComanda = total.toString();
+		comanda.setTotal(total);
+		
+		return total;
 	}
 	
 	/**
@@ -167,7 +170,7 @@ public class ComandaController {
 	/**
 	 * @return the comandas
 	 */
-	public List<Comanda> getComandas() {
+	public Collection getComandas() {
 		return comandas;
 	}
 
@@ -351,17 +354,4 @@ public class ComandaController {
 		this.clientes = clientes;
 	}
 	
-	/**
-	 * @return the totalComanda
-	 */
-	public String getTotalComanda() {
-		return totalComanda;
-	}
-
-	/**
-	 * @param totalComanda the totalComanda to set
-	 */
-	public void setTotalComanda(String totalComanda) {
-		this.totalComanda = totalComanda;
-	}
 }

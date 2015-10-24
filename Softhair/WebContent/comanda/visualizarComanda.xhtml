@@ -15,26 +15,37 @@
 	<p:panelGrid id="vizualizarComanda" columns="2">
 
 		<p:outputLabel value="Cliente" />
-		<p:outputLabel 
-			value="#{comandaController.comanda.cliente.nome}" />
-
-		<p:outputLabel value="Servico" />
-		<p:outputLabel 
-			value="#{comandaController.comanda.servicosPrestados.size()}" />
-
-		<p:outputLabel value="Funcionario" />
-		<p:outputLabel 
-			value="#{comandaController.comanda.servicosPrestados.size()}" />
+		<p:outputLabel value="#{comandaController.comanda.cliente.nome}" />
 
 		<p:outputLabel value="Data de Abertura" />
 		<p:outputLabel id="dataAbertura" converter="calendarConverter"
 			value="#{comandaController.comanda.dataAbertura}" />
 
-		<p:outputLabel value="Total" />
-		<p:outputLabel id="total"
-			value="#{comandaController.comanda.total.toString()}" />
-
 	</p:panelGrid>
+
+	<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
+		var="servicosPrestados" value="#{comandaController.comanda.servicosPrestados}">
+
+		<p:column headerText="Serviço">
+			<h:outputText value="#{servicosPrestados.servico.nome}" />
+		</p:column>
+
+		<p:column headerText="Funcionário">
+			<h:outputText value="#{servicosPrestados.funcionario.nome}" />
+		</p:column>
+
+		<p:column headerText="valor">
+			<h:outputText value="#{servicosPrestados.servico.valor}" />
+
+		</p:column>
+
+	</p:dataTable>
+
+
+
+	<p:outputLabel value="Total" />
+	<p:outputLabel id="total"
+		value="#{comandaController.comanda.total}" />
 
 </h:body>
 </html>

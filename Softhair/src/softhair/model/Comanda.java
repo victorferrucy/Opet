@@ -5,6 +5,7 @@ package softhair.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-@SequenceGenerator(sequenceName = Comanda.COMANDA_SEQUENCE, name = Comanda.COMANDA_SEQUENCE, initialValue = 0, allocationSize = 10)
+@SequenceGenerator(sequenceName = Comanda.COMANDA_SEQUENCE, name = Comanda.COMANDA_SEQUENCE, initialValue = 0)
 public class Comanda implements Serializable {
 
 	/**
@@ -51,7 +52,17 @@ public class Comanda implements Serializable {
 	private BigDecimal total;
 	@Column
 	private String status;
-
+	
+	
+	public Comanda(){
+		cliente = new Cliente();
+		servicosPrestados = new ArrayList<ServicoPrestado>();
+		dataAbertura = Calendar.getInstance();
+		dataFechamento = Calendar.getInstance();
+		total = new BigDecimal("0.0");
+		status = "";
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

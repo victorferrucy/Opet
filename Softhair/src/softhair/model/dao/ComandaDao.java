@@ -4,6 +4,8 @@
 package softhair.model.dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -28,12 +30,10 @@ public class ComandaDao {
 	public Comanda salvar(Comanda comanda) {
 
 		try {
-			System.out.println("SALVANDO COMANDA 1 ");
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(comanda);
 			tx.commit();
-			System.out.println("SALVANDO COMANDA 2 ");
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -57,12 +57,16 @@ public class ComandaDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Comanda> buscar() {
-		List<Comanda> comandas = new ArrayList<Comanda>();
+	public Collection buscar() {
+		/*List<Comanda> comandas = new ArrayList<Comanda>();*/
+		Collection comandas;
+		
+		comandas = new LinkedHashSet<Comanda>();
+		
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			comandas = ss.createCriteria(Comanda.class).list();
+			comandas = new LinkedHashSet( ss.createCriteria(Comanda.class).list());
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
