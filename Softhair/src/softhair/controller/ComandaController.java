@@ -5,7 +5,9 @@ package softhair.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,6 +18,7 @@ import softhair.model.Comanda;
 import softhair.model.Funcionario;
 import softhair.model.Servico;
 import softhair.model.ServicoPrestado;
+import softhair.model.Status;
 import softhair.model.dao.ClienteDao;
 import softhair.model.dao.ComandaDao;
 import softhair.model.dao.FuncionarioDao;
@@ -35,7 +38,7 @@ public class ComandaController {
 	private List<ServicoPrestado> servicosPrestados;
 	/*private List<Comanda> comandas;*/
 	
-	private Collection comandas;
+	private LinkedHashSet<Comanda> comandas;
 	
 	private ClienteDao clienteDao;
 	private ComandaDao comandaDao;
@@ -45,6 +48,8 @@ public class ComandaController {
 	private List<Funcionario> funcionarios;
 	private List<Servico> servicos;
 	private List<Cliente> clientes;
+	private List<Status> status;
+	private List<String> nomeStatus;
 
 	private ServicoDao servicoDao;
 	private FuncionarioDao funcionarioDao;
@@ -64,6 +69,12 @@ public class ComandaController {
 		servicos = servicoDao.buscar();
 		clientes = clienteDao.buscar();
 		comandas = comandaDao.buscar();
+		
+		status = Arrays.asList(Status.values());
+		nomeStatus = new ArrayList<String>();
+		for (Status s : status){
+			nomeStatus.add(s.getStatus());
+		}
 	}
 
 	public String novaComanda() {
@@ -82,26 +93,22 @@ public class ComandaController {
 	}
 
 	public void salvar() {
-		comanda.setTotal(totalComanda());
-		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.salvar(comanda);
 		comanda = new Comanda();
-		servicoPrestado = new ServicoPrestado();
-		servicosPrestados = new ArrayList<ServicoPrestado>();
 	}
 
 	public void atualizar(Comanda comanda) {
 		comandaDao.atualizar(comanda);
 	}
 
-	public Collection buscar() {
-		comandas = new ArrayList<Comanda>();
+	public LinkedHashSet<Comanda> buscar() {
+		comandas = new LinkedHashSet<Comanda>();
 		comandas = comandaDao.buscar();
 
 		return comandas;
 	}
 
-	public Collection deletar(Comanda comandaSel) {
+	public LinkedHashSet<Comanda> deletar(Comanda comandaSel) {
 		boolean deletou = false;
 
 		deletou = comandaDao.deletar(comandaDao.buscar(comandaSel));
@@ -131,7 +138,7 @@ public class ComandaController {
 	}
 	
 	public List<ServicoPrestado> adicionarServico(){
-		servicosPrestados.add(servicoPrestado);
+		comanda.getServicosPrestados().add(servicoPrestado);
 		servicoPrestado = new ServicoPrestado();
 		comanda.setTotal(totalComanda());
 		return servicosPrestados;
@@ -143,7 +150,7 @@ public class ComandaController {
 		
 		total = new BigDecimal("0.0");
 		
-		for(ServicoPrestado sp : servicosPrestados){
+		for(ServicoPrestado sp : comanda.getServicosPrestados()){
 			total = total.add(sp.getServico().getValor());
 		}
 		
@@ -170,7 +177,7 @@ public class ComandaController {
 	/**
 	 * @return the comandas
 	 */
-	public Collection getComandas() {
+	public LinkedHashSet<Comanda> getComandas() {
 		return comandas;
 	}
 
@@ -178,7 +185,7 @@ public class ComandaController {
 	 * @param comandas
 	 *            the comandas to set
 	 */
-	public void setComandas(List<Comanda> comandas) {
+	public void setComandas(LinkedHashSet<Comanda> comandas) {
 		this.comandas = comandas;
 	}
 
@@ -353,5 +360,22 @@ public class ComandaController {
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
+	
+	
+	/**
+	 * @return the status
+	 */
+	public List<Status> getStatus() {
+		return status;
+	}
+	
+
+	/**
+	 * @return the nomeStatus
+	 */
+	public List<String> getNomeStatus() {
+		return nomeStatus;
+	}
+
 	
 }

@@ -22,35 +22,29 @@
 
 	<h:form id="tabelaComandas">
 
-		<p:dataTable id="comandas" var="comanda"
-			value="#{comandaController.buscar()}">
+		<p:dataTable id="comandas"  value="#{comandaController.buscar()}" var="comanda" >
 
-			<p:column headerText="Código">
+			<p:column headerText="Código" sortBy="#{comanda.idComanda}">
 				<h:outputText value="#{comanda.idComanda}" />
 			</p:column>
 
-			<p:column headerText="Nome">
+			<p:column headerText="Nome" sortBy="#{comanda.cliente.nome}">
 				<h:outputText
 					value="#{comanda.cliente.nome}" />
 			</p:column>
 
-			<p:column headerText="Data de abertura">
+			<p:column headerText="Data de abertura" sortBy="#{comanda.dataAbertura}">
 				<h:outputText converter="calendarConverter"
 					value="#{comanda.dataAbertura}" />
 			</p:column>
 
-			<p:column headerText="Status">
+			<p:column headerText="Status" sortBy="#{comanda.status}">
 				<h:outputText value="#{comanda.status}" />
 			</p:column>
 
 			<p:column headerText="Detalhes">
 				<p:commandButton icon="ui-icon-contact" title="Detalhar"
 					action="#{comandaController.visualizarComanda(comanda)}" />
-			</p:column>
-
-			<p:column headerText="Atualizar">
-				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{comandaController.atualizarComanda(comanda)}" />
 			</p:column>
 
 			<p:column headerText="Deletar">

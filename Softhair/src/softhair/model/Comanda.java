@@ -27,7 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-@SequenceGenerator(sequenceName = Comanda.COMANDA_SEQUENCE, name = Comanda.COMANDA_SEQUENCE, initialValue = 0)
+@SequenceGenerator(sequenceName = Comanda.COMANDA_SEQUENCE, name = Comanda.COMANDA_SEQUENCE, initialValue = 0, allocationSize = 1)
 public class Comanda implements Serializable {
 
 	/**

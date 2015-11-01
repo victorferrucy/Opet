@@ -32,6 +32,14 @@
 				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
 				showOn="button" yearRange="c-70:c"
 				value="#{comandaController.comanda.dataAbertura}" />
+				
+			<p:outputLabel value="Status" />
+			<p:selectOneMenu id="status" value="#{comandaController.comanda.status}">
+				
+				<f:selectItems value="#{comandaController.nomeStatus}"
+					var="status" itemValue="#{status}" />
+			
+			</p:selectOneMenu>
 		</p:panelGrid>
 		
 		<p:commandButton value="Adicionar Serviço" type="button"
@@ -39,7 +47,7 @@
 			
 		<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
 			var="servicosPrestados"
-			value="#{comandaController.servicosPrestados}" >
+			value="#{comandaController.comanda.servicosPrestados}" >
 
 			<p:column headerText="Serviço">
 				<h:outputText value="#{servicosPrestados.servico.nome}" />

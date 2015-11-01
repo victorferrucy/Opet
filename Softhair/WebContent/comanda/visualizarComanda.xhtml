@@ -11,41 +11,65 @@
 </h:head>
 <h:body>
 	<ui:include src="../menu.xhtml" />
+	<ui:include src="/comanda/adicionarServico.xhtml" />
+	<h:form id="cadastrarComandaF">
+		
 
-	<p:panelGrid id="vizualizarComanda" columns="2">
+		<p:panelGrid id="cadastrarComanda" columns="2">
 
-		<p:outputLabel value="Cliente" />
-		<p:outputLabel value="#{comandaController.comanda.cliente.nome}" />
+			<p:outputLabel value="Cliente" />
+			<p:selectOneMenu id="clientes" converter="clienteConverter"
+				value="#{comandaController.comanda.cliente}" required="true">
+				<f:selectItems value="#{comandaController.buscarClientes()}"
+					var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
+			</p:selectOneMenu>
 
-		<p:outputLabel value="Data de Abertura" />
-		<p:outputLabel id="dataAbertura" converter="calendarConverter"
-			value="#{comandaController.comanda.dataAbertura}" />
+			<p:outputLabel value="Data de Abertura" />
+			<p:calendar id="dataAbertura" converter="calendarConverter"
+				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
+				showOn="button" yearRange="c-70:c"
+				value="#{comandaController.comanda.dataAbertura}" />
+				
+			<p:outputLabel value="Status" />
+			<p:selectOneMenu id="status" value="#{comandaController.comanda.status}">
+				
+				<f:selectItems value="#{comandaController.nomeStatus}"
+					var="status" itemValue="#{status}" />
+			
+			</p:selectOneMenu>
+		</p:panelGrid>
+		
+		<p:commandButton value="Adicionar Serviço" type="button"
+			onclick="PF('adicionarServico').show();" />
+			
+		<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
+			var="servicosPrestados"
+			value="#{comandaController.comanda.servicosPrestados}" >
 
-	</p:panelGrid>
+			<p:column headerText="Serviço">
+				<h:outputText value="#{servicosPrestados.servico.nome}" />
+			</p:column>
 
-	<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
-		var="servicosPrestados" value="#{comandaController.comanda.servicosPrestados}">
+			<p:column headerText="Funcionário">
+				<h:outputText value="#{servicosPrestados.funcionario.nome}" />
+			</p:column>
 
-		<p:column headerText="Serviço">
-			<h:outputText value="#{servicosPrestados.servico.nome}" />
-		</p:column>
+			<p:column headerText="valor">
+				<h:outputText value="#{servicosPrestados.servico.valor}" />
+							
+			</p:column>
 
-		<p:column headerText="Funcionário">
-			<h:outputText value="#{servicosPrestados.funcionario.nome}" />
-		</p:column>
+		</p:dataTable>
 
-		<p:column headerText="valor">
-			<h:outputText value="#{servicosPrestados.servico.valor}" />
+		<p:commandButton value="Atualizar"
+			action="#{comandaController.atualizar(comandaController.comanda)}"  />
 
-		</p:column>
+		<p:outputLabel value="Total" />
+		<p:outputLabel id="total" maxlength="10"
+			value="#{comandaController.comanda.total}"  >
+		</p:outputLabel>
 
-	</p:dataTable>
-
-
-
-	<p:outputLabel value="Total" />
-	<p:outputLabel id="total"
-		value="#{comandaController.comanda.total}" />
+	</h:form>
 
 </h:body>
 </html>

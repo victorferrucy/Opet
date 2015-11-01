@@ -57,16 +57,16 @@ public class ComandaDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Collection buscar() {
+	public LinkedHashSet<Comanda> buscar() {
 		/*List<Comanda> comandas = new ArrayList<Comanda>();*/
-		Collection comandas;
+		LinkedHashSet<Comanda> comandas;
 		
 		comandas = new LinkedHashSet<Comanda>();
 		
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			comandas = new LinkedHashSet( ss.createCriteria(Comanda.class).list());
+			comandas = new LinkedHashSet<Comanda>( ss.createCriteria(Comanda.class).list());
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
