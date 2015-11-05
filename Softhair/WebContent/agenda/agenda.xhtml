@@ -17,7 +17,6 @@
 				<p:growl id="messages" showDetail="true" />
 
 				<h:panelGrid columnClasses="value">
-					<h3 style="margin-top: 0">Editable Schedule</h3>
 					<p:schedule id="agenda" value="#{agendaController.horarioModel}"
 						widgetVar="minhaAgenda">
 
@@ -40,7 +39,7 @@
 					resizable="false" modal="true" showEffect="clip" hideEffect="clip">
 					<h:panelGrid id="detalhesHorario" columns="2">
 
-						<h:outputLabel for="from" value="Início:" />
+						<h:outputLabel for="dataInicio" value="Início:" />
 						<p:inputMask id="dataInicio"
 							value="#{agendaController.horarioReservado.dataInicio.toDate()}"
 							mask="99/99/9999">

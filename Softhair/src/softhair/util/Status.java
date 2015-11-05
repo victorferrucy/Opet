@@ -1,7 +1,7 @@
 /**
  * 
  */
-package softhair.model;
+package softhair.util;
 
 import java.util.List;
 

@@ -3,10 +3,13 @@
  */
 package softhair.model.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -30,8 +33,7 @@ public class ServicoPrestadoDao {
 	public ServicoPrestado salvar(ServicoPrestado servico) {
 
 		try {
-			
-			System.out.println("SALVANDO SP");
+
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(servico);
@@ -177,6 +179,56 @@ public class ServicoPrestadoDao {
 		}
 
 		return deletou;
+	}
+
+	public List<ServicoPrestado> buscarServicosPrestadosFuncionario(int idFuncionario, Calendar dataInicial,
+			Calendar dataFinal) {
+		 
+		String sql = "FROM ServicoPrestado sp" 
+		+ " WHERE sp.funcionario.idColaborador = :idFuncionario" 
+				+ " AND sp.idServicoPrestado IN "
+				+ " ( SELECT sp.idServicoPrestado  "
+				+ "	FROM Comanda c"
+				+ " inner join c.servicosPrestados sp"
+				+ "	WHERE c.dataAbertura >= :dataInicial "
+				+ " AND c.dataAbertura <= :dataFinal )";
+
+		List<ServicoPrestado> servicosPrestadosFuncionario;
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			Query query = ss.createQuery(sql);
+
+			query.setParameter("dataInicial", dataInicial);
+			query.setParameter("dataFinal", dataFinal);
+			query.setParameter("idFuncionario", idFuncionario);
+			servicosPrestadosFuncionario = query.list();
+			tx.commit();
+
+		} catch (HibernateException e) {
+			servicosPrestadosFuncionario = null;
+
+			e.printStackTrace();
+
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+
+				e.printStackTrace();
+			}
+		}
+
+		return servicosPrestadosFuncionario;
+
 	}
 
 }

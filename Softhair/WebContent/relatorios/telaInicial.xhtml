@@ -6,15 +6,73 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
- 
+
 <h:head>
+	<h:outputStylesheet name="main.css" library="css" />
 </h:head>
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
- 
+
+	
+	<ui:include src="../menu.xhtml" />
+	
+	<h1>Relatórios</h1>
+	
 	<h:form>
-	   <p:editor value="#{editor.value}" />
+		<p:tabView orientation="left">
+			<p:tab title="Receita">
+				<p:panelGrid columns="1" cellpadding="10">
+
+					<p:calendar id="dataInicialR" converter="calendarConverter"
+						navigator="true" pattern="dd/MM/yyyy" showOn="button"
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
+					</p:calendar>
+
+
+					<p:calendar id="dataFinalR" converter="calendarConverter"
+						navigator="true" pattern="dd/MM/yyyy" showOn="button"
+						yearRange="c-5:c" value="#{relatorioview.dataFinal}">
+					</p:calendar>
+
+					<p:commandButton action="#{relatorioview.calcularReceitaMensal()}"
+						update="receitaMensal" value="Consultar"></p:commandButton>
+
+					<h:outputText id="receitaMensal"
+						value="#{relatorioview.receitaMensal.doubleValue()}" />
+				</p:panelGrid>
+			</p:tab>
+			<p:tab title="Comissões">
+				<h:panelGrid columns="2" cellpadding="10">
+
+					<p:outputLabel value="Funcionario" />
+					<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
+						value="#{relatorioview.funcionario}" required="true">
+						<f:selectItems value="#{relatorioview.funcionarios}"
+							var="funcionario" itemValue="#{funcionario}"
+							itemLabel="#{funcionario.nome}" />
+
+					</p:selectOneMenu>
+
+					<p:calendar id="dataInicialC" converter="calendarConverter"
+						navigator="true" pattern="dd/MM/yyyy" showOn="button"
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
+					</p:calendar>
+
+
+					<p:calendar id="dataFinalC" converter="calendarConverter"
+						navigator="true" pattern="dd/MM/yyyy" showOn="button"
+						yearRange="c-5:c" value="#{relatorioview.dataFinal}">
+					</p:calendar>
+
+					<p:commandButton
+						action="#{relatorioview.calcularComissaoFuncionario()}"
+						update="comissaoFuncionario" value="Consultar"></p:commandButton>
+
+					<h:outputText id="comissaoFuncionario"
+						value="#{relatorioview.comissao.doubleValue()}" />
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
 	</h:form>
- 
+
 </h:body>
 </html>

@@ -4,11 +4,20 @@
 package softhair.controller;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
+import org.hibernate.HibernateException;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import softhair.model.HorarioReservado;
@@ -90,7 +99,7 @@ public class AgendaController implements Serializable {
 		this.horarioReservadoDao = horarioReservadoDao;
 	}
 	
-	/*@PostConstruct
+	@PostConstruct
 	public void inicializar(){
 		horarioReservadoDao = new HorarioReservadoDao();
 		horarioReservado = new HorarioReservado();
@@ -106,8 +115,8 @@ public class AgendaController implements Serializable {
 		
 		for(HorarioReservado hr : horariosReservados){
 			DefaultScheduleEvent evt = new DefaultScheduleEvent();
-			evt.setEndDate(hr.getDataFim().toDate());
-			evt.setStartDate(hr.getDataInicio().toDate());
+			evt.setEndDate(hr.getDataFim().getTime());
+			evt.setStartDate(hr.getDataInicio().getTime());
 			evt.setTitle(hr.getCliente().getNome() + " - " + hr.getFuncionario().getNome());
 			evt.setData(hr.getIdHorarioReservado());
 			evt.setDescription(hr.getDescricao());
@@ -131,9 +140,13 @@ public class AgendaController implements Serializable {
 	}
 	
 	public void onHorarioReservadoNovo(SelectEvent selectEvent){
-		ScheduleEvent evento = new DefaultScheduleEvent("",(Date)selectEvent.getObject(), (Date)selectEvent.getObject());
+		Calendar calendar = Calendar.getInstance();
+		
+		ScheduleEvent evento = new DefaultScheduleEvent();
 		horarioReservado = new HorarioReservado();
-		horarioReservado.setDataInicio(new DateTime(evento.getStartDate()));
-		horarioReservado.setDataFim(new DateTime(evento.getStartDate()));
-	}*/
+		calendar.setTime(evento.getStartDate());
+		horarioReservado.setDataInicio(calendar);
+		calendar.setTime(evento.getStartDate());
+		horarioReservado.setDataFim(calendar);
+	}
 }

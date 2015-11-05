@@ -12,8 +12,8 @@
 <h:body>
 	<ui:include src="../menu.xhtml" />
 	<ui:include src="/comanda/adicionarServico.xhtml" />
-	<h:form id="cadastrarComandaF">
-		
+	
+	<h:form id="visualizarComandaF">
 
 		<p:panelGrid id="cadastrarComanda" columns="2">
 
@@ -29,44 +29,49 @@
 				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
 				showOn="button" yearRange="c-70:c"
 				value="#{comandaController.comanda.dataAbertura}" />
-				
+
 			<p:outputLabel value="Status" />
-			<p:selectOneMenu id="status" value="#{comandaController.comanda.status}">
-				
-				<f:selectItems value="#{comandaController.nomeStatus}"
-					var="status" itemValue="#{status}" />
-			
+			<p:selectOneMenu id="status"
+				value="#{comandaController.comanda.status}">
+
+				<f:selectItems value="#{comandaController.nomeStatus}" var="status"
+					itemValue="#{status}" />
+
 			</p:selectOneMenu>
 		</p:panelGrid>
-		
+
 		<p:commandButton value="Adicionar Serviço" type="button"
 			onclick="PF('adicionarServico').show();" />
-			
-		<p:dataTable widgetVar="servicosPrestadosT" id="servicosPrestadosT"
-			var="servicosPrestados"
-			value="#{comandaController.comanda.servicosPrestados}" >
+
+		<p:dataTable widgetVar="servicosPrestados" id="servicosPrestados"
+			var="servicoPrestado"
+			value="#{comandaController.servicosPrestados}">
 
 			<p:column headerText="Serviço">
-				<h:outputText value="#{servicosPrestados.servico.nome}" />
+				<h:outputText value="#{servicoPrestado.servico.nome}" />
 			</p:column>
 
 			<p:column headerText="Funcionário">
-				<h:outputText value="#{servicosPrestados.funcionario.nome}" />
+				<h:outputText value="#{servicoPrestado.funcionario.nome}" />
 			</p:column>
 
-			<p:column headerText="valor">
-				<h:outputText value="#{servicosPrestados.servico.valor}" />
-							
+			<p:column headerText="Valor">
+				<h:outputText value="#{servicoPrestado.servico.valor}" />
 			</p:column>
 
+			<p:column headerText="Deletar">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					action="#{comandaController.removerServico(servicoPrestado)}" update="servicosPrestados :visualizarComandaF:total" />
+			</p:column>
+			
 		</p:dataTable>
 
 		<p:commandButton value="Atualizar"
-			action="#{comandaController.atualizar(comandaController.comanda)}"  />
+			action="#{comandaController.atualizar(comandaController.comanda)}" />
 
 		<p:outputLabel value="Total" />
 		<p:outputLabel id="total" maxlength="10"
-			value="#{comandaController.comanda.total}"  >
+			value="#{comandaController.comanda.total}">
 		</p:outputLabel>
 
 	</h:form>

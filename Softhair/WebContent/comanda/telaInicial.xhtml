@@ -22,9 +22,9 @@
 
 	<h:form id="tabelaComandas">
 
-		<p:dataTable id="comandas"  value="#{comandaController.buscar()}" var="comanda" >
+		<p:dataTable id="comandas"  value="#{comandaController.comandas}" var="comanda" >
 
-			<p:column headerText="Código" sortBy="#{comanda.idComanda}">
+			<p:column headerText="Código" sortBy="#{comanda.idComanda}" >
 				<h:outputText value="#{comanda.idComanda}" />
 			</p:column>
 

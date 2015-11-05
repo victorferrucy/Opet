@@ -6,8 +6,6 @@ package softhair.controller;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -18,11 +16,11 @@ import softhair.model.Comanda;
 import softhair.model.Funcionario;
 import softhair.model.Servico;
 import softhair.model.ServicoPrestado;
-import softhair.model.Status;
 import softhair.model.dao.ClienteDao;
 import softhair.model.dao.ComandaDao;
 import softhair.model.dao.FuncionarioDao;
 import softhair.model.dao.ServicoDao;
+import softhair.util.Status;
 
 /**
  * @author Victor Ferrucy
@@ -36,9 +34,9 @@ public class ComandaController {
 	private Cliente cliente;
 	private ServicoPrestado servicoPrestado;
 	private List<ServicoPrestado> servicosPrestados;
-	/*private List<Comanda> comandas;*/
+	private List<Comanda> comandas;
 	
-	private LinkedHashSet<Comanda> comandas;
+	/*private Set<Comanda> comandas;*/
 	
 	private ClienteDao clienteDao;
 	private ComandaDao comandaDao;
@@ -79,7 +77,7 @@ public class ComandaController {
 
 	public String novaComanda() {
 		comanda = new Comanda();
-		return "cadastrarComanda.xhtml?faces-redirect=true";
+		return "visualizarComanda.xhtml?faces-redirect=true";
 	}
 
 	public String atualizarComanda(Comanda comanda) {
@@ -89,26 +87,29 @@ public class ComandaController {
 
 	public String visualizarComanda(Comanda comanda) {
 		this.comanda = comanda;
+		servicosPrestados = comanda.getServicosPrestados();
 		return "visualizarComanda.xhtml?faces-redirect=true";
 	}
 
 	public void salvar() {
 		comandaDao.salvar(comanda);
+		comandas = comandaDao.buscar();
 		comanda = new Comanda();
 	}
 
 	public void atualizar(Comanda comanda) {
+		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.atualizar(comanda);
 	}
 
-	public LinkedHashSet<Comanda> buscar() {
-		comandas = new LinkedHashSet<Comanda>();
+	public List<Comanda> buscar() {
+		comandas = new ArrayList<Comanda>();
 		comandas = comandaDao.buscar();
 
 		return comandas;
 	}
 
-	public LinkedHashSet<Comanda> deletar(Comanda comandaSel) {
+	public List<Comanda> deletar(Comanda comandaSel) {
 		boolean deletou = false;
 
 		deletou = comandaDao.deletar(comandaDao.buscar(comandaSel));
@@ -117,6 +118,34 @@ public class ComandaController {
 			comandas = comandaDao.buscar();
 		}
 		return comandas;
+	}
+	
+	public List<ServicoPrestado> adicionarServico(){
+		servicosPrestados.add(servicoPrestado);
+		servicoPrestado = new ServicoPrestado();
+		comanda.setTotal(totalComanda());
+		return servicosPrestados;
+		
+	}
+	
+	public List<ServicoPrestado> removerServico(ServicoPrestado servicoPrestado){
+		servicosPrestados.remove(servicoPrestado);
+		comanda.setTotal(totalComanda());
+		return servicosPrestados;
+	}
+	
+	public BigDecimal totalComanda(){
+		BigDecimal total;
+		
+		total = new BigDecimal("0.0");
+		
+		for(ServicoPrestado sp : servicosPrestados){
+			total = total.add(sp.getServico().getValor());
+		}
+		
+		comanda.setTotal(total);
+		
+		return total;
 	}
 	
 	public List<Cliente> buscarClientes(){
@@ -137,28 +166,6 @@ public class ComandaController {
 		
 	}
 	
-	public List<ServicoPrestado> adicionarServico(){
-		comanda.getServicosPrestados().add(servicoPrestado);
-		servicoPrestado = new ServicoPrestado();
-		comanda.setTotal(totalComanda());
-		return servicosPrestados;
-		
-	}
-	
-	public BigDecimal totalComanda(){
-		BigDecimal total;
-		
-		total = new BigDecimal("0.0");
-		
-		for(ServicoPrestado sp : comanda.getServicosPrestados()){
-			total = total.add(sp.getServico().getValor());
-		}
-		
-		comanda.setTotal(total);
-		
-		return total;
-	}
-	
 	/**
 	 * @return the comandaDao
 	 */
@@ -177,7 +184,7 @@ public class ComandaController {
 	/**
 	 * @return the comandas
 	 */
-	public LinkedHashSet<Comanda> getComandas() {
+	public List<Comanda> getComandas() {
 		return comandas;
 	}
 
@@ -185,7 +192,7 @@ public class ComandaController {
 	 * @param comandas
 	 *            the comandas to set
 	 */
-	public void setComandas(LinkedHashSet<Comanda> comandas) {
+	public void setComandas(List<Comanda> comandas) {
 		this.comandas = comandas;
 	}
 

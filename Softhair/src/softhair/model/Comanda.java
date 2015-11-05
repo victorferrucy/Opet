@@ -12,14 +12,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Victor Ferrucy
@@ -42,7 +46,9 @@ public class Comanda implements Serializable {
 	private int idComanda;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval= true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinTable(name = "comanda_servicoprestado", joinColumns = @JoinColumn(name = "comanda_idcomanda") , inverseJoinColumns = @JoinColumn(name = "servicosprestados_idservicoprestado") )
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ServicoPrestado> servicosPrestados;
 	@Column
 	private Calendar dataAbertura;
@@ -52,9 +58,8 @@ public class Comanda implements Serializable {
 	private BigDecimal total;
 	@Column
 	private String status;
-	
-	
-	public Comanda(){
+
+	public Comanda() {
 		cliente = new Cliente();
 		servicosPrestados = new ArrayList<ServicoPrestado>();
 		dataAbertura = Calendar.getInstance();
@@ -62,7 +67,7 @@ public class Comanda implements Serializable {
 		total = new BigDecimal("0.0");
 		status = "";
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
