@@ -8,59 +8,62 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
+	<script type="text/javascript">
+		PrimeFaces.locales['pt_br'] = {  
+			    closeText: 'Fechar',  
+			    prevText: 'Anterior',  
+			    nextText: 'Próximo',  
+			    currentText: 'Começo',  
+			    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+			    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+			    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+			    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+			    dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+			    weekHeader: 'Semana',  
+			    firstDay: 0,  
+			    isRTL: false,  
+			    showMonthAfterYear: false,  
+			    yearSuffix: '',  
+			    timeOnlyTitle: 'Só Horas',  
+			    timeText: 'Tempo',  
+			    hourText: 'Hora',  
+			    minuteText: 'Minuto',  
+			    secondText: 'Segundo',  
+			    ampm: false,  
+			    month: 'Mês',  
+			    week: 'Semana',  
+			    day: 'Dia',  
+			    allDayText : 'Todo o Dia'  
+				    }
+	</script>
 </h:head>
 
 <h:body>
+
 	<ui:include src="../menu.xhtml" />
-		
-			<h:form id="agendaF">
-				<p:growl id="messages" showDetail="true" />
+	<ui:include src="/agenda/addHorarioReservado.xhtml" />
 
-				<h:panelGrid columnClasses="value">
-					<p:schedule id="agenda" value="#{agendaController.horarioModel}"
-						widgetVar="minhaAgenda">
-
-						<p:ajax event="dateSelect"
-							listener="#{agendaController.onHorarioReservadoNovo}"
-							update="detalhesHorario" oncomplete="PF('caixaDialog').show();" />
-						<p:ajax event="eventSelect"
-							listener="#{agendaController.onHorarioReservadoSelecionado}"
-							update="detalhesHorario" oncomplete="PF('caixaDialog').show();" />
-						<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
-							update="messages" />
-						<p:ajax event="eventResize"
-							listener="#{scheduleView.onEventResize}" update="messages" />
-
-					</p:schedule>
-
-				</h:panelGrid>
-
-				<p:dialog widgetVar="caixaDialog" header="Detalhes do horário"
-					resizable="false" modal="true" showEffect="clip" hideEffect="clip">
-					<h:panelGrid id="detalhesHorario" columns="2">
-
-						<h:outputLabel for="dataInicio" value="Início:" />
-						<p:inputMask id="dataInicio"
-							value="#{agendaController.horarioReservado.dataInicio.toDate()}"
-							mask="99/99/9999">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</p:inputMask>
-
-						<h:outputLabel for="to" value="Fim:" />
-						<p:inputMask id="to"
-							value="#{agendaController.horarioReservado.dataFim.toDate()}"
-							mask="99/99/9999">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</p:inputMask>
-
-
-						<p:commandButton type="reset" value="Limpar" />
-						<p:commandButton id="addButton" value="Salvar"
-							oncomplete="PF('minhaAgenda').update();PF('caixaDialog').hide();" />
-					</h:panelGrid>
-				</p:dialog>
-			</h:form>
-	
+	<h:form id="agendaF">
+		<p:schedule id="agenda" widgetVar="agenda"
+			value="#{agendaController.eventModel}" locale="pt_br"
+			timeZone="GMT-2" minTime="8" maxTime="20" axisFormat="H:mm"
+			timeFormat="H:mm">
+			<p:ajax event="dateSelect"
+				listener="#{agendaController.onDateSelect}"
+				update=":detalhesHorario" oncomplete="PF('detalhesHorario').show();" />
+			<p:ajax event="eventSelect"
+				listener="#{agendaController.onEventSelect}"
+				update=":detalhesHorario" oncomplete="PF('detalhesHorario').show();" />
+			<p:ajax event="eventMove" listener="#{agendaController.onEventMove}" />
+			<p:ajax event="eventResize"
+				listener="#{agendaController.onEventResize}" />
+		</p:schedule>
+	</h:form>
 
 </h:body>
+
+
+
+
 </html>

@@ -19,7 +19,7 @@ import javax.faces.convert.FacesConverter;
  */
 @FacesConverter("calendarConverter")
 public class CalendarConverter implements Converter{
-	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","BR"));
+	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","BR")); 
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {

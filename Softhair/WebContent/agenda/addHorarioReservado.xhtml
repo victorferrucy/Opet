@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<p:dialog id="detalhesHorario" widgetVar="detalhesHorario"
+		header="Detalhes do horário" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
+		<h:form id="adicionarHorarioReservadoF">
+			<h:panelGrid id="detalhesHorarioP" columns="2">
+
+				<p:outputLabel value="Cliente" />
+				<p:selectOneMenu id="clientes" converter="clienteConverter"
+					value="#{agendaController.horarioReservado.cliente}"
+					required="true">
+					<f:selectItems value="#{agendaController.clientes}" var="cliente"
+						itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
+
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="Funcionario" />
+				<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
+					value="#{agendaController.horarioReservado.funcionario}"
+					required="true">
+					<f:selectItems value="#{agendaController.funcionarios}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.nome}" />
+
+				</p:selectOneMenu>
+
+				<h:outputLabel for="dataInicio" value="Início" />
+				<p:calendar id="dataInicio"
+					value="#{agendaController.horarioReservado.dataInicio}"
+					converter="calendarConverter" pattern="dd/MM/yyyy H:mm" minHour="8"
+					maxHour="19">
+				</p:calendar>
+
+				<h:outputLabel for="termino" value="Término" />
+				<p:calendar id="termino"
+					value="#{agendaController.horarioReservado.dataFim}"
+					converter="calendarConverter" pattern="dd/MM/yyyy H:mm" minHour="8"
+					maxHour="19">
+				</p:calendar>
+
+
+				<p:commandButton type="reset" value="Limpar" />
+				<p:commandButton id="addButton" value="Salvar"
+					actionListener="#{agendaController.addEvent}"
+					oncomplete="PF('agenda').update(); PF('detalhesHorario').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+
+</h:body>
+</html>
