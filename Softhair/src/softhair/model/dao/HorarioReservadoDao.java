@@ -23,12 +23,33 @@ public class HorarioReservadoDao {
 
 	public HorarioReservadoDao() {
 
-		ss = HibernateUtil.getSessionFactory().openSession();
 	}
 
-	public HorarioReservado salvar() {
+	public HorarioReservado salvar(HorarioReservado hr) {
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			ss.save(hr);
+			tx.commit();
 
-		return null;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+
+		return hr;
 	}
 
 	public List<HorarioReservado> buscar() {
@@ -37,8 +58,42 @@ public class HorarioReservadoDao {
 		horariosReservados = null;
 
 		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			horariosReservados = (List<HorarioReservado>) ss.createCriteria(HorarioReservado.class).list();
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+
+		} finally {
+			try {
+
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+
+		return horariosReservados;
+	}
+
+	public HorarioReservado buscar(Integer idHorarioReservado) {
+		HorarioReservado horariosReservado;
+
+		horariosReservado = null;
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			horariosReservado = (HorarioReservado) ss.get(HorarioReservado.class, idHorarioReservado);
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -59,19 +114,67 @@ public class HorarioReservadoDao {
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
-			return horariosReservados;
+			return horariosReservado;
 		}
 
 	}
 
-	public HorarioReservado atualizar() {
+	public HorarioReservado atualizar(HorarioReservado hr) {
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			ss.update(hr);
+			tx.commit();
 
-		return null;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+
+		return hr;
 	}
 
-	public boolean deletar() {
+	public boolean deletar(HorarioReservado hr) {
+		boolean deletou;
 
-		return false;
+		deletou = true;
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			ss.delete(hr);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			deletou = false;
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+		} finally {
+			try {
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+
+		return deletou;
 	}
 
 }

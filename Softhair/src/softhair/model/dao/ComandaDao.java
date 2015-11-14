@@ -267,7 +267,7 @@ public class ComandaDao {
 			Query query = ss.createQuery(sql);
 			query.setParameter("dataInicial", dataInicial);
 			query.setParameter("dataFinal", dataFinal);
-			receita = (BigDecimal) query.list().get(0);
+			receita = (BigDecimal) query.uniqueResult();
 			tx.commit();
 
 		} catch (HibernateException e) {

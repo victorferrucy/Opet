@@ -55,6 +55,7 @@ public class RelatorioView {
 		receitaMensal = comandaDao.buscarReceitaPeriodo(dataInicial, dataFinal);
 
 		if (receitaMensal == null) {
+			System.out.println("null RECEIETA");
 			receitaMensal = new BigDecimal("0.00");
 		}
 	}

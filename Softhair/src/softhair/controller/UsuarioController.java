@@ -40,10 +40,7 @@ public class UsuarioController {
 		} else {
 			return "/agenda/agenda";
 		}*/
-		System.out.println(usuario.getLogin());
-		System.out.println(usuario.getSenha());
 		if(usuario.getLogin().equals("victor") && usuario.getSenha().equals("victor")){
-			System.out.println("ACHOOOO");
 			return "/agenda/agenda.xhtml?faces-redirect=true";
 		} else {
 			System.out.println("NULL");

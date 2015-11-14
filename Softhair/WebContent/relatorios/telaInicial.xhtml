@@ -12,15 +12,16 @@
 </h:head>
 <h:body>
 
-	
+
 	<ui:include src="../menu.xhtml" />
-	
+
 	<h1>Relatórios</h1>
-	
-	<h:form>
-		<p:tabView orientation="left">
-			<p:tab title="Receita">
-				<p:panelGrid columns="1" cellpadding="10">
+
+
+	<p:tabView orientation="left">
+		<p:tab title="Receita">
+			<h:form id="receitaF">
+				<h:panelGrid columns="2" cellpadding="10" >
 
 					<p:calendar id="dataInicialR" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
@@ -37,10 +38,12 @@
 						update="receitaMensal" value="Consultar"></p:commandButton>
 
 					<h:outputText id="receitaMensal"
-						value="#{relatorioview.receitaMensal.doubleValue()}" />
-				</p:panelGrid>
-			</p:tab>
-			<p:tab title="Comissões">
+						value="#{relatorioview.receitaMensal.toString()}" />
+				</h:panelGrid>
+			</h:form>
+		</p:tab>
+		<p:tab title="Comissões">
+			<h:form id="comissoesF">
 				<h:panelGrid columns="2" cellpadding="10">
 
 					<p:outputLabel value="Funcionario" />
@@ -70,9 +73,10 @@
 					<h:outputText id="comissaoFuncionario"
 						value="#{relatorioview.comissao.doubleValue()}" />
 				</h:panelGrid>
-			</p:tab>
-		</p:tabView>
-	</h:form>
+			</h:form>
+		</p:tab>
+	</p:tabView>
+
 
 </h:body>
 </html>
