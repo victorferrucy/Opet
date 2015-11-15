@@ -24,6 +24,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<context-param>
@@ -37,10 +41,6 @@
 		<load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>mvc-dispatcher</servlet-name> 
 		<url-pattern>/</url-pattern> </servlet-mapping> -->
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -50,6 +50,15 @@
 	</context-param>
 
 	<!-- Spring Security -->
+
+	<context-param>
+		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+		<param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
@@ -57,15 +66,11 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
-
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-	<context-param>
-		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
-		<param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
-	</context-param>
-
+	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
 </web-app>

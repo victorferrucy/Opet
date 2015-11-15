@@ -3,6 +3,7 @@
  */
 package softhair.controller;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -25,28 +26,28 @@ import softhair.model.Usuario;
 public class UsuarioController {
 	private Usuario usuario;
 
-	@ManagedProperty(value = "#{authenticationManager}")
+	@ManagedProperty("#{authenticationManager}")
 	private AuthenticationManager authManager;
-	
+
 	public UsuarioController() {
 		usuario = new Usuario();
 	}
 
 	public String login() {
 		try {
-			
-			System.out.println("USUARIO " + usuario.getLogin() + "  " + usuario.getSenha());
+
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 					usuario.getLogin(), usuario.getSenha());
-			Authentication authenticate = authManager.authenticate(usernamePasswordAuthenticationToken);	
+			System.out.println(authManager);
+			Authentication authenticate = authManager.authenticate(usernamePasswordAuthenticationToken);
 			SecurityContextHolder.getContext().setAuthentication(authenticate);
-			System.out.println("CORRETO");
 			return "correct";
 		} catch (final Exception e) {
+			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Invalid login", "Bad Credential. Try again"));
 		}
-		System.out.println("DEU RUIM");
+
 		return null;
 	}
 
@@ -79,7 +80,8 @@ public class UsuarioController {
 	}
 
 	/**
-	 * @param authManager the authManager to set
+	 * @param authManager
+	 *            the authManager to set
 	 */
 	public void setAuthManager(AuthenticationManager authManager) {
 		this.authManager = authManager;

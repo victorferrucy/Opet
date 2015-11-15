@@ -106,7 +106,9 @@ public class UsuarioDao {
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			usuario = (Usuario) ss.createCriteria(Usuario.class).add(Restrictions.eq("login", loginUsuario));
+			Criteria criteria = ss.createCriteria(Usuario.class);
+			criteria.add(Restrictions.eq("login", loginUsuario));
+			usuario = (Usuario) (criteria.uniqueResult());
 			tx.commit();
 
 		} catch (HibernateException e) {
@@ -217,7 +219,9 @@ public class UsuarioDao {
 		try {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
-			usuario = (Usuario) ss.createCriteria(Usuario.class).add(Restrictions.eq("idUsuario", idUsuario));
+			Criteria criteria = ss.createCriteria(Usuario.class);
+			criteria.add(Restrictions.eq("idUsuario", idUsuario));
+			usuario = (Usuario) (criteria.uniqueResult());
 			usuario.getCargo().size();
 			cargos = usuario.getCargo();
 			tx.commit();

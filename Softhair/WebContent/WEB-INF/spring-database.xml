@@ -31,9 +31,7 @@
 	</bean>
 
 	<bean id="usuarioLoginService" class="softhair.service.UsuarioLoginService" />
-
-	<!-- <bean id="usuarioDao" class="softhair.model.dao.UsuarioDao"> <property 
-		name="sessionFactory" ref="sessionFactory" /> </bean> -->
+	<bean id="usuarioDao" class="softhair.model.dao.UsuarioDao" />
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
