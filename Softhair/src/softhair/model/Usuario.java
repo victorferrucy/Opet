@@ -1,6 +1,7 @@
 package softhair.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,20 +28,24 @@ public class Usuario implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1504440720328564732L;
-	
+
 	public static final String USUARIO_SEQUENCE = "usuario_sequence";
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = USUARIO_SEQUENCE)
 	private int idUsuario;
-	@OneToOne(cascade = CascadeType.ALL) 
-	@JoinColumn(name="idFuncionario")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idFuncionario")
 	private Funcionario funcionario;
 	@Column
 	private String login;
 	@Column
 	private String senha;
-	
-	/* (non-Javadoc)
+	@ManyToMany
+	private List<CargoSistema> cargo;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -52,7 +58,10 @@ public class Usuario implements Serializable {
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -83,46 +92,71 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
+
 	/**
 	 * @return the login
 	 */
 	public String getLogin() {
 		return login;
 	}
+
 	/**
-	 * @param login the login to set
+	 * @param login
+	 *            the login to set
 	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
 	/**
 	 * @return the senha
 	 */
 	public String getSenha() {
 		return senha;
 	}
+
 	/**
-	 * @param senha the senha to set
+	 * @param senha
+	 *            the senha to set
 	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	/**
 	 * @return the idUsuario
 	 */
 	public int getIdUsuario() {
 		return idUsuario;
 	}
+
 	/**
 	 * @return the funcionario
 	 */
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
+
 	/**
-	 * @param funcionario the funcionario to set
+	 * @param funcionario
+	 *            the funcionario to set
 	 */
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	/**
+	 * @return the cargo
+	 */
+	public List<CargoSistema> getCargo() {
+		return cargo;
+	}
+
+	/**
+	 * @param cargo
+	 *            the cargo to set
+	 */
+	public void setCargo(List<CargoSistema> cargo) {
+		this.cargo = cargo;
 	}
 }

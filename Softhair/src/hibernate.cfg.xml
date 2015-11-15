@@ -11,7 +11,6 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-
 		<mapping package="softhair.model" />
 		<mapping class="softhair.model.Usuario" />
 		<mapping class="softhair.model.Funcionario" />
@@ -24,7 +23,6 @@
 		<mapping class="softhair.model.Fornecedor" />
 		<mapping class="softhair.model.Servico" />
 		<mapping class="softhair.model.ServicoPrestado" />
-
+		<mapping class="softhair.model.CargoSistema"/>
 	</session-factory>
-
 </hibernate-configuration>
