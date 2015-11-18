@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.enterprise.event.Event;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 import softhair.model.Cliente;
 import softhair.model.Comanda;
@@ -35,12 +38,12 @@ public class ComandaController {
 	private ServicoPrestado servicoPrestado;
 	private List<ServicoPrestado> servicosPrestados;
 	private List<Comanda> comandas;
-	
-	/*private Set<Comanda> comandas;*/
-	
+
+	/* private Set<Comanda> comandas; */
+
 	private ClienteDao clienteDao;
 	private ComandaDao comandaDao;
-	
+
 	private Funcionario funcionario;
 	private Servico servico;
 	private List<Funcionario> funcionarios;
@@ -51,38 +54,34 @@ public class ComandaController {
 
 	private ServicoDao servicoDao;
 	private FuncionarioDao funcionarioDao;
-	
+
 	public ComandaController() {
 		comanda = new Comanda();
 		cliente = new Cliente();
 		servicoPrestado = new ServicoPrestado();
-		
+
 		clienteDao = new ClienteDao();
 		comandaDao = new ComandaDao();
 		servicoDao = new ServicoDao();
 		funcionarioDao = new FuncionarioDao();
-	
+
 		servicosPrestados = new ArrayList<ServicoPrestado>();
 		funcionarios = funcionarioDao.buscar();
 		servicos = servicoDao.buscar();
 		clientes = clienteDao.buscar();
 		comandas = comandaDao.buscar();
-		
+
 		status = Arrays.asList(Status.values());
 		nomeStatus = new ArrayList<String>();
-		for (Status s : status){
+		for (Status s : status) {
 			nomeStatus.add(s.getStatus());
 		}
 	}
 
 	public String novaComanda() {
 		comanda = new Comanda();
+		servicosPrestados = new ArrayList<ServicoPrestado>();
 		return "visualizarComanda.xhtml?faces-redirect=true";
-	}
-
-	public String atualizarComanda(Comanda comanda) {
-		this.comanda = comanda;
-		return "alterarComanda.xhtml?faces-redirect=true";
 	}
 
 	public String visualizarComanda(Comanda comanda) {
@@ -91,15 +90,17 @@ public class ComandaController {
 		return "visualizarComanda.xhtml?faces-redirect=true";
 	}
 
-	public void salvar() {
-		comandaDao.salvar(comanda);
-		comandas = comandaDao.buscar();
-		comanda = new Comanda();
+	public void salvar(AjaxBehaviorEvent e) {
+		if (comanda.getIdComanda() == 0) {
+			comandaDao.salvar(comanda);
+			comandas = comandaDao.buscar();
+		}
 	}
 
 	public void atualizar(Comanda comanda) {
 		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.atualizar(comanda);
+		comandas = comandaDao.buscar();
 	}
 
 	public List<Comanda> buscar() {
@@ -119,53 +120,53 @@ public class ComandaController {
 		}
 		return comandas;
 	}
-	
-	public List<ServicoPrestado> adicionarServico(){
+
+	public List<ServicoPrestado> adicionarServico() {
 		servicosPrestados.add(servicoPrestado);
 		servicoPrestado = new ServicoPrestado();
 		comanda.setTotal(totalComanda());
 		return servicosPrestados;
-		
+
 	}
-	
-	public List<ServicoPrestado> removerServico(ServicoPrestado servicoPrestado){
+
+	public List<ServicoPrestado> removerServico(ServicoPrestado servicoPrestado) {
 		servicosPrestados.remove(servicoPrestado);
 		comanda.setTotal(totalComanda());
 		return servicosPrestados;
 	}
-	
-	public BigDecimal totalComanda(){
+
+	public BigDecimal totalComanda() {
 		BigDecimal total;
-		
+
 		total = new BigDecimal("0.0");
-		
-		for(ServicoPrestado sp : servicosPrestados){
+
+		for (ServicoPrestado sp : servicosPrestados) {
 			total = total.add(sp.getServico().getValor());
 		}
-		
+
 		comanda.setTotal(total);
-		
+
 		return total;
 	}
-	
-	public List<Cliente> buscarClientes(){
+
+	public List<Cliente> buscarClientes() {
 		clientes = clienteDao.buscar();
 		return clientes;
-		
+
 	}
-	
-	public List<Funcionario> buscarFuncionarios(){
+
+	public List<Funcionario> buscarFuncionarios() {
 		funcionarios = funcionarioDao.buscar();
 		return funcionarios;
-		
+
 	}
-	
-	public List<Servico> buscarServicos(){
+
+	public List<Servico> buscarServicos() {
 		servicos = servicoDao.buscar();
 		return servicos;
-		
+
 	}
-	
+
 	/**
 	 * @return the comandaDao
 	 */
@@ -264,7 +265,8 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param servicoPrestado the servicoPrestado to set
+	 * @param servicoPrestado
+	 *            the servicoPrestado to set
 	 */
 	public void setServicoPrestado(ServicoPrestado servicoPrestado) {
 		this.servicoPrestado = servicoPrestado;
@@ -278,12 +280,13 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param servicosPrestados the servicosPrestados to set
+	 * @param servicosPrestados
+	 *            the servicosPrestados to set
 	 */
 	public void setServicosPrestados(List<ServicoPrestado> servicosPrestados) {
 		this.servicosPrestados = servicosPrestados;
 	}
-	
+
 	/**
 	 * @return the funcionario
 	 */
@@ -292,7 +295,8 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param funcionario the funcionario to set
+	 * @param funcionario
+	 *            the funcionario to set
 	 */
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
@@ -306,7 +310,8 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param servico the servico to set
+	 * @param servico
+	 *            the servico to set
 	 */
 	public void setServico(Servico servico) {
 		this.servico = servico;
@@ -320,7 +325,8 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param funcionarios the funcionarios to set
+	 * @param funcionarios
+	 *            the funcionarios to set
 	 */
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
@@ -334,7 +340,8 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param servicos the servicos to set
+	 * @param servicos
+	 *            the servicos to set
 	 */
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
@@ -348,12 +355,13 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param servicoDao the servicoDao to set
+	 * @param servicoDao
+	 *            the servicoDao to set
 	 */
 	public void setServicoDao(ServicoDao servicoDao) {
 		this.servicoDao = servicoDao;
 	}
-	
+
 	/**
 	 * @return the clientes
 	 */
@@ -362,20 +370,19 @@ public class ComandaController {
 	}
 
 	/**
-	 * @param clientes the clientes to set
+	 * @param clientes
+	 *            the clientes to set
 	 */
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
-	
-	
+
 	/**
 	 * @return the status
 	 */
 	public List<Status> getStatus() {
 		return status;
 	}
-	
 
 	/**
 	 * @return the nomeStatus
@@ -384,5 +391,4 @@ public class ComandaController {
 		return nomeStatus;
 	}
 
-	
 }

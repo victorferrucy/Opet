@@ -32,7 +32,7 @@ public class ClienteController {
 	private ClienteDao clienteDao;
 	private EnderecoDao enderecoDao;
 	private ContatoDao contatoDao;
-
+	
 	public ClienteController() {
 		setCliente(new Cliente());
 		setEndereco(new Endereco());

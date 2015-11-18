@@ -11,12 +11,14 @@
 	<context:annotation-config />
 	<context:spring-configured />
 	<sec:global-method-security />
-		
+
 	<!-- enable use-expressions -->
 	<sec:http auto-config="true" use-expressions="true">
+
+		<sec:intercept-url pattern="/paginas/admin/**"
+			access="hasRole('ADMIN')" />
 		<sec:intercept-url pattern="/javax.faces.resource/**"
 			access="permitAll" />
-		<!-- <sec:intercept-url pattern="/admin**" access="hasRole('ADMIN')" /> -->
 
 		<!-- access denied page -->
 		<sec:access-denied-handler error-page="/paginas/index.xhtml" />

@@ -21,8 +21,11 @@ public class ClienteConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String idCliente) {
-		ClienteDao clienteDao = new ClienteDao();
-		return clienteDao.buscarPorId(Integer.valueOf(idCliente));
+		if (!idCliente.isEmpty() && idCliente != null) {
+			ClienteDao clienteDao = new ClienteDao();
+			return clienteDao.buscarPorId(Integer.valueOf(idCliente));
+		}
+		return new Cliente();
 	}
 
 	@Override

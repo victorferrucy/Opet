@@ -11,8 +11,8 @@
 </h:head>
 <h:body>
 	<ui:include src="../menu.xhtml" />
-	<ui:include src="/comanda/adicionarServico.xhtml" />
-	
+	<ui:include src="adicionarServico.xhtml" />
+
 	<h:form id="visualizarComandaF">
 
 		<p:panelGrid id="cadastrarComanda" columns="2">
@@ -20,10 +20,12 @@
 			<p:outputLabel value="Cliente" />
 			<p:selectOneMenu id="clientes" converter="clienteConverter"
 				value="#{comandaController.comanda.cliente}" required="true">
+				<p:ajax listener="#{comandaController.salvar}" />
+				<f:selectItem itemLabel="Selecione um cliente"
+					noSelectionOption="true" />
 				<f:selectItems value="#{comandaController.buscarClientes()}"
 					var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
 			</p:selectOneMenu>
-
 			<p:outputLabel value="Data de Abertura" />
 			<p:calendar id="dataAbertura" converter="calendarConverter"
 				navigator="true" pattern="dd/MM/yyyy" readonlyInput="true"
@@ -33,10 +35,8 @@
 			<p:outputLabel value="Status" />
 			<p:selectOneMenu id="status"
 				value="#{comandaController.comanda.status}">
-
 				<f:selectItems value="#{comandaController.nomeStatus}" var="status"
 					itemValue="#{status}" />
-
 			</p:selectOneMenu>
 		</p:panelGrid>
 
@@ -44,8 +44,7 @@
 			onclick="PF('adicionarServico').show();" />
 
 		<p:dataTable widgetVar="servicosPrestados" id="servicosPrestados"
-			var="servicoPrestado"
-			value="#{comandaController.servicosPrestados}">
+			var="servicoPrestado" value="#{comandaController.servicosPrestados}">
 
 			<p:column headerText="Serviço">
 				<h:outputText value="#{servicoPrestado.servico.nome}" />
@@ -61,9 +60,10 @@
 
 			<p:column headerText="Deletar">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{comandaController.removerServico(servicoPrestado)}" update="servicosPrestados :visualizarComandaF:total" />
+					action="#{comandaController.removerServico(servicoPrestado)}"
+					update="servicosPrestados :visualizarComandaF:total" />
 			</p:column>
-			
+
 		</p:dataTable>
 
 		<p:commandButton value="Atualizar"

@@ -11,7 +11,7 @@
 </h:head>
 <h:body>
 
-	<ui:include src="../menu.xhtml" />
+	<ui:include src="../../menu.xhtml" />
 
 	<h1>Serviços</h1>
 
@@ -41,19 +41,19 @@
 				<h:outputText value="#{servico.valor}" />
 			</p:column>
 
-			<p:column headerText="Detalhes">
+			<p:column headerText="Detalhes" styleClass="acoes">
 					<p:commandButton icon="ui-icon-contact" title="Detalhar"
 						action="#{servicoController.visualizarServico(servico)}" >
 						<f:param name="i" value="3" />
 					</p:commandButton>
 			</p:column>
 
-			<p:column headerText="Atualizar">
+			<p:column headerText="Atualizar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
 					action="#{servicoController.atualizarServico(servico)}" />
 			</p:column>
 
-			<p:column headerText="Deletar">
+			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
 					action="#{servicoController.deletar(servico)}" update="servicos" />
 			</p:column>

@@ -36,20 +36,19 @@
 				<h:outputText value="#{cliente.contato.celular}" />
 			</p:column>
 
-			<p:column headerText="Detalhes">
-					<p:commandButton icon="ui-icon-contact" title="Detalhar"
-						action="#{clienteController.visualizarCliente(cliente)}" />
+			<p:column headerText="Detalhes" styleClass="acoes">
+				<p:commandButton icon="ui-icon-contact" title="Detalhar"
+					action="#{clienteController.visualizarCliente(cliente)}" />
 			</p:column>
 
-			<p:column headerText="Atualizar">
+			<p:column headerText="Atualizar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
 					action="#{clienteController.atualizarCliente(cliente)}" />
 			</p:column>
 
-			<p:column headerText="Deletar">
+			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{clienteController.deletar(cliente)}"
-					update="clientes" />
+					action="#{clienteController.deletar(cliente)}" update="clientes" />
 			</p:column>
 
 		</p:dataTable>

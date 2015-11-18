@@ -10,7 +10,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<ui:include src="../menu.xhtml" />
+	<ui:include src="../../menu.xhtml" />
 	<h1>Fornecedores</h1>
 
 	<h:form id="cadastrarFornecedor">
@@ -39,17 +39,17 @@
 				<h:outputText value="#{fornecedor.contato.celular}" />
 			</p:column>
 
-			<p:column headerText="Detalhes">
+			<p:column headerText="Detalhes" styleClass="acoes">
 					<p:commandButton icon="ui-icon-contact" title="Detalhar"
 						action="#{fornecedorController.visualizarFornecedor(fornecedor)}" />
 			</p:column>
 
-			<p:column headerText="Atualizar">
+			<p:column headerText="Atualizar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
 					action="#{fornecedorController.atualizarFornecedor(fornecedor)}" />
 			</p:column>
 
-			<p:column headerText="Deletar">
+			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
 					action="#{fornecedorController.deletar(fornecedor)}"
 					update="fornecedores" />

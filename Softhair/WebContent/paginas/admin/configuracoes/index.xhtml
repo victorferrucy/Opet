@@ -12,15 +12,5 @@
 <h:body>
 	<h1>CONFIGURAÇÕES</h1>
 
-	<h:form>
-		<p:outputLabel value="Login: " />
-		<p:inputText id="login" value="#{usuarioController.usuario.login}" />
-		<p:outputLabel value="Senha: " />
-		<p:password id="senha" value="#{usuarioController.usuario.senha}" />
-
-		<p:commandButton value="Entrar"
-			action="#{usuarioController.validarUsuario()}" />
-	</h:form>
-
 </h:body>
 </html>

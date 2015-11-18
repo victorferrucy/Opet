@@ -1,0 +1,24 @@
+.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
+	border: none !important;
+}
+
+h1, h2, .ui-outputlabel {
+	color: #0073EA;
+}
+
+h1 {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.ui-outputlabel {
+	font-weight: bold;
+}
+
+.ui-widget-content .ui-panelgrid-cell .ui-inputfield {
+	font-weight: normal;
+}
+
+.acoes{
+	text-align: center;
+	
+}

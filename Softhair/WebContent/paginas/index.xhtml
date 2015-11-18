@@ -8,18 +8,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
 </h:head>
 <h:body>
+	<h:outputStylesheet library="css" name="main.css" />
 	<h1>Alle Granato</h1>
+	<h:form id="loginF">
+		<p:panelGrid columns="1">
+			<p:inputText id="login" value="#{usuarioController.usuario.login}" />
+			<p:watermark for="login" value="Login" id="loginW" />
+			<p:password id="senha" value="#{usuarioController.usuario.senha}" />
+			<p:watermark for="senha" value="Senha" id="senhaW" />
+			<p:commandButton value="Entrar" action="#{usuarioController.login()}" />
+		</p:panelGrid>
 
-	<h:form>
-		<p:outputLabel value="Login: " />
-		<p:inputText id="login" value="#{usuarioController.usuario.login}" />
-		<p:outputLabel value="Senha: " />
-		<p:password id="senha" value="#{usuarioController.usuario.senha}" />
 
-		<p:commandButton value="Entrar"
-			action="#{usuarioController.login()}" />
 
 	</h:form>
 </h:body>

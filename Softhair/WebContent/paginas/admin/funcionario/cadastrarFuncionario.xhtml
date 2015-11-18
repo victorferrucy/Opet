@@ -10,11 +10,9 @@
 <h:head>
 </h:head>
 <h:body>
-	<ui:include src="../menu.xhtml" />
-
-	<h1>Alterar Funcionario</h1>
-	<h:form id="alterarFuncionarioF">
-		<p:panelGrid id="alterarFuncionario" columns="2">
+	<ui:include src="../../menu.xhtml" />
+	<h:form id="cadastrarFuncionarioF">
+		<p:panelGrid id="cadastrarFuncionario" columns="2">
 			<p:outputLabel value="nome" />
 			<p:inputText id="nome" maxlength="30"
 				value="#{funcionarioController.funcionario.nome}" />
@@ -107,12 +105,9 @@
 
 		</p:panelGrid>
 
-		<p:commandButton value="Atualizar"
-			action="#{funcionarioController.atualizar(funcionarioController.funcionario)}">
-		</p:commandButton>
+		<p:commandButton value="Cadastrar"
+			action="#{funcionarioController.salvar()}" />
 
 	</h:form>
-
-
 </h:body>
 </html>

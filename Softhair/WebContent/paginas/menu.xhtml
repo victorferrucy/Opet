@@ -5,54 +5,86 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
 
 <h:head>
+
 </h:head>
 <h:body>
+	<h:outputStylesheet library="css" name="main.css" />
+
 	<h:form id="menuF">
+		<sec:authorize ifAllGranted="ADMIN">
+			<p:tabMenu id="menu" activeIndex="#{param.i}">
 
-		<p:tabMenu id="menu" activeIndex="#{param.i}">
+				<p:menuitem value="Agenda" outcome="/paginas/agenda/agenda"
+					icon="ui-icon-home">
+					<f:param name="i" value="0" />
+				</p:menuitem>
+				<p:menuitem value="Comanda" outcome="/paginas/comanda/telaInicial"
+					icon="ui-icon-document">
+					<f:param name="i" value="1" />
+				</p:menuitem>
+				<p:menuitem value="Cliente" outcome="/paginas/cliente/telaInicial"
+					icon="ui-icon-person">
+					<f:param name="i" value="2" />
+				</p:menuitem>
+				<p:menuitem value="Serviço"
+					outcome="/paginas/admin/servico/telaInicial"
+					icon="ui-icon-scissors">
+					<f:param name="i" value="3" />
+				</p:menuitem>
+				<p:menuitem value="Funcionario"
+					outcome="/paginas/admin/funcionario/telaInicial"
+					icon="ui-icon-person">
+					<f:param name="i" value="4" />
+				</p:menuitem>
 
-			<p:menuitem value="Agenda" outcome="/paginas/agenda/agenda"
-				icon="ui-icon-home">
-				<f:param name="i" value="0" />
-			</p:menuitem>
-			<p:menuitem value="Comanda" outcome="/paginas/comanda/telaInicial"
-				icon="ui-icon-document">
-				<f:param name="i" value="1" />
-			</p:menuitem>
-			<p:menuitem value="Cliente" outcome="/paginas/cliente/telaInicial"
-				icon="ui-icon-person">
-				<f:param name="i" value="2" />
-			</p:menuitem>
-			<p:menuitem value="Serviço" outcome="/paginas/servico/telaInicial"
-				icon="ui-icon-scissors">
-				<f:param name="i" value="3" />
-			</p:menuitem>
-			<p:menuitem value="Funcionario" outcome="/paginas/funcionario/telaInicial"
-				icon="ui-icon-person">
-				<f:param name="i" value="4" />
-			</p:menuitem>
-			<p:menuitem value="Fornecedor" outcome="/paginas/fornecedor/telaInicial"
-				icon="ui-icon-person">
-				<f:param name="i" value="5" />
-			</p:menuitem>
+				<p:menuitem value="Fornecedor"
+					outcome="/paginas/admin/fornecedor/telaInicial"
+					icon="ui-icon-person">
+					<f:param name="i" value="5" />
+				</p:menuitem>
 
-			<p:menuitem value="Relatorio" outcome="/paginas/relatorios/telaInicial"
-				icon="ui-icon-document">
-				<f:param name="i" value="6" />
-			</p:menuitem>
+				<p:menuitem value="Relatorio"
+					outcome="/paginas/relatorios/telaInicial" icon="ui-icon-document">
+					<f:param name="i" value="6" />
+				</p:menuitem>
 
-			<p:menuitem value="Configurações"  outcome="/paginas/configuracoes/index"
-				icon="ui-icon-wrench">
-				<f:param name="i" value="7" />
-			</p:menuitem>
+				<p:menuitem value="Configurações"
+					outcome="/paginas/admin/configuracoes/index" icon="ui-icon-wrench">
+					<f:param name="i" value="7" />
+				</p:menuitem>
 
-			<p:menuitem value="Sair" action="#{usuarioController.logout()}" icon="ui-icon-close">
-			</p:menuitem>
+				<p:menuitem value="Sair" action="#{usuarioController.logout()}"
+					icon="ui-icon-close">
+				</p:menuitem>
 
-		</p:tabMenu>
+			</p:tabMenu>
+		</sec:authorize>
+
+
+		<sec:authorize ifAllGranted="FUNCIONARIO">
+			<p:tabMenu id="menu" activeIndex="#{param.i}">
+				<p:menuitem value="Agenda" outcome="/paginas/agenda/agenda"
+					icon="ui-icon-home">
+					<f:param name="i" value="0" />
+				</p:menuitem>
+				<p:menuitem value="Comanda" outcome="/paginas/comanda/telaInicial"
+					icon="ui-icon-document">
+					<f:param name="i" value="1" />
+				</p:menuitem>
+				<p:menuitem value="Cliente" outcome="/paginas/cliente/telaInicial"
+					icon="ui-icon-person">
+					<f:param name="i" value="2" />
+				</p:menuitem>
+				<p:menuitem value="Sair" action="#{usuarioController.logout()}"
+					icon="ui-icon-close">
+				</p:menuitem>
+
+			</p:tabMenu>
+		</sec:authorize>
 	</h:form>
 
 </h:body>

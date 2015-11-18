@@ -10,73 +10,69 @@
 <h:head>
 </h:head>
 <h:body>
-	<ui:include src="../menu.xhtml" />
+	<ui:include src="../../menu.xhtml" />
 
-	<h1>Atualizar Fornecedor</h1>
-
-	<h:form id="alterarFornecedorF">
-
-		<p:panelGrid id="alterarFornecedor" columns="2">
-
+	<p:fieldset legend="Informações" style="margin: 10px 0;">
+		<p:panelGrid columns="2">
 			<p:outputLabel value="Nome" />
-			<p:inputText id="nome" maxlength="30"
+			<p:outputLabel id="nome"
 				value="#{fornecedorController.fornecedor.nome}" />
 
 			<p:outputLabel value="CNPJ" />
-			<p:inputText id="cnpj" maxlength="20"
+			<p:outputLabel id="cnpj"
 				value="#{fornecedorController.fornecedor.cnpj}" />
-
+		</p:panelGrid>
+	</p:fieldset>
+	<p:fieldset legend="Endereço" style="margin-bottom: 10px;">
+		<p:panelGrid columns="2">
 			<p:outputLabel value="Rua" />
-			<p:inputText id="rua" maxlength="40"
+			<p:outputLabel id="rua"
 				value="#{fornecedorController.fornecedor.endereco.rua}" />
 
 			<p:outputLabel value="CEP" />
-			<p:inputMask id="cep" maxlength="7" mask="99999-99"
+			<p:outputLabel id="cep"
 				value="#{fornecedorController.fornecedor.endereco.cep}" />
 
 			<p:outputLabel value="Bairro" />
-			<p:inputText id="bairro" maxlength="40"
+			<p:outputLabel id="bairro"
 				value="#{fornecedorController.fornecedor.endereco.bairro}" />
 
 			<p:outputLabel value="Numero" />
-			<p:inputText id="numero" maxlength="5"
+			<p:outputLabel id="numero"
 				value="#{fornecedorController.fornecedor.endereco.numero}" />
 
 			<p:outputLabel value="Complemento" />
-			<p:inputText id="complemento" maxlength="50"
+			<p:outputLabel id="complemento"
 				value="#{fornecedorController.fornecedor.endereco.complemento}" />
 
 			<p:outputLabel value="Cidade" />
-			<p:inputText id="cidade" maxlength="20"
+			<p:outputLabel id="cidade"
 				value="#{fornecedorController.fornecedor.endereco.cidade}" />
 
 			<p:outputLabel value="Estado" />
-			<p:inputText id="estado" maxlength="20"
+			<p:outputLabel id="estado"
 				value="#{fornecedorController.fornecedor.endereco.estado}" />
 
+		</p:panelGrid>
+	</p:fieldset>
+	<p:fieldset legend="Contato" style="margin-bottom: 10px;">
+		<p:panelGrid columns="2">
 			<p:outputLabel value="Email principal" />
-			<p:inputText id="emailPrin" maxlength="30"
+			<p:outputLabel id="emailPrin"
 				value="#{fornecedorController.fornecedor.contato.emailPrincipal}" />
 
 			<p:outputLabel value="Email secundário" />
-			<p:inputText id="emailSec" maxlength="30"
+			<p:outputLabel id="emailSec"
 				value="#{fornecedorController.fornecedor.contato.emailSecundario}" />
 
 			<p:outputLabel value="Telefone Comercial" />
-			<p:inputMask mask="(99)9999-9999" maxlength="10"
+			<p:outputLabel
 				value="#{fornecedorController.fornecedor.contato.telefoneComercial}" />
 
 			<p:outputLabel value="Celular" />
-			<p:inputMask mask="(99)9999-9999" maxlength="10"
+			<p:outputLabel
 				value="#{fornecedorController.fornecedor.contato.celular}" />
-
 		</p:panelGrid>
-
-		<p:commandButton value="Atualizar"
-			action="#{fornecedorController.atualizar(fornecedorController.fornecedor)}">
-		</p:commandButton>
-
-	</h:form>
-
+	</p:fieldset>
 </h:body>
 </html>
