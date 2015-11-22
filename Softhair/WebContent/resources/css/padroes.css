@@ -1,0 +1,43 @@
+/* ACESSO NEGADO  */
+span {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1.1em;
+}
+
+.centralizar {
+	background-color: #FFE7D6;
+	border-radius: 8px;
+	margin: auto;
+	margin-top: 5%;
+	text-align: center;
+	width: 50%;
+}
+
+div .font-awesome-size {
+	font-size: 200px;
+	color: #FF6900;
+}
+
+.div-vazia-30 {
+	display: block;
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+}
+
+.aviso40, .aviso30, .aviso18 {
+	display: block;
+	color: #FF6900;
+}
+
+.aviso40 {
+	font-size: 40px;
+}
+
+.aviso30 {
+	font-size: 30px;
+}
+
+.aviso18 {
+	font-size: 18px;
+}

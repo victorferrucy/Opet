@@ -41,9 +41,12 @@ public class FornecedorController {
 		fornecedorDao = new FornecedorDao();
 		setEnderecoDao(new EnderecoDao());
 		contatoDao = new ContatoDao();
-
 	}
-
+	
+	public String paginaInicial() {
+		return "telaInicial.xhtml?faces-redirect=true";
+	}
+	
 	public String novoFornecedor(){
 		fornecedor = new Fornecedor();
 		fornecedor.setContato(new Contato());

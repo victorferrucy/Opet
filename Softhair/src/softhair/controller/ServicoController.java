@@ -20,7 +20,7 @@ import softhair.model.dao.ServicoDao;
 @ManagedBean
 @SessionScoped
 public class ServicoController {
-	
+
 	private Servico servico;
 	private List<Servico> servicos;
 	private ServicoDao servicoDao;
@@ -30,26 +30,29 @@ public class ServicoController {
 		servicoDao = new ServicoDao();
 	}
 
-	public String novoServico (){
+	public String paginaInicial() {
+		return "telaInicial.xhtml?faces-redirect=true";
+	}
+
+	public String novoServico() {
 		servico = new Servico();
 		return "cadastrarServico.xhtml?faces-redirect=true";
 	}
-	
+
 	public String atualizarServico(Servico servico) {
 		this.servico = servico;
 		return "alterarServico.xhtml?faces-redirect=true";
 	}
-	
-	public String visualizarServico(Servico servico){
+
+	public String visualizarServico(Servico servico) {
 		this.servico = servico;
 		return "visualizarServico.xhtml?faces-redirect=true";
 	}
-	
-	public String voltarPagina(){
+
+	public String voltarPagina() {
 		return "telaInicial.xhtml?faces-redirect=true";
 	}
-	
-	
+
 	public void salvar() {
 		servicoDao.salvar(servico);
 		servico = new Servico();
@@ -62,7 +65,7 @@ public class ServicoController {
 
 	public List<Servico> buscar() {
 		servicos = new ArrayList<Servico>();
-		servicos= servicoDao.buscar();
+		servicos = servicoDao.buscar();
 
 		return servicos;
 	}
@@ -70,7 +73,7 @@ public class ServicoController {
 	public void deletar(Servico servico) {
 		servicoDao.deletar(servico);
 	}
-	
+
 	/**
 	 * @return the servico
 	 */
@@ -79,7 +82,8 @@ public class ServicoController {
 	}
 
 	/**
-	 * @param servico the servico to set
+	 * @param servico
+	 *            the servico to set
 	 */
 	public void setServico(Servico servico) {
 		this.servico = servico;
@@ -93,7 +97,8 @@ public class ServicoController {
 	}
 
 	/**
-	 * @param servicos the servicos to set
+	 * @param servicos
+	 *            the servicos to set
 	 */
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
@@ -107,7 +112,8 @@ public class ServicoController {
 	}
 
 	/**
-	 * @param servicoDao the servicoDao to set
+	 * @param servicoDao
+	 *            the servicoDao to set
 	 */
 	public void setServicoDao(ServicoDao servicoDao) {
 		this.servicoDao = servicoDao;

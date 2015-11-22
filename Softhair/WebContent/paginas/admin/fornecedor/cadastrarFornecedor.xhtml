@@ -14,6 +14,10 @@
 	<ui:include src="../../menu.xhtml" />
 
 	<h:form id="cadastrarFornecedorF">
+	
+		<p:commandButton value="Voltar" 
+			action="#{fornecedorController.paginaInicial()}" />
+	
 		<p:fieldset legend="Informações" style="margin: 10px 0;">
 
 			<p:panelGrid id="cadastrarFornecedor" columns="2">
@@ -23,7 +27,7 @@
 					value="#{fornecedorController.fornecedor.nome}" />
 
 				<p:outputLabel value="CNPJ" />
-				<p:inputText id="cnpj" maxlength="20"
+				<p:inputText id="cnpj" maxlength="14"
 					value="#{fornecedorController.fornecedor.cnpj}" />
 			</p:panelGrid>
 		</p:fieldset>
@@ -79,7 +83,6 @@
 		</p:fieldset>
 		<p:commandButton value="Cadastrar"
 			action="#{fornecedorController.salvar()}" />
-
 	</h:form>
 </h:body>
 </html>

@@ -12,6 +12,11 @@
 <h:body>
 	<ui:include src="../../menu.xhtml" />
 
+	<h:form>
+		<p:commandButton value="Voltar"
+			action="#{funcionarioController.paginaInicial()}" />
+	</h:form>
+
 	<p:panelGrid id="visualizarFuncionario" columns="2"
 		style="border:none;">
 		<p:outputLabel value="Nome" />
@@ -25,9 +30,6 @@
 		<p:outputLabel value="CPF" />
 		<p:outputLabel id="cpf"
 			value="#{funcionarioController.funcionario.cpf}" />
-
-		<p:outputLabel value="RG" />
-		<p:outputLabel id="rg" value="#{funcionarioController.funcionario.rg}" />
 
 		<p:outputLabel value="sexo" />
 		<p:outputLabel id="sexo"

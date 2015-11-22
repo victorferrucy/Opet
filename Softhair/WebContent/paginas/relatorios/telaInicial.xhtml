@@ -8,20 +8,16 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet name="main.css" library="css" />
 </h:head>
 <h:body>
-
-
 	<ui:include src="../menu.xhtml" />
 
 	<h1>Relatórios</h1>
 
-
 	<p:tabView orientation="left">
 		<p:tab title="Receita">
 			<h:form id="receitaF">
-				<p:panelGrid columns="2" cellpadding="10" >
+				<p:panelGrid columns="2" cellpadding="10">
 
 					<p:calendar id="dataInicialR" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"

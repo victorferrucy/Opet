@@ -16,7 +16,7 @@
 
 	<h:form id="menuF">
 		<sec:authorize ifAllGranted="ADMIN">
-			<p:tabMenu id="menu" activeIndex="#{param.i}">
+			<p:tabMenu id="menu" activeIndex="#{param.i}" styleClass="menu">
 
 				<p:menuitem value="Agenda" outcome="/paginas/agenda/agenda"
 					icon="ui-icon-home">
@@ -57,7 +57,7 @@
 					<f:param name="i" value="7" />
 				</p:menuitem>
 
-				<p:menuitem value="Sair" action="#{usuarioController.logout()}"
+				<p:menuitem value="Sair" action="#{loginView.logout()}"
 					icon="ui-icon-close">
 				</p:menuitem>
 
@@ -79,7 +79,7 @@
 					icon="ui-icon-person">
 					<f:param name="i" value="2" />
 				</p:menuitem>
-				<p:menuitem value="Sair" action="#{usuarioController.logout()}"
+				<p:menuitem value="Sair" action="#{loginView.logout()}"
 					icon="ui-icon-close">
 				</p:menuitem>
 

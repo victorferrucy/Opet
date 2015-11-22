@@ -12,76 +12,86 @@
 
 <h:body>
 	<ui:include src="../menu.xhtml" />
+	<h:form>
+		<p:commandButton value="Voltar"
+			action="#{funcionarioController.paginaInicial()}" />
+	</h:form>
+	<p:fieldset legend="Informações" styleClass="grupo-form">
+		<p:panelGrid id="informacoes" columns="2">
+			<p:outputLabel value="Nome" />
+			<p:outputLabel id="nome" value="#{clienteController.cliente.nome}" />
 
-	<p:panelGrid id="visualizarCliente" columns="2">
-		<p:outputLabel value="Nome" />
-		<p:outputLabel id="nome" value="#{clienteController.cliente.nome}" />
+			<p:outputLabel value="Sobrenome" />
+			<p:outputLabel id="sobrenome"
+				value="#{clienteController.cliente.sobrenome}" />
 
-		<p:outputLabel value="Sobrenome" />
-		<p:outputLabel id="sobrenome"
-			value="#{clienteController.cliente.sobrenome}" />
+			<p:outputLabel value="CPF" />
+			<p:outputLabel id="cpf" value="#{clienteController.cliente.cpf}" />
 
-		<p:outputLabel value="CPF" />
-		<p:outputLabel id="cpf" value="#{clienteController.cliente.cpf}" />
+			<p:outputLabel value="sexo" />
+			<p:outputLabel id="sexo" value="#{clienteController.cliente.sexo}" />
 
-		<p:outputLabel value="RG" />
-		<p:outputLabel id="rg" value="#{clienteController.cliente.rg}" />
+			<p:outputLabel value="Data de nascimento" />
+			<p:outputLabel id="dataNascimento" converter="calendarConverter"
+				value="#{clienteController.cliente.dataNascimento}" />
+		</p:panelGrid>
+	</p:fieldset>
 
-		<p:outputLabel value="sexo" />
-		<p:outputLabel id="sexo" value="#{clienteController.cliente.sexo}" />
+	<p:fieldset legend="Endereço" styleClass="grupo-form">
+		<p:panelGrid id="endereco" columns="2">
+			<p:outputLabel value="Rua" />
+			<p:outputLabel id="rua"
+				value="#{clienteController.cliente.endereco.rua}" />
 
-		<p:outputLabel value="Data de nascimento" />
-		<p:outputLabel id="dataNascimento" converter="calendarConverter"
-			value="#{clienteController.cliente.dataNascimento}" />
+			<p:outputLabel value="CEP" />
+			<p:outputLabel id="cep"
+				value="#{clienteController.cliente.endereco.cep}" />
 
-		<p:outputLabel value="Rua" />
-		<p:outputLabel id="rua"
-			value="#{clienteController.cliente.endereco.rua}" />
+			<p:outputLabel value="Bairro" />
+			<p:outputLabel id="bairro"
+				value="#{clienteController.cliente.endereco.bairro}" />
 
-		<p:outputLabel value="CEP" />
-		<p:outputLabel id="cep"
-			value="#{clienteController.cliente.endereco.cep}" />
+			<p:outputLabel value="Numero" />
+			<p:outputLabel id="numero"
+				value="#{clienteController.cliente.endereco.numero}" />
 
-		<p:outputLabel value="Bairro" />
-		<p:outputLabel id="bairro"
-			value="#{clienteController.cliente.endereco.bairro}" />
+			<p:outputLabel value="Complemento" />
+			<p:outputLabel id="complemento"
+				value="#{clienteController.cliente.endereco.complemento}" />
 
-		<p:outputLabel value="Numero" />
-		<p:outputLabel id="numero"
-			value="#{clienteController.cliente.endereco.numero}" />
+			<p:outputLabel value="Cidade" />
+			<p:outputLabel id="cidade"
+				value="#{clienteController.cliente.endereco.cidade}" />
 
-		<p:outputLabel value="Complemento" />
-		<p:outputLabel id="complemento"
-			value="#{clienteController.cliente.endereco.complemento}" />
+			<p:outputLabel value="Estado" />
+			<p:outputLabel id="estado"
+				value="#{clienteController.cliente.endereco.estado}" />
+		</p:panelGrid>
+	</p:fieldset>
 
-		<p:outputLabel value="Cidade" />
-		<p:outputLabel id="cidade"
-			value="#{clienteController.cliente.endereco.cidade}" />
+	<p:fieldset legend="Contato" styleClass="grupo-form">
+		<p:panelGrid id="contato" columns="2">
+			<p:outputLabel value="Email principal" />
+			<p:outputLabel id="emailPrin"
+				value="#{clienteController.cliente.contato.emailPrincipal}" />
 
-		<p:outputLabel value="Estado" />
-		<p:outputLabel id="estado"
-			value="#{clienteController.cliente.endereco.estado}" />
+			<p:outputLabel value="Email secundário" />
+			<p:outputLabel id="emailSec"
+				value="#{clienteController.cliente.contato.emailSecundario}" />
 
-		<p:outputLabel value="Email principal" />
-		<p:outputLabel id="emailPrin"
-			value="#{clienteController.cliente.contato.emailPrincipal}" />
+			<p:outputLabel value="Telefone Residencial" />
+			<p:outputLabel
+				value="#{clienteController.cliente.contato.telefoneResidencial}" />
 
-		<p:outputLabel value="Email secundário" />
-		<p:outputLabel id="emailSec"
-			value="#{clienteController.cliente.contato.emailSecundario}" />
+			<p:outputLabel value="Telefone Comercial" />
+			<p:outputLabel
+				value="#{clienteController.cliente.contato.telefoneComercial}" />
 
-		<p:outputLabel value="Telefone Residencial" />
-		<p:outputLabel
-			value="#{clienteController.cliente.contato.telefoneResidencial}" />
+			<p:outputLabel value="Celular" />
+			<p:outputLabel value="#{clienteController.cliente.contato.celular}" />
+		</p:panelGrid>
+	</p:fieldset>
 
-		<p:outputLabel value="Telefone Comercial" />
-		<p:outputLabel
-			value="#{clienteController.cliente.contato.telefoneComercial}" />
-
-		<p:outputLabel value="Celular" />
-		<p:outputLabel value="#{clienteController.cliente.contato.celular}" />
-
-	</p:panelGrid>
 
 
 

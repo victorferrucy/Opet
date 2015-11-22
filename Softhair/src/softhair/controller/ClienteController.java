@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import softhair.model.Cliente;
 import softhair.model.Contato;
@@ -32,7 +31,7 @@ public class ClienteController {
 	private ClienteDao clienteDao;
 	private EnderecoDao enderecoDao;
 	private ContatoDao contatoDao;
-	
+
 	public ClienteController() {
 		setCliente(new Cliente());
 		setEndereco(new Endereco());
@@ -45,32 +44,36 @@ public class ClienteController {
 
 	}
 
-	public String novoCliente(){
+	public String paginaInicial() {
+		return "telaInicial.xhtml?faces-redirect=true";
+	}
+
+	public String novoCliente() {
 		cliente = new Cliente();
 		cliente.setEndereco(new Endereco());
 		cliente.setContato(new Contato());
 		return "cadastrarCliente.xhtml?faces-redirect=true";
 	}
-	
+
 	public String atualizarCliente(Cliente cliente) {
 		this.cliente = cliente;
 		return "alterarCliente.xhtml?faces-redirect=true";
 	}
-	
-	public String visualizarCliente(Cliente cliente){
+
+	public String visualizarCliente(Cliente cliente) {
 		this.cliente = cliente;
 		return "visualizarCliente.xhtml?faces-redirect=true";
 	}
-	
+
 	public void salvar() {
 		clienteDao.salvar(cliente);
-		
+
 		cliente = new Cliente();
 		cliente.setEndereco(new Endereco());
 		cliente.setContato(new Contato());
 
 	}
-	
+
 	public void atualizar(Cliente cliente) {
 		clienteDao.atualizar(cliente);
 	}
@@ -84,12 +87,12 @@ public class ClienteController {
 
 	public List<Cliente> deletar(Cliente clienteSel) {
 		boolean deletou = false;
-		
+
 		deletou = clienteDao.deletar(clienteDao.buscar(clienteSel));
-				
-		if(deletou){
+
+		if (deletou) {
 			clientes = clienteDao.buscar();
-		} 
+		}
 		return clientes;
 	}
 
@@ -153,7 +156,6 @@ public class ClienteController {
 		this.enderecoDao = enderecoDao;
 	}
 
-
 	/**
 	 * @return the clientes
 	 */
@@ -162,7 +164,8 @@ public class ClienteController {
 	}
 
 	/**
-	 * @param clientes the clientes to set
+	 * @param clientes
+	 *            the clientes to set
 	 */
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
@@ -176,7 +179,8 @@ public class ClienteController {
 	}
 
 	/**
-	 * @param clienteDao the clienteDao to set
+	 * @param clienteDao
+	 *            the clienteDao to set
 	 */
 	public void setClienteDao(ClienteDao clienteDao) {
 		this.clienteDao = clienteDao;
@@ -190,7 +194,8 @@ public class ClienteController {
 	}
 
 	/**
-	 * @param contatoDao the contatoDao to set
+	 * @param contatoDao
+	 *            the contatoDao to set
 	 */
 	public void setContatoDao(ContatoDao contatoDao) {
 		this.contatoDao = contatoDao;

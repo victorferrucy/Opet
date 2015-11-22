@@ -14,14 +14,21 @@
 
 	<!-- enable use-expressions -->
 	<sec:http auto-config="true" use-expressions="true">
-
+		<sec:intercept-url pattern="/paginas/index.*"
+			access="permitAll" />
 		<sec:intercept-url pattern="/paginas/admin/**"
 			access="hasRole('ADMIN')" />
+
+		<sec:intercept-url pattern="/paginas/**"
+			access="hasAnyRole('ADMIN','FUNCIONARIO')" />
+
+
+
 		<sec:intercept-url pattern="/javax.faces.resource/**"
 			access="permitAll" />
 
 		<!-- access denied page -->
-		<sec:access-denied-handler error-page="/paginas/index.xhtml" />
+		<sec:access-denied-handler error-page="/paginas/padroes/acessoNegado.xhtml" />
 
 		<sec:form-login login-page="/paginas/index.xhtml" />
 		<sec:logout invalidate-session="true" delete-cookies="true"
@@ -33,6 +40,7 @@
 			user-service-ref="usuarioLoginService">
 			<sec:password-encoder hash="plaintext"></sec:password-encoder>
 		</sec:authentication-provider>
+
 	</sec:authentication-manager>
 
 </beans>

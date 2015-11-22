@@ -10,7 +10,51 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>CONFIGURAÇÕES</h1>
+	<ui:include src="../../menu.xhtml" />
+	<ui:include src="../../confirmacaoDialogo.xhtml" />
+	<ui:include src="cadastrarUsuario.xhtml" />
+	<ui:include src="atualizarUsuario.xhtml" />
+
+	<h1>Configurações</h1>
+
+	<p:commandButton id="cadastrar" type="button" value="Novo Usuario"
+		styleClass="novo" onclick="PF('cadastrarUsuario').show();" />
+
+	<h:form id="tabelaUsuario">
+		<p:dataTable id="usuarios" var="usuario"
+			value="#{usuarioController.usuarios}" styleClass="conteudo">
+			<p:column headerText="Login">
+				<h:outputText value="#{usuario.login}" />
+			</p:column>
+
+			<p:column headerText="Papel">
+				<h:outputText value="#{usuario.cargo.get(0).nomeCargo}" />
+			</p:column>
+
+			<p:column headerText="Dono">
+				<h:outputText value="#{usuario.funcionario.nome}" />
+			</p:column>
+
+			<p:column headerText="Atualizar" styleClass="acoes">
+				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
+					action="#{usuarioController.atualizarUsuario(usuario)}"
+					update=":atualizarUsuario"
+					oncomplete="PF('atualizarUsuario').show();" />
+			</p:column>
+
+			<p:column headerText="Deletar" styleClass="acoes">
+				<p:commandButton icon="ui-icon-trash" title="Deletar"
+					update="usuarios"
+					action="#{usuarioController.deletarUsuario(usuario)}">
+					<p:confirm header="Confirmação"
+						message="Você tem certeza que deseja excluir este item?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
 
 </h:body>
 </html>

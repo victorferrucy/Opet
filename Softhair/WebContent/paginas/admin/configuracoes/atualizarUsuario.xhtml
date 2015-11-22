@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<p:dialog id="atualizarUsuario" widgetVar="atualizarUsuario"
+		header="Atualizar Usuário" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
+		<h:form id="atualizarUsuarioF">
+			<h:panelGrid id="atualizarUsuarioP" columns="2">
+
+				<h:outputLabel for="Login" value="Login" />
+				<p:inputText id="Login" value="#{usuarioController.usuarioC.login}" />
+
+				<h:outputLabel for="Senha" value="Senha" />
+				<p:password id="Senha" value="#{usuarioController.usuarioC.senha}" />
+
+				<h:outputLabel for="cargos" value="Cargo" />
+				<p:selectOneMenu id="cargos"
+					value="#{usuarioController.usuarioC.cargo}"
+					converter="cargoConverter" required="true">
+					<f:selectItem noSelectionOption=""
+						itemLabel="Selecione um cargo..." />
+					<f:selectItems value="#{usuarioController.cargos}" var="cargo"
+						itemValue="#{cargo}" itemLabel="#{cargo.nomeCargo}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="atualizar" value="Atualizar"
+					action="#{usuarioController.atualizarUsuario()}"
+					oncomplete="PF('atualizarUsuario').hide()"
+					update=":tabelaUsuario:usuarios" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

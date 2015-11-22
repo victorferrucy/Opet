@@ -3,88 +3,110 @@
  */
 package softhair.controller;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
+import softhair.model.CargoSistema;
 import softhair.model.Usuario;
+import softhair.model.dao.UsuarioDao;
 
 /**
  * @author Victor Ferrucy
  *
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class UsuarioController {
-	private Usuario usuario;
-
-	@ManagedProperty("#{authenticationManager}")
-	private AuthenticationManager authManager;
+	private Usuario usuarioC;
+	private List<Usuario> usuarios;
+	private UsuarioDao usuarioDao;
+	private List<CargoSistema> cargos;
+	private CargoSistema cargo;
 
 	public UsuarioController() {
-		usuario = new Usuario();
+		usuarioC = new Usuario();
+		usuarioDao = new UsuarioDao();
+		usuarios = usuarioDao.buscar();
+		cargos = usuarioDao.buscarCargos();
+		cargo = new CargoSistema();
 	}
 
-	public String login() {
-		try {
-
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-					usuario.getLogin(), usuario.getSenha());
-			System.out.println(authManager);
-			Authentication authenticate = authManager.authenticate(usernamePasswordAuthenticationToken);
-			SecurityContextHolder.getContext().setAuthentication(authenticate);
-			return "correct";
-		} catch (final Exception e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Invalid login", "Bad Credential. Try again"));
-		}
-
-		return null;
+	public void novoUsuario() {
+		usuarioC.getCargo().add(cargo);
+		usuarioDao.salvar(usuarioC);
+		usuarioC = new Usuario();
+		usuarios = usuarioDao.buscar();
 	}
 
-	public String logout() {
-		SecurityContextHolder.clearContext();
-		usuario = new Usuario();
-		return "logout";
+	public void atualizarUsuario(Usuario usuario) {
+		usuarioC = usuario;
+	}
+
+	public void deletarUsuario(Usuario usuario) {
+		usuarioDao.deletar(usuario);
+		usuarios = usuarioDao.buscar();
 	}
 
 	/**
 	 * @return the usuario
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getUsuarioC() {
+		return usuarioC;
 	}
 
 	/**
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioC(Usuario usuarioC) {
+		this.usuarioC = usuarioC;
 	}
 
 	/**
-	 * @return the authManager
+	 * @return the usuarios
 	 */
-	public AuthenticationManager getAuthManager() {
-		return authManager;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 	/**
-	 * @param authManager
-	 *            the authManager to set
+	 * @param usuarios
+	 *            the usuarios to set
 	 */
-	public void setAuthManager(AuthenticationManager authManager) {
-		this.authManager = authManager;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	/**
+	 * @return the cargos
+	 */
+	public List<CargoSistema> getCargos() {
+		return cargos;
+	}
+
+	/**
+	 * @param cargos
+	 *            the cargos to set
+	 */
+	public void setCargos(List<CargoSistema> cargos) {
+		this.cargos = cargos;
+	}
+
+	/**
+	 * @return the cargo
+	 */
+	public CargoSistema getCargo() {
+		return cargo;
+	}
+
+	/**
+	 * @param cargo
+	 *            the cargo to set
+	 */
+	public void setCargo(CargoSistema cargo) {
+		this.cargo = cargo;
 	}
 
 }

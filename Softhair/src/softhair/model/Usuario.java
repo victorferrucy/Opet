@@ -1,6 +1,7 @@
 package softhair.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,7 +43,13 @@ public class Usuario implements Serializable {
 	private String senha;
 	@ManyToMany
 	private List<CargoSistema> cargo;
-
+	
+	public Usuario(){
+		login = "";
+		senha = "";
+		cargo = new ArrayList<CargoSistema>();
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

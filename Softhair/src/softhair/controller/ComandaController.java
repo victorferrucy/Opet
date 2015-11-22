@@ -78,6 +78,10 @@ public class ComandaController {
 		}
 	}
 
+	public String paginaInicial() {
+		return "telaInicial.xhtml?faces-redirect=true";
+	}
+
 	public String novaComanda() {
 		comanda = new Comanda();
 		servicosPrestados = new ArrayList<ServicoPrestado>();

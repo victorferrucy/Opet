@@ -12,18 +12,19 @@
 <h:body>
 
 	<ui:include src="../menu.xhtml" />
+	<ui:include src="../confirmacaoDialogo.xhtml" />
 
 	<h1>Comandas</h1>
 
 	<h:form id="cadastrarComanda">
 		<p:commandButton id="cadastrar" value="Nova Comanda"
-			action="#{comandaController.novaComanda()}" />
+			action="#{comandaController.novaComanda()}" styleClass="novo" />
 	</h:form>
 
 	<h:form id="tabelaComandas">
 
 		<p:dataTable id="comandas" value="#{comandaController.comandas}"
-			var="comanda">
+			var="comanda" styleClass="conteudo">
 
 			<p:column headerText="Código" sortBy="#{comanda.idComanda}">
 				<h:outputText value="#{comanda.idComanda}" />
@@ -50,7 +51,11 @@
 
 			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{comandaController.deletar(comanda)}" update="comandas" />
+					action="#{comandaController.deletar(comanda)}" update="comandas">
+					<p:confirm header="Confirmação"
+						message="Você tem certeza que deseja excluir este item?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
 			</p:column>
 
 		</p:dataTable>

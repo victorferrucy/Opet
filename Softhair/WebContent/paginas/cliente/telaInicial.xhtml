@@ -11,15 +11,16 @@
 </h:head>
 <h:body>
 	<ui:include src="../menu.xhtml" />
+	<ui:include src="../confirmacaoDialogo.xhtml" />
 	<h1>Clientes</h1>
 	<h:form id="cadastrarCliente">
 		<p:commandButton id="cadastrar" value="Novo Cliente"
-			action="#{clienteController.novoCliente()}" />
+			action="#{clienteController.novoCliente()}" styleClass="novo" />
 	</h:form>
 	<h:form id="tabelaClientes">
 
 		<p:dataTable id="clientes" var="cliente"
-			value="#{clienteController.buscar()}">
+			value="#{clienteController.buscar()}" styleClass="conteudo">
 			<p:column headerText="Nome">
 				<h:outputText value="#{cliente.nome}" />
 			</p:column>
@@ -48,7 +49,11 @@
 
 			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{clienteController.deletar(cliente)}" update="clientes" />
+					action="#{clienteController.deletar(cliente)}" update="clientes">
+					<p:confirm header="Confirmação"
+						message="Você tem certeza que deseja excluir este item?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
 			</p:column>
 
 		</p:dataTable>

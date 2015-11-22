@@ -31,6 +31,7 @@ public class UsuarioDao {
 
 	public Usuario salvar(Usuario usuario) {
 		try {
+			System.out.println("Salvando -------------------");
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			ss.save(usuario);
@@ -71,6 +72,9 @@ public class UsuarioDao {
 			ss = HibernateUtil.getSessionFactory().openSession();
 			tx = ss.beginTransaction();
 			usuarios = ss.createCriteria(Usuario.class).list();
+			for (Usuario u : usuarios) {
+				u.getCargo().size();
+			}
 			tx.commit();
 
 		} catch (HibernateException e) {
@@ -250,6 +254,83 @@ public class UsuarioDao {
 		}
 
 		return cargos;
+
+	}
+	
+	public List<CargoSistema> buscarCargos() {
+		List<CargoSistema> cargos;
+		cargos = new ArrayList<CargoSistema>();
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			Criteria criteria = ss.createCriteria(CargoSistema.class);
+			cargos = criteria.list();
+			tx.commit();
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+
+		} finally {
+
+			try {
+
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+
+			} catch (Throwable e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		return cargos;
+
+	}
+	
+	public CargoSistema buscarCargo(Integer idCargo) {
+		CargoSistema cargo;
+		cargo = null;
+
+		try {
+			ss = HibernateUtil.getSessionFactory().openSession();
+			tx = ss.beginTransaction();
+			Criteria criteria = ss.createCriteria(CargoSistema.class);
+			criteria.add(Restrictions.eq("idCargoSistema", idCargo));
+			cargo = (CargoSistema) criteria.uniqueResult();
+			tx.commit();
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+
+				tx.rollback();
+			}
+
+		} finally {
+
+			try {
+
+				if (ss.isOpen()) {
+
+					ss.close();
+				}
+
+			} catch (Throwable e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		return cargo;
 
 	}
 

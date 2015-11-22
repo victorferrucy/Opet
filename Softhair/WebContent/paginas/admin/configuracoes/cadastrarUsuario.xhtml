@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<p:dialog id="cadastrarUsuario" widgetVar="cadastrarUsuario"
+		header="Cadastrar Novo Usuário" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
+		<h:form id="cadastrarUsuarioF">
+			<h:panelGrid id="cadastrarUsuarioP" columns="2">
+
+				<h:outputLabel for="novoLogin" value="Login" />
+				<p:inputText id="novoLogin"
+					value="#{usuarioController.usuarioC.login}" required="true">
+				</p:inputText>
+
+				<h:outputLabel for="novaSenha" value="Senha" />
+				<p:password id="novaSenha" required="true"
+					value="#{usuarioController.usuarioC.senha}">
+				</p:password>
+
+				<h:outputLabel for="cargos" value="Cargo"  />
+				<p:selectOneMenu id="cargos" value="#{usuarioController.cargo}"
+					converter="cargoConverter" required="true">
+					<f:selectItem noSelectionOption=""
+						itemLabel="Selecione um cargo..." />
+					<f:selectItems value="#{usuarioController.cargos}" var="cargo"
+						itemValue="#{cargo}" itemLabel="#{cargo.nomeCargo}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="addButton" value="Salvar"
+					action="#{usuarioController.novoUsuario()}"
+					oncomplete="PF('cadastrarUsuario').hide()" update=":tabelaUsuario:usuarios" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

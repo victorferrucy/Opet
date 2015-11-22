@@ -69,7 +69,10 @@ public class RelatorioView {
 
 		for (ServicoPrestado sp : servicosPrestadosFuncionario) {
 			System.out.println("ID SERVIÇo " + sp.getIdServicoPrestado());
-			comissao = comissao.add(sp.getServico().getValor().multiply(sp.getServico().getComissao()));
+			BigDecimal valorComissao = new BigDecimal("0.00");
+			valorComissao = sp.getServico().getValor().multiply(sp.getServico().getComissao().divide(new BigDecimal("100")));
+			System.out.println("VALOR COMISSAO" + valorComissao);
+			comissao = comissao.add(valorComissao);
 		}
 	}
 

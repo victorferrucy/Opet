@@ -15,11 +15,11 @@
 	<h1>Alle Granato</h1>
 	<h:form id="loginF">
 		<p:panelGrid columns="1">
-			<p:inputText id="login" value="#{usuarioController.usuario.login}" />
+			<p:inputText id="login" value="#{loginView.usuario.login}" />
 			<p:watermark for="login" value="Login" id="loginW" />
-			<p:password id="senha" value="#{usuarioController.usuario.senha}" />
+			<p:password id="senha" value="#{loginView.usuario.senha}" />
 			<p:watermark for="senha" value="Senha" id="senhaW" />
-			<p:commandButton value="Entrar" action="#{usuarioController.login()}" />
+			<p:commandButton value="Entrar" action="#{loginView.login()}" />
 		</p:panelGrid>
 
 

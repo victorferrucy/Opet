@@ -42,18 +42,19 @@
 				<p:calendar id="dataInicio"
 					value="#{agendaController.horarioReservado.dataInicio}"
 					converter="calendarTimeConverter" pattern="dd/MM/yyyy H:mm"
-					minHour="8" maxHour="19">
+					minHour="9" maxHour="19">
 				</p:calendar>
 
 				<h:outputLabel for="termino" value="Término" />
 				<p:calendar id="termino"
 					value="#{agendaController.horarioReservado.dataFim}"
 					converter="calendarTimeConverter" pattern="dd/MM/yyyy H:mm"
-					minHour="8" maxHour="19">
+					minHour="9" maxHour="19">
 				</p:calendar>
 
 
-				<p:commandButton id="desmarcar" value="Desmarcar" actionListener="#{agendaController.desmarcar()}"
+				<p:commandButton id="desmarcar" value="Desmarcar"
+					actionListener="#{agendaController.desmarcar()}"
 					oncomplete="PF('agenda').update(); PF('detalhesHorario').hide();" />
 				<p:commandButton id="addButton" value="Salvar"
 					actionListener="#{agendaController.addEvent}"

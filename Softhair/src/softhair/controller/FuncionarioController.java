@@ -41,23 +41,27 @@ public class FuncionarioController {
 
 	}
 
-	public String novoFuncionario(){
+	public String paginaInicial() {
+		return "telaInicial.xhtml?faces-redirect=true";
+	}
+
+	public String novoFuncionario() {
 		funcionario = new Funcionario();
 		funcionario.setContato(new Contato());
 		funcionario.setEndereco(new Endereco());
 		return "cadastrarFuncionario.xhtml?faces-redirect=true";
 	}
-	
+
 	public String atualizarFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 		return "alterarFuncionario.xhtml?faces-redirect=true";
 	}
-	
-	public String visualizarFuncionario(Funcionario funcionario){
+
+	public String visualizarFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 		return "visualizarFuncionario.xhtml?faces-redirect=true";
 	}
-	
+
 	public void salvar() {
 		funcionarioDao.salvar(funcionario);
 		setFuncionario(new Funcionario());
@@ -121,11 +125,13 @@ public class FuncionarioController {
 	}
 
 	/**
-	 * @param enderecoDao the enderecoDao to set
+	 * @param enderecoDao
+	 *            the enderecoDao to set
 	 */
 	public void setEnderecoDao(EnderecoDao enderecoDao) {
 		this.enderecoDao = enderecoDao;
 	}
+
 	/**
 	 * @return the funcionario
 	 */
@@ -134,7 +140,8 @@ public class FuncionarioController {
 	}
 
 	/**
-	 * @param funcionario the funcionario to set
+	 * @param funcionario
+	 *            the funcionario to set
 	 */
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
@@ -148,7 +155,8 @@ public class FuncionarioController {
 	}
 
 	/**
-	 * @param funcionarios the funcionarios to set
+	 * @param funcionarios
+	 *            the funcionarios to set
 	 */
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
@@ -162,7 +170,8 @@ public class FuncionarioController {
 	}
 
 	/**
-	 * @param funcionarioDao the funcionarioDao to set
+	 * @param funcionarioDao
+	 *            the funcionarioDao to set
 	 */
 	public void setFuncionarioDao(FuncionarioDao funcionarioDao) {
 		this.funcionarioDao = funcionarioDao;
@@ -176,7 +185,8 @@ public class FuncionarioController {
 	}
 
 	/**
-	 * @param contatoDao the contatoDao to set
+	 * @param contatoDao
+	 *            the contatoDao to set
 	 */
 	public void setContatoDao(ContatoDao contatoDao) {
 		this.contatoDao = contatoDao;
