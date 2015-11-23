@@ -13,11 +13,13 @@
 
 <h:body>
 	<ui:include src="../menu.xhtml" />
+
 	<h:form id="cadastrarClienteF">
-
-		<p:commandButton value="Voltar"
-			action="#{funcionarioController.paginaInicial()}" />
-
+		<h:panelGrid columns="2">
+			<h1>Cadastrar Cliente</h1>
+			<p:commandButton value="Voltar"
+				action="#{funcionarioController.paginaInicial()}" />
+		</h:panelGrid>
 		<p:fieldset legend="Informações" styleClass="grupo-form">
 			<p:panelGrid id="infomacoes" columns="2">
 				<p:outputLabel value="nome" />

@@ -11,13 +11,14 @@
 </h:head>
 <h:body>
 	<ui:include src="../../menu.xhtml" />
-
-	<h1>Atualizar Fornecedor</h1>
-
-	<p:commandButton value="Voltar"
-		action="#{fornecedorController.paginaInicial()}" />
+	<p:growl id="sucesso" />
 	<h:form id="alterarFornecedorF">
 
+		<p:panelGrid columns="2">
+			<h1>Atualizar Fornecedor</h1>
+			<p:commandButton value="Voltar"
+				action="#{fornecedorController.paginaInicial()}" />
+		</p:panelGrid>
 		<p:fieldset legend="Informações" style="margin: 10px 0;">
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Nome" />
@@ -25,7 +26,7 @@
 					value="#{fornecedorController.fornecedor.nome}" />
 
 				<p:outputLabel value="CNPJ" />
-				<p:inputText id="cnpj" maxlength="20"
+				<p:inputMask mask="99.999.999/9999-99" id="cnpj" maxlength="14"
 					value="#{fornecedorController.fornecedor.cnpj}" />
 			</p:panelGrid>
 		</p:fieldset>
@@ -82,7 +83,8 @@
 
 
 		<p:commandButton value="Atualizar"
-			action="#{fornecedorController.atualizar(fornecedorController.fornecedor)}">
+			action="#{fornecedorController.atualizar(fornecedorController.fornecedor)}"
+			update=":sucesso">
 		</p:commandButton>
 
 	</h:form>

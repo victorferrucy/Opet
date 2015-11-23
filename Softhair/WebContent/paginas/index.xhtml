@@ -12,18 +12,20 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet library="css" name="main.css" />
-	<h1>Alle Granato</h1>
-	<h:form id="loginF">
-		<p:panelGrid columns="1">
-			<p:inputText id="login" value="#{loginView.usuario.login}" />
-			<p:watermark for="login" value="Login" id="loginW" />
-			<p:password id="senha" value="#{loginView.usuario.senha}" />
-			<p:watermark for="senha" value="Senha" id="senhaW" />
-			<p:commandButton value="Entrar" action="#{loginView.login()}" />
-		</p:panelGrid>
 
+	<div class="centralizar-login">
 
+		<span class="logo" >Alle Granato</span>
 
-	</h:form>
+		<h:form id="loginF">
+			<p:panelGrid columns="1" styleClass="centralizar-login">
+				<p:inputText id="login" value="#{loginView.usuario.login}" />
+				<p:watermark for="login" value="Login" id="loginW" />
+				<p:password id="senha" value="#{loginView.usuario.senha}" />
+				<p:watermark for="senha" value="Senha" id="senhaW" />
+				<p:commandButton value="Entrar" action="#{loginView.login()}" />
+			</p:panelGrid>
+		</h:form>
+	</div>
 </h:body>
 </html>

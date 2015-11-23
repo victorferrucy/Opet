@@ -6,8 +6,10 @@ package softhair.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import softhair.model.Contato;
 import softhair.model.Endereco;
@@ -42,41 +44,45 @@ public class FornecedorController {
 		setEnderecoDao(new EnderecoDao());
 		contatoDao = new ContatoDao();
 	}
-	
+
 	public String paginaInicial() {
 		return "telaInicial.xhtml?faces-redirect=true";
 	}
-	
-	public String novoFornecedor(){
+
+	public String novoFornecedor() {
 		fornecedor = new Fornecedor();
 		fornecedor.setContato(new Contato());
 		fornecedor.setEndereco(new Endereco());
 		return "cadastrarFornecedor.xhtml?faces-redirect=true";
 	}
-	
+
 	public String atualizarFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 		return "alterarFornecedor.xhtml?faces-redirect=true";
 	}
-	
-	public String visualizarFornecedor(Fornecedor fornecedor){
+
+	public String visualizarFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 		return "visualizarFornecedor.xhtml?faces-redirect=true";
 	}
-	
+
 	public void salvar() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+
 		fornecedorDao.salvar(fornecedor);
-		
+
 		fornecedor = new Fornecedor();
 		fornecedor.setEndereco(new Endereco());
 		fornecedor.setContato(new Contato());
 
+		fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+
 	}
 
 	public void atualizar(Fornecedor fornecedor) {
-		System.out.println(fornecedor.getEndereco().toString());
+		FacesContext fc = FacesContext.getCurrentInstance();
 		fornecedorDao.atualizar(fornecedor);
-
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public List<Fornecedor> buscar() {
@@ -87,13 +93,16 @@ public class FornecedorController {
 	}
 
 	public List<Fornecedor> deletar(Fornecedor fornecedor) {
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
 		boolean deletou;
-		
+
 		deletou = fornecedorDao.deletar(fornecedor);
-		
-		if(deletou){
+
+		if (deletou) {
 			fornecedores = fornecedorDao.buscar();
 		}
+		fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
 		
 		return fornecedores;
 
@@ -111,7 +120,7 @@ public class FornecedorController {
 	 *            the cliente to set
 	 */
 	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor= fornecedor;
+		this.fornecedor = fornecedor;
 	}
 
 	/**
@@ -152,7 +161,8 @@ public class FornecedorController {
 	}
 
 	/**
-	 * @param enderecoDao the enderecoDao to set
+	 * @param enderecoDao
+	 *            the enderecoDao to set
 	 */
 	public void setEnderecoDao(EnderecoDao enderecoDao) {
 		this.enderecoDao = enderecoDao;

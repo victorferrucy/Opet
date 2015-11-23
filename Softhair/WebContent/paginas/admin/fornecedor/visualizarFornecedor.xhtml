@@ -11,8 +11,13 @@
 </h:head>
 <h:body>
 	<ui:include src="../../menu.xhtml" />
-	<p:commandButton value="Voltar"
-		action="#{fornecedorController.paginaInicial()}" />
+
+	<p:panelGrid columns="2">
+		<h1>Visualizar Fornecedor</h1>
+		<p:commandButton value="Voltar"
+			action="#{fornecedorController.paginaInicial()}" />
+	</p:panelGrid>
+
 	<p:fieldset legend="Informações" style="margin: 10px 0;">
 		<p:panelGrid columns="2">
 			<p:outputLabel value="Nome" />

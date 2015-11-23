@@ -11,32 +11,31 @@
 </h:head>
 <h:body>
 
-	<ui:include src="../../menu.xhtml" />
-	
-	<h:form id="atualizarServicoF">
+	<p:dialog id="visualizarServicoD" widgetVar="visualizarServicoD"
+		header="Visualizar Serviço" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
 
-		<p:panelGrid id="atualizarServico" columns="2">
+		<h:form id="visualizarServicoF">
 
-			<p:outputLabel value="Nome" />
-			<p:outputLabel id="nome" maxlength="30"
-				value="#{servicoController.servico.nome}" />
+			<p:panelGrid id="visualizarServico" columns="2">
 
-			<p:outputLabel value="Descrição do serviço" />
-			<p:outputLabel id="descricao"
-				value="#{servicoController.servico.descricao}" />
+				<p:outputLabel value="Nome" />
+				<p:outputLabel id="nome" maxlength="30"
+					value="#{servicoController.servico.nome}" />
 
-			<p:outputLabel value="Valor" />
-			<p:outputLabel id="valor" value="#{servicoController.servico.valor}" />
+				<p:outputLabel value="Descrição do serviço" />
+				<p:outputLabel id="descricao"
+					value="#{servicoController.servico.descricao}" />
 
-			<p:outputLabel value="Comissão" />
-			<p:outputLabel id="comissao"
-				value="#{servicoController.servico.comissao}" />
+				<p:outputLabel value="Valor" />
+				<p:outputLabel id="valor" value="#{servicoController.valorFormatado}" />
 
-		</p:panelGrid>
-	
-		<p:commandButton value="Voltar"
-			action="#{servicoController.voltarPagina()}" />
+				<p:outputLabel value="Comissão" />
+				<p:outputLabel id="comissao"
+					value="#{servicoController.comissaoFormatado}" />
 
-	</h:form>
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>

@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'Darleston'; /*a name to be used later*/
+	src: url("#{resource['fonts/Darleston.otf']}");
+}
+
 body {
 	width: 90%;
 	margin: auto;
@@ -9,6 +14,29 @@ h1, h2, .ui-outputlabel {
 
 h1 {
 	font-family: Helvetica, Arial, sans-serif;
+}
+
+.logo {
+	font-size: 150px;
+	font-family: Darleston, Helvetica;
+	color: #444444;
+}
+
+.centralizar-login {
+	border-radius: 8px;
+	margin: auto;
+	margin-top: 5%;
+	text-align: center;
+	width: 50%;
+}
+
+.centralizar-login input {
+	height: 30px;
+	width: 97%;
+}
+
+.centralizar-login button {
+	width: 100%;
 }
 
 form .menu {
@@ -26,17 +54,6 @@ form .menu ul {
 	margin: 10px 0;
 }
 
-.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
-	border: none !important;
-}
-
-.ui-outputlabel {
-	font-weight: bold;
-}
-
-.ui-widget-content .ui-panelgrid-cell .ui-inputfield {
-	font-weight: normal;
-}
 
 .acoes {
 	text-align: center;
@@ -48,4 +65,33 @@ form .menu ul {
 
 .conteudo {
 	margin-top: 1em
+}
+
+.msg-relatorio{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.msg-relatorio .ui-outputlabel{
+	font-size: 25px !important;
+	
+}
+.valor-relatorio{
+	font-size: 30px;
+	color: #FF6900;
+	text-align: center;
+	
+	
+}
+
+.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
+	border: none !important;
+}
+
+.ui-outputlabel {
+	font-weight: bold;
+}
+
+.ui-widget-content .ui-panelgrid-cell .ui-inputfield {
+	font-weight: normal;
 }

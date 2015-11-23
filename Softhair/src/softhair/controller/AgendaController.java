@@ -99,7 +99,12 @@ public class AgendaController implements Serializable {
 
 		return calendar.getTime();
 	}
-
+	
+	public void dateSelect(SelectEvent  evt){
+		horarioReservado.setDataFim((Calendar)evt.getObject());
+		
+	}
+	
 	public void addEvent(ActionEvent actionEvent) {
 		event.setStartDate(horarioReservado.getDataInicio().getTime());
 		event.setEndDate(horarioReservado.getDataFim().getTime());

@@ -12,11 +12,15 @@
 <h:body>
 	<ui:include src="../../menu.xhtml" />
 
-	<h1>Atualizar Funcionario</h1>
+
 
 	<h:form id="alterarFuncionarioF">
-		<p:commandButton value="Voltar"
-			action="#{funcionarioController.paginaInicial()}" />
+
+		<p:panelGrid columns="2">
+			<h1>Atualizar Funcionário</h1>
+			<p:commandButton value="Voltar"
+				action="#{funcionarioController.paginaInicial()}" />
+		</p:panelGrid>
 		<p:fieldset legend="Informações" styleClass="grupo-form">
 			<p:panelGrid id="informacoes" columns="2">
 				<p:outputLabel value="nome" />

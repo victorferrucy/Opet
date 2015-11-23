@@ -4,8 +4,11 @@
 package softhair.controller;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -35,28 +38,44 @@ public class RelatorioView {
 	private List<Funcionario> funcionarios;
 	private FuncionarioDao funcionarioDao;
 
+	private String msgReceita;
+	private String msgComissao;
+	private String valorFormatado;
+
 	public RelatorioView() {
-		// Receita
+		setValorFormatado("");
 		comandaDao = new ComandaDao();
 		dataInicial = Calendar.getInstance();
 		dataFinal = Calendar.getInstance();
 		dataFinal.set(Calendar.MONTH, dataFinal.get(Calendar.MONTH) + 1);
-		receitaMensal = comandaDao.buscarReceitaPeriodo(dataInicial, dataFinal);
+		// Receita
 
+		receitaMensal = comandaDao.buscarReceitaPeriodo(dataInicial, dataFinal);
+		msgReceita = "";
 		// Comissao
 		servicoPrestadoDao = new ServicoPrestadoDao();
 		funcionarioDao = new FuncionarioDao();
 		funcionarios = funcionarioDao.buscar();
 		comissao = new BigDecimal("0.00");
+		msgComissao = "";
 
 	}
 
 	public void calcularReceitaMensal() {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("PT", "BR"));
+
 		receitaMensal = comandaDao.buscarReceitaPeriodo(dataInicial, dataFinal);
 
+		setMsgReceita("A receita entre o período " + sdf.format(dataInicial.getTime()) + " e "
+				+ sdf.format(dataFinal.getTime()) + " é de:");
+
 		if (receitaMensal == null) {
-			System.out.println("null RECEIETA");
 			receitaMensal = new BigDecimal("0.00");
+			setValorFormatado(nf.format(receitaMensal));
+		} else {
+			setValorFormatado(nf.format(receitaMensal));
 		}
 	}
 
@@ -68,12 +87,19 @@ public class RelatorioView {
 		comissao = new BigDecimal("0.00");
 
 		for (ServicoPrestado sp : servicosPrestadosFuncionario) {
-			System.out.println("ID SERVIÇo " + sp.getIdServicoPrestado());
 			BigDecimal valorComissao = new BigDecimal("0.00");
-			valorComissao = sp.getServico().getValor().multiply(sp.getServico().getComissao().divide(new BigDecimal("100")));
-			System.out.println("VALOR COMISSAO" + valorComissao);
+			valorComissao = sp.getServico().getValor()
+					.multiply(sp.getServico().getComissao().divide(new BigDecimal("100")));
 			comissao = comissao.add(valorComissao);
 		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("PT", "BR"));
+
+		setMsgComissao("A comissão do funcionário " + funcionario.getNome() + " entre o período "
+				+ sdf.format(dataInicial.getTime()) + " e " + sdf.format(dataFinal.getTime()) + " é de:");
+		valorFormatado = nf.format(comissao);
+
 	}
 
 	/**
@@ -164,6 +190,51 @@ public class RelatorioView {
 	 */
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	/**
+	 * @return the msgReceita
+	 */
+	public String getMsgReceita() {
+		return msgReceita;
+	}
+
+	/**
+	 * @param msgReceita
+	 *            the msgReceita to set
+	 */
+	public void setMsgReceita(String msgReceita) {
+		this.msgReceita = msgReceita;
+	}
+
+	/**
+	 * @return the msgComissao
+	 */
+	public String getMsgComissao() {
+		return msgComissao;
+	}
+
+	/**
+	 * @param msgComissao
+	 *            the msgComissao to set
+	 */
+	public void setMsgComissao(String msgComissao) {
+		this.msgComissao = msgComissao;
+	}
+
+	/**
+	 * @return the valorFormatado
+	 */
+	public String getValorFormatado() {
+		return valorFormatado;
+	}
+
+	/**
+	 * @param valorFormatado
+	 *            the valorFormatado to set
+	 */
+	public void setValorFormatado(String valorFormatado) {
+		this.valorFormatado = valorFormatado;
 	}
 
 }

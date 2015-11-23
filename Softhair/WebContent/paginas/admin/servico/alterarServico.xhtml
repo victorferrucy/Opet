@@ -10,32 +10,37 @@
 <h:head>
 </h:head>
 <h:body>
+	<p:dialog id="atualizarServicoD" widgetVar="atualizarServicoD"
+		header="Atualizar Serviço" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
+		<h:form id="atualizarServicoF">
 
-	<ui:include src="../../menu.xhtml" />
-	<h:form id="atualizarServicoF">
-	
-		<p:panelGrid id="atualizarServico" columns="2">
+			<p:panelGrid id="atualizarServico" columns="2">
 
-			<p:outputLabel value="Nome" />
-			<p:inputText id="nome" maxlength="30"
-				value="#{servicoController.servico.nome}" />
+				<p:outputLabel value="Nome" />
+				<p:inputText id="nome" maxlength="30"
+					value="#{servicoController.servico.nome}" />
 
-			<p:outputLabel value="Descrição do serviço" />
-			<p:inputTextarea id="descricao"
-				value="#{servicoController.servico.descricao}" />
+				<p:outputLabel value="Descrição do serviço" />
+				<p:inputTextarea id="descricao"
+					value="#{servicoController.servico.descricao}" />
 
-			<p:outputLabel value="Valor" />
-			<p:inputMask id="valor" value="#{servicoController.servico.valor}" />
+				<p:outputLabel value="Valor" />
+				<p:inputMask id="valor" value="#{servicoController.servico.valor}"  disabled="true"/>
 
-			<p:outputLabel value="Comissão" />
-			<p:inputMask id="comissao"
-				value="#{servicoController.servico.comissao}" />
+				<p:outputLabel value="Comissão" />
+				<p:spinner id="comissao"
+					value="#{servicoController.servico.comissao}" stepFactor="0.5"
+					min="0" max="100" />
 
-		</p:panelGrid>
+			</p:panelGrid>
 
-		<p:commandButton value="Atualizar"
-			action="#{servicoController.atualizar(servicoController.servico)}" />
+			<p:commandButton value="Atualizar"
+				action="#{servicoController.atualizar(servicoController.servico)}"
+				oncomplete="PF('atualizarServicoD').hide()"
+				update=":tabelaServicos:servicos" />
 
-	</h:form>
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>

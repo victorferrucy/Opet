@@ -11,32 +11,39 @@
 </h:head>
 <h:body>
 
-	<ui:include src="../../menu.xhtml" />
-	<h:form id="cadastrarServicoF">
-	
-		<p:panelGrid id="cadastrarServico" columns="2">
+	<p:dialog id="cadastrarServicoD" widgetVar="cadastrarServicoD"
+		header="Cadastrar Novo Serviço" resizable="false" modal="true"
+		showEffect="clip" hideEffect="clip">
+		<h:form id="cadastrarServicoF">
 
-			<p:outputLabel value="Nome" />
-			<p:inputText id="nome" maxlength="30"
-				value="#{servicoController.servico.nome}" />
+			<p:panelGrid id="cadastrarServico" columns="2">
 
-			<p:outputLabel value="Descrição do serviço" />
-			<p:inputTextarea id="descricao"
-				value="#{servicoController.servico.descricao}" />
+				<p:outputLabel value="Nome" />
+				<p:inputText id="nome" maxlength="30"
+					value="#{servicoController.servico.nome}" />
 
-			<p:outputLabel value="Valor" />
-			<p:inputMask id="valor" value="#{servicoController.servico.valor}" />
+				<p:outputLabel value="Descrição do serviço" />
+				<p:inputTextarea id="descricao" maxlength="70"
+					value="#{servicoController.servico.descricao}" />
 
-			<p:outputLabel value="Comissão" />
-			<p:inputMask id="comissao" value="#{servicoController.servico.comissao}" />
+				<p:outputLabel value="Valor" />
+				<p:inputMask id="valor" value="#{servicoController.servico.valor}" />
 
-		</p:panelGrid>
+				<p:outputLabel value="Comissão (%)" />
+				<p:spinner id="comissao"
+					value="#{servicoController.servico.comissao}" stepFactor="0.5"
+					min="0" max="100" />
 
-		<p:commandButton value="Cadastrar"
-			action="#{servicoController.salvar()}" />
-			
-			
+			</p:panelGrid>
 
-	</h:form>
+			<p:commandButton value="Cadastrar"
+				action="#{servicoController.salvar()}"
+				oncomplete="PF('cadastrarServicoD').hide()"
+				update=":tabelaServicos:servicos" />
+
+
+
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>

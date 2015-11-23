@@ -12,10 +12,14 @@
 
 <h:body>
 	<ui:include src="../menu.xhtml" />
-	<h:form>
-		<p:commandButton value="Voltar"
-			action="#{funcionarioController.paginaInicial()}" />
-	</h:form>
+
+	<h:panelGrid columns="2">
+		<h1>Visualizar Cliente</h1>
+		<h:form>
+			<p:commandButton value="Voltar"
+				action="#{funcionarioController.paginaInicial()}" />
+		</h:form>
+	</h:panelGrid>
 	<p:fieldset legend="Informações" styleClass="grupo-form">
 		<p:panelGrid id="informacoes" columns="2">
 			<p:outputLabel value="Nome" />

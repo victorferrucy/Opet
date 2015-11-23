@@ -3,8 +3,13 @@
  */
 package softhair.controller;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,6 +30,9 @@ public class ServicoController {
 	private List<Servico> servicos;
 	private ServicoDao servicoDao;
 
+	private String valorFormatado;
+	private String comissaoFormatado;
+
 	public ServicoController() {
 		servico = new Servico();
 		servicoDao = new ServicoDao();
@@ -34,19 +42,35 @@ public class ServicoController {
 		return "telaInicial.xhtml?faces-redirect=true";
 	}
 
-	public String novoServico() {
+	public void novoServico() {
 		servico = new Servico();
-		return "cadastrarServico.xhtml?faces-redirect=true";
 	}
 
-	public String atualizarServico(Servico servico) {
+	public void atualizarServico(Servico servico) {
 		this.servico = servico;
-		return "alterarServico.xhtml?faces-redirect=true";
 	}
 
-	public String visualizarServico(Servico servico) {
+	public void visualizarServico(Servico servico) {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("PT", "BR"));
+		NumberFormat nfp = new DecimalFormat("0.##%", DecimalFormatSymbols.getInstance(new Locale("PT", "BR")));
 		this.servico = servico;
-		return "visualizarServico.xhtml?faces-redirect=true";
+
+		valorFormatado = nf.format(servico.getValor());
+		comissaoFormatado = nfp.format(servico.getComissao().divide(new BigDecimal("100")));
+
+	}
+
+	public String formatarComissao(BigDecimal comissao) {
+
+		NumberFormat nfp = new DecimalFormat("0.##%", DecimalFormatSymbols.getInstance(new Locale("PT", "BR")));
+		comissaoFormatado = nfp.format(comissao.divide(new BigDecimal("100")));
+		return comissaoFormatado;
+	}
+
+	public String formatarValor(BigDecimal valor) {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("PT", "BR"));
+		valorFormatado = nf.format(valor.doubleValue());
+		return valorFormatado;
 	}
 
 	public String voltarPagina() {
@@ -117,6 +141,36 @@ public class ServicoController {
 	 */
 	public void setServicoDao(ServicoDao servicoDao) {
 		this.servicoDao = servicoDao;
+	}
+
+	/**
+	 * @return the valorFormatado
+	 */
+	public String getValorFormatado() {
+		return valorFormatado;
+	}
+
+	/**
+	 * @param valorFormatado
+	 *            the valorFormatado to set
+	 */
+	public void setValorFormatado(String valorFormatado) {
+		this.valorFormatado = valorFormatado;
+	}
+
+	/**
+	 * @return the comissaoFormatado
+	 */
+	public String getComissaoFormatado() {
+		return comissaoFormatado;
+	}
+
+	/**
+	 * @param comissaoFormatado
+	 *            the comissaoFormatado to set
+	 */
+	public void setComissaoFormatado(String comissaoFormatado) {
+		this.comissaoFormatado = comissaoFormatado;
 	}
 
 }

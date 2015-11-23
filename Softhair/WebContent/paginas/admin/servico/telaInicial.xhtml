@@ -13,12 +13,16 @@
 
 	<ui:include src="../../menu.xhtml" />
 	<ui:include src="../../confirmacaoDialogo.xhtml" />
+	<ui:include src="cadastrarServico.xhtml" />
+	<ui:include src="alterarServico.xhtml" />
+	<ui:include src="visualizarServico.xhtml" />
 
 	<h1>Serviços</h1>
 
 	<h:form id="cadastrarServiço">
 		<p:commandButton id="cadastrar" value="Novo Serviço"
-			action="#{servicoController.novoServico()}" styleClass="novo" />
+			styleClass="novo" action="#{servicoController.novoServico()}"
+			update=":cadastrarServicoD"  oncomplete="PF('cadastrarServicoD').show()" />
 	</h:form>
 
 	<h:form id="tabelaServicos">
@@ -34,24 +38,27 @@
 				<h:outputText value="#{servico.descricao}" />
 			</p:column>
 
-			<p:column headerText="Valor da comissão">
-				<h:outputText value="#{servico.comissao}" />
+			<p:column headerText="Valor da comissão" >
+				<h:outputText value="#{servicoController.formatarComissao(servico.comissao)}" />
 			</p:column>
 
 			<p:column headerText="Valor">
-				<h:outputText value="#{servico.valor}" />
+				<h:outputText value="#{servicoController.formatarValor(servico.valor)}" />
 			</p:column>
 
 			<p:column headerText="Detalhes" styleClass="acoes">
 				<p:commandButton icon="ui-icon-contact" title="Detalhar"
-					action="#{servicoController.visualizarServico(servico)}">
-					<f:param name="i" value="3" />
+					action="#{servicoController.visualizarServico(servico)}"
+					oncomplete="PF('visualizarServicoD').show()"
+					update=":visualizarServicoD">
 				</p:commandButton>
 			</p:column>
 
 			<p:column headerText="Atualizar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
-					action="#{servicoController.atualizarServico(servico)}" />
+					action="#{servicoController.atualizarServico(servico)}"
+					oncomplete="PF('atualizarServicoD').show()"
+					update=":atualizarServicoD" />
 			</p:column>
 
 			<p:column headerText="Deletar" styleClass="acoes">

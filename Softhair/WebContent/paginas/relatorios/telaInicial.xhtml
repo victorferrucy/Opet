@@ -17,25 +17,29 @@
 	<p:tabView orientation="left">
 		<p:tab title="Receita">
 			<h:form id="receitaF">
-				<p:panelGrid columns="2" cellpadding="10">
-
+				<p:panelGrid columns="4" cellpadding="10">
+					<p:outputLabel value="Período" />
 					<p:calendar id="dataInicialR" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
-					</p:calendar>
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}" />
 
 
 					<p:calendar id="dataFinalR" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataFinal}">
-					</p:calendar>
+						yearRange="c-5:c" value="#{relatorioview.dataFinal}" />
 
 					<p:commandButton action="#{relatorioview.calcularReceitaMensal()}"
-						update="receitaMensal" value="Consultar"></p:commandButton>
+						update="msgReceita receitaMensal" value="Consultar" />
 
-					<h:outputText id="receitaMensal"
-						value="#{relatorioview.receitaMensal.toString()}" />
+
 				</p:panelGrid>
+				<p:panelGrid columns="1" cellpadding="10" styleClass="msg-relatorio">
+					<p:outputLabel id="msgReceita" value="#{relatorioview.msgReceita}" />
+					<h:outputText id="receitaMensal"
+						value="#{relatorioview.valorFormatado}"
+						styleClass="valor-relatorio" />
+				</p:panelGrid>
+
 			</h:form>
 		</p:tab>
 		<p:tab title="Comissões">
@@ -50,24 +54,29 @@
 							itemLabel="#{funcionario.nome}" />
 
 					</p:selectOneMenu>
-
+				</p:panelGrid>
+				<p:panelGrid columns="4" cellpadding="10">
+				<p:outputLabel value="Período" />
 					<p:calendar id="dataInicialC" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
-					</p:calendar>
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}" />
 
 
 					<p:calendar id="dataFinalC" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataFinal}">
-					</p:calendar>
+						yearRange="c-5:c" value="#{relatorioview.dataFinal}" />
 
 					<p:commandButton
 						action="#{relatorioview.calcularComissaoFuncionario()}"
-						update="comissaoFuncionario" value="Consultar"></p:commandButton>
+						update="msgComissao comissaoFuncionario" value="Consultar" />
 
+				</p:panelGrid>
+				<p:panelGrid columns="1" cellpadding="10" styleClass="msg-relatorio">
+					<p:outputLabel id="msgComissao"
+						value="#{relatorioview.msgComissao}" />
 					<h:outputText id="comissaoFuncionario"
-						value="#{relatorioview.comissao.doubleValue()}" />
+						value="#{relatorioview.valorFormatado}"
+						styleClass="valor-relatorio" />
 				</p:panelGrid>
 			</h:form>
 		</p:tab>

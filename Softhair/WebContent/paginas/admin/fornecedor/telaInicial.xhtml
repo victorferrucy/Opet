@@ -15,11 +15,13 @@
 	<h1>Fornecedores</h1>
 
 	<h:form id="cadastrarFornecedor">
+		<p:growl id="sucesso" />
 		<p:commandButton id="cadastrar" value="Novo Fornecedor"
 			action="#{fornecedorController.novoFornecedor()}" styleClass="novo" />
 	</h:form>
 
 	<h:form id="tabelaFornecedores">
+
 
 		<p:dataTable id="fornecedores" var="fornecedor"
 			value="#{fornecedorController.buscar()}" styleClass="conteudo">
@@ -53,8 +55,9 @@
 			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
 					action="#{fornecedorController.deletar(fornecedor)}"
-					update="fornecedores">
-					<p:confirm header="Confirmação" message="Você tem certeza que deseja excluir este item?"
+					update="fornecedores :cadastrarFornecedor:sucesso">
+					<p:confirm header="Confirmação"
+						message="Você tem certeza que deseja excluir este item?"
 						icon="ui-icon-alert" />
 				</p:commandButton>
 			</p:column>

@@ -13,8 +13,11 @@
 	<ui:include src="../../menu.xhtml" />
 
 	<h:form>
-		<p:commandButton value="Voltar"
-			action="#{funcionarioController.paginaInicial()}" />
+		<p:panelGrid columns="2">
+			<h1>Visualizar Funcionário</h1>
+			<p:commandButton value="Voltar"
+				action="#{funcionarioController.paginaInicial()}" />
+		</p:panelGrid>
 	</h:form>
 
 	<p:panelGrid id="visualizarFuncionario" columns="2"
