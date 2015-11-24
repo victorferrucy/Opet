@@ -1,5 +1,5 @@
 @font-face {
-	font-family: 'Darleston'; /*a name to be used later*/
+	font-family: 'Darleston'; 
 	src: url("#{resource['fonts/Darleston.otf']}");
 }
 
@@ -16,6 +16,7 @@ h1 {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+/* Tela Login */
 .logo {
 	font-size: 150px;
 	font-family: Darleston, Helvetica;
@@ -30,14 +31,72 @@ h1 {
 	width: 50%;
 }
 
-.centralizar-login input {
+.centralizar-login .input-login {
+	border: none;
+	border-bottom: 1px solid #444;
+	color: #444;
+	height: 30px;
+	width: 97%;
+	height: 30px;
+}
+
+.centralizar-login .input-login:HOVER {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #444;
 	height: 30px;
 	width: 97%;
 }
 
-.centralizar-login button {
+.centralizar-login .input-login:ACTIVE {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #444;
+	height: 30px;
+	width: 97%;
+}
+
+.centralizar-login .input-login:FOCUS {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #444;
+	height: 30px;
+	width: 97%;
+}
+
+.centralizar-login .botao-login {
+	border: 1px solid rgb(68, 68, 68);
+	color: rgb(68, 68, 68);
+	border-radius: 2px;
 	width: 100%;
 }
+
+.centralizar-login .botao-login:HOVER {
+	background: none; border : 1px solid rgb( 68, 68, 68);
+	color: rgb(68, 68, 68);
+	border-radius: 2px;
+	width: 100%;
+	border: 1px solid rgb(68, 68, 68);
+}
+
+.centralizar-login .botao-login:ACTIVE {
+	background: none;
+	border: 1px solid rgb(68, 68, 68);
+	color: rgb(68, 68, 68);
+	border-radius: 2px;
+	width: 100%;
+}
+
+.centralizar-login .botao-login:FOCUS {
+	background: none;
+	border: 1px solid rgb(68, 68, 68);
+	color: rgb(68, 68, 68);
+	border-radius: 2px;
+	width: 100%;
+}
+
+
+/* Menu */
 
 form .menu {
 	background: none;
@@ -54,7 +113,6 @@ form .menu ul {
 	margin: 10px 0;
 }
 
-
 .acoes {
 	text-align: center;
 }
@@ -67,21 +125,19 @@ form .menu ul {
 	margin-top: 1em
 }
 
-.msg-relatorio{
+.msg-relatorio {
 	margin-top: 30px;
 	text-align: center;
 }
 
-.msg-relatorio .ui-outputlabel{
+.msg-relatorio .ui-outputlabel {
 	font-size: 25px !important;
-	
 }
-.valor-relatorio{
+
+.valor-relatorio {
 	font-size: 30px;
 	color: #FF6900;
 	text-align: center;
-	
-	
 }
 
 .ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {

@@ -21,7 +21,10 @@
 					<p:outputLabel value="Período" />
 					<p:calendar id="dataInicialR" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataInicial}" />
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
+						<p:ajax event="dateSelect" listener="#{relatorioview.dateSelect}"
+							update="dataFinalR" />
+					</p:calendar>
 
 
 					<p:calendar id="dataFinalR" converter="calendarConverter"
@@ -48,7 +51,8 @@
 
 					<p:outputLabel value="Funcionario" />
 					<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
-						value="#{relatorioview.funcionario}" required="true">
+						value="#{relatorioview.funcionario}" required="true" filter="true"
+						filterMatchMode="startsWith">
 						<f:selectItems value="#{relatorioview.funcionarios}"
 							var="funcionario" itemValue="#{funcionario}"
 							itemLabel="#{funcionario.nome}" />
@@ -56,10 +60,13 @@
 					</p:selectOneMenu>
 				</p:panelGrid>
 				<p:panelGrid columns="4" cellpadding="10">
-				<p:outputLabel value="Período" />
+					<p:outputLabel value="Período" />
 					<p:calendar id="dataInicialC" converter="calendarConverter"
 						navigator="true" pattern="dd/MM/yyyy" showOn="button"
-						yearRange="c-5:c" value="#{relatorioview.dataInicial}" />
+						yearRange="c-5:c" value="#{relatorioview.dataInicial}">
+						<p:ajax event="dateSelect" listener="#{relatorioview.dateSelect}"
+							update="dataFinalC" />
+					</p:calendar>
 
 
 					<p:calendar id="dataFinalC" converter="calendarConverter"

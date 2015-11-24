@@ -13,6 +13,8 @@ import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.SelectEvent;
+
 import softhair.model.Funcionario;
 import softhair.model.ServicoPrestado;
 import softhair.model.dao.ComandaDao;
@@ -48,8 +50,8 @@ public class RelatorioView {
 		dataInicial = Calendar.getInstance();
 		dataFinal = Calendar.getInstance();
 		dataFinal.set(Calendar.MONTH, dataFinal.get(Calendar.MONTH) + 1);
+		
 		// Receita
-
 		receitaMensal = comandaDao.buscarReceitaPeriodo(dataInicial, dataFinal);
 		msgReceita = "";
 		// Comissao
@@ -102,6 +104,13 @@ public class RelatorioView {
 
 	}
 
+	public void dateSelect(SelectEvent evt){
+		
+		dataFinal = (Calendar)evt.getObject();
+		dataFinal.set(Calendar.MONTH, dataFinal.get(Calendar.MONTH) + 1);
+		
+	}
+	
 	/**
 	 * @return the receitaMensal
 	 */

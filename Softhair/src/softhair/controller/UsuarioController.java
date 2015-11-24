@@ -5,8 +5,10 @@ package softhair.controller;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import softhair.model.CargoSistema;
 import softhair.model.Usuario;
@@ -34,19 +36,29 @@ public class UsuarioController {
 	}
 
 	public void novoUsuario() {
+
+		FacesContext fc = FacesContext.getCurrentInstance();
 		usuarioC.getCargo().add(cargo);
 		usuarioDao.salvar(usuarioC);
 		usuarioC = new Usuario();
 		usuarios = usuarioDao.buscar();
+
+		fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
 	}
 
 	public void atualizarUsuario(Usuario usuario) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		usuarioC = usuario;
+
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public void deletarUsuario(Usuario usuario) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		usuarioDao.deletar(usuario);
 		usuarios = usuarioDao.buscar();
+
+		fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
 	}
 
 	/**

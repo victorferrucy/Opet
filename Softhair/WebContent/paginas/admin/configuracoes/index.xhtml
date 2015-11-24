@@ -16,7 +16,6 @@
 	<ui:include src="atualizarUsuario.xhtml" />
 
 	<h1>Configurações</h1>
-
 	<p:commandButton id="cadastrar" type="button" value="Novo Usuario"
 		styleClass="novo" onclick="PF('cadastrarUsuario').show();" />
 
@@ -35,16 +34,16 @@
 				<h:outputText value="#{usuario.funcionario.nome}" />
 			</p:column>
 
-			<p:column headerText="Atualizar" styleClass="acoes">
+		<!-- 	<p:column headerText="Atualizar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-arrowrefresh-1-e" title="Alterar"
 					action="#{usuarioController.atualizarUsuario(usuario)}"
 					update=":atualizarUsuario"
 					oncomplete="PF('atualizarUsuario').show();" />
-			</p:column>
+			</p:column> -->
 
 			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					update="usuarios"
+					update="usuarios :msg"
 					action="#{usuarioController.deletarUsuario(usuario)}">
 					<p:confirm header="Confirmação"
 						message="Você tem certeza que deseja excluir este item?"

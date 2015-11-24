@@ -26,19 +26,20 @@
 					value="#{servicoController.servico.descricao}" />
 
 				<p:outputLabel value="Valor" />
-				<p:inputMask id="valor" value="#{servicoController.servico.valor}"  disabled="true"/>
+				<p:inputMask id="valor" value="#{servicoController.servico.valor}"
+					disabled="true" />
 
 				<p:outputLabel value="Comissão" />
 				<p:spinner id="comissao"
 					value="#{servicoController.servico.comissao}" stepFactor="0.5"
-					min="0" max="100" />
+					min="0" max="100" disabled="true" />
 
 			</p:panelGrid>
 
 			<p:commandButton value="Atualizar"
 				action="#{servicoController.atualizar(servicoController.servico)}"
 				oncomplete="PF('atualizarServicoD').hide()"
-				update=":tabelaServicos:servicos" />
+				update=":tabelaServicos:servicos :msg" />
 
 		</h:form>
 	</p:dialog>

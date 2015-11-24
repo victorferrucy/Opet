@@ -6,8 +6,10 @@ package softhair.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import softhair.model.Cliente;
 import softhair.model.Contato;
@@ -66,16 +68,23 @@ public class ClienteController {
 	}
 
 	public void salvar() {
+
+		FacesContext fc = FacesContext.getCurrentInstance();
 		clienteDao.salvar(cliente);
 
 		cliente = new Cliente();
 		cliente.setEndereco(new Endereco());
 		cliente.setContato(new Contato());
 
+		fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+
 	}
 
 	public void atualizar(Cliente cliente) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		clienteDao.atualizar(cliente);
+
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public List<Cliente> buscar() {
@@ -86,13 +95,18 @@ public class ClienteController {
 	}
 
 	public List<Cliente> deletar(Cliente clienteSel) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		boolean deletou = false;
 
 		deletou = clienteDao.deletar(clienteDao.buscar(clienteSel));
 
 		if (deletou) {
 			clientes = clienteDao.buscar();
+			fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
+		} else {
+			fc.addMessage(null, new FacesMessage("Este cliente está sendo usado em uma comanda!"));
 		}
+
 		return clientes;
 	}
 

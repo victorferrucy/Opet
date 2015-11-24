@@ -11,7 +11,7 @@
 </h:head>
 <h:body>
 	<ui:include src="../../menu.xhtml" />
-
+	
 	<h:form id="cadastrarFuncionarioF">
 
 		<p:panelGrid columns="2">
@@ -116,7 +116,7 @@
 		</p:fieldset>
 
 		<p:commandButton value="Cadastrar"
-			action="#{funcionarioController.salvar()}" />
+			action="#{funcionarioController.salvar()}" update=":msg"/>
 
 	</h:form>
 </h:body>

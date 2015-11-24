@@ -14,9 +14,6 @@
 	<ui:include src="../../menu.xhtml" />
 
 	<h:form id="cadastrarFornecedorF">
-		<p:growl id="sucesso" />
-
-
 		<p:panelGrid columns="2">
 			<h1>Cadastrar Fornecedor</h1>
 			<p:commandButton value="Voltar"
@@ -85,7 +82,8 @@
 			</p:panelGrid>
 		</p:fieldset>
 		<p:commandButton value="Cadastrar"
-			action="#{fornecedorController.salvar()}" update="sucesso"/>
+			action="#{fornecedorController.salvar()}"
+			update="cadastrarFornecedorF :msg" />
 	</h:form>
 </h:body>
 </html>

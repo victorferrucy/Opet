@@ -9,8 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.event.Event;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
@@ -96,15 +98,24 @@ public class ComandaController {
 
 	public void salvar(AjaxBehaviorEvent e) {
 		if (comanda.getIdComanda() == 0) {
+
+			FacesContext fc = FacesContext.getCurrentInstance();
+
 			comandaDao.salvar(comanda);
 			comandas = comandaDao.buscar();
+
+			fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
 		}
 	}
 
 	public void atualizar(Comanda comanda) {
+		FacesContext fc = FacesContext.getCurrentInstance();
+
 		comanda.setServicosPrestados(servicosPrestados);
 		comandaDao.atualizar(comanda);
 		comandas = comandaDao.buscar();
+
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public List<Comanda> buscar() {
@@ -115,13 +126,17 @@ public class ComandaController {
 	}
 
 	public List<Comanda> deletar(Comanda comandaSel) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		boolean deletou = false;
 
 		deletou = comandaDao.deletar(comandaDao.buscar(comandaSel));
 
 		if (deletou) {
 			comandas = comandaDao.buscar();
+			fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
+
 		}
+		
 		return comandas;
 	}
 

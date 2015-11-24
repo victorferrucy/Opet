@@ -12,14 +12,15 @@
 <h:body>
 	<ui:include src="../menu.xhtml" />
 	<ui:include src="adicionarServico.xhtml" />
+	<ui:include src="../confirmacaoDialogo.xhtml" />
 
-	<h:form id="visualizarComandaF">
-		<p:panelGrid id="cadastrarComanda" columns="2">
+	<h:form id="visualizarComandaF" styleClass="conteudo">
 
+		<p:panelGrid columns="4">
 			<p:outputLabel value="Cliente" />
 			<p:selectOneMenu id="clientes" converter="clienteConverter"
-				value="#{comandaController.comanda.cliente}" required="true">
-				<p:ajax listener="#{comandaController.salvar}" />
+				value="#{comandaController.comanda.cliente}" required="true" filter="true" filterMatchMode="startsWith">
+				<p:ajax listener="#{comandaController.salvar}" update=":msg"/>
 				<f:selectItem itemLabel="Selecione um cliente"
 					noSelectionOption="true" />
 				<f:selectItems value="#{comandaController.buscarClientes()}"
@@ -31,6 +32,10 @@
 				showOn="button" yearRange="c-70:c"
 				value="#{comandaController.comanda.dataAbertura}" />
 
+		</p:panelGrid>
+
+		<p:panelGrid id="cadastrarComanda" columns="2">
+
 			<p:outputLabel value="Status" />
 			<p:selectOneMenu id="status"
 				value="#{comandaController.comanda.status}">
@@ -39,42 +44,46 @@
 			</p:selectOneMenu>
 		</p:panelGrid>
 
-		<p:commandButton value="Adicionar Serviço" type="button"
-			onclick="PF('adicionarServico').show();" />
+		<p:panelGrid columns="1" styleClass="conteudo">
+			<p:commandButton value="Adicionar Serviço" type="button"
+				onclick="PF('adicionarServico').show();" />
 
-		<p:dataTable widgetVar="servicosPrestados" id="servicosPrestados"
-			var="servicoPrestado" value="#{comandaController.servicosPrestados}">
+			<p:dataTable widgetVar="servicosPrestados" id="servicosPrestados"
+				styleClass="conteudo" var="servicoPrestado"
+				value="#{comandaController.servicosPrestados}">
 
-			<p:column headerText="Serviço">
-				<h:outputText value="#{servicoPrestado.servico.nome}" />
-			</p:column>
+				<p:column headerText="Serviço">
+					<h:outputText value="#{servicoPrestado.servico.nome}" />
+				</p:column>
 
-			<p:column headerText="Funcionário">
-				<h:outputText value="#{servicoPrestado.funcionario.nome}" />
-			</p:column>
+				<p:column headerText="Funcionário">
+					<h:outputText value="#{servicoPrestado.funcionario.nome}" />
+				</p:column>
 
-			<p:column headerText="Valor">
-				<h:outputText value="#{servicoPrestado.servico.valor}" />
-			</p:column>
+				<p:column id="total" headerText="Valor" footerText="#{comandaController.comanda.total.toString()}">
+					<h:outputText value="#{servicoPrestado.servico.valor}" />
+				</p:column>
 
-			<p:column headerText="Deletar">
-				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{comandaController.removerServico(servicoPrestado)}"
-					update="servicosPrestados :visualizarComandaF:total" />
-			</p:column>
+				<p:column headerText="Deletar">
+					<p:commandButton icon="ui-icon-trash" title="Deletar"
+						action="#{comandaController.removerServico(servicoPrestado)}"
+						update="servicosPrestados">
+						<p:confirm header="Confirmação"
+							message="Você tem certeza que deseja excluir este item?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
 
-		</p:dataTable>
+			</p:dataTable>
+		</p:panelGrid>
 
-		<p:commandButton value="Atualizar"
-			action="#{comandaController.atualizar(comandaController.comanda)}" />
-		<p:commandButton value="Voltar"
-			action="#{funcionarioController.paginaInicial()}" />
-
-		<p:outputLabel value="Total" />
-		<p:outputLabel id="total" maxlength="10"
-			value="#{comandaController.comanda.total}">
-		</p:outputLabel>
-
+		<p:panelGrid columns="2" styleClass="conteudo">
+			<p:commandButton value="Atualizar"
+				action="#{comandaController.atualizar(comandaController.comanda)}" update=":msg" />
+			<p:commandButton value="Voltar"
+				action="#{funcionarioController.paginaInicial()}" />
+		</p:panelGrid>
+	
 	</h:form>
 
 </h:body>

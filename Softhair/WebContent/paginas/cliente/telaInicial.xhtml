@@ -49,7 +49,7 @@
 
 			<p:column headerText="Deletar" styleClass="acoes">
 				<p:commandButton icon="ui-icon-trash" title="Deletar"
-					action="#{clienteController.deletar(cliente)}" update="clientes">
+					action="#{clienteController.deletar(cliente)}" update="clientes :msg">
 					<p:confirm header="Confirmação"
 						message="Você tem certeza que deseja excluir este item?"
 						icon="ui-icon-alert" />

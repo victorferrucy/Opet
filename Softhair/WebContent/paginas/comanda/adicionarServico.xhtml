@@ -21,7 +21,7 @@
 				<p:outputLabel value="Servico" />
 				<p:selectOneMenu id="servicos" converter="servicoConverter"
 					value="#{comandaController.servicoPrestado.servico}"
-					required="true">
+					required="true" filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{comandaController.buscarServicos()}"
 						var="servico" itemValue="#{servico}" itemLabel="#{servico.nome}" />
 				</p:selectOneMenu>
@@ -29,7 +29,7 @@
 				<p:outputLabel value="Funcionario" />
 				<p:selectOneMenu id="funcionarios" converter="funcionarioConverter"
 					value="#{comandaController.servicoPrestado.funcionario}"
-					required="true">
+					required="true" filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{comandaController.buscarFuncionarios()}"
 						var="funcionario" itemValue="#{funcionario}"
 						itemLabel="#{funcionario.nome}" />
@@ -38,7 +38,7 @@
 
 				<p:commandButton value="Adicionar Serviço"
 					action="#{comandaController.adicionarServico()}"
-					update=":visualizarComandaF:servicosPrestados :visualizarComandaF:total" >
+					update=":visualizarComandaF:servicosPrestados">
 				</p:commandButton>
 			</p:panelGrid>
 		</h:form>

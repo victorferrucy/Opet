@@ -11,7 +11,6 @@
 </h:head>
 <h:body>
 	<ui:include src="../../menu.xhtml" />
-	<p:growl id="sucesso" />
 	<h:form id="alterarFornecedorF">
 
 		<p:panelGrid columns="2">
@@ -84,7 +83,7 @@
 
 		<p:commandButton value="Atualizar"
 			action="#{fornecedorController.atualizar(fornecedorController.fornecedor)}"
-			update=":sucesso">
+			update=":msg">
 		</p:commandButton>
 
 	</h:form>

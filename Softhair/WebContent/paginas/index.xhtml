@@ -19,11 +19,11 @@
 
 		<h:form id="loginF">
 			<p:panelGrid columns="1" styleClass="centralizar-login">
-				<p:inputText id="login" value="#{loginView.usuario.login}" />
+				<p:inputText id="login" value="#{loginView.usuario.login}" styleClass="input-login" />
 				<p:watermark for="login" value="Login" id="loginW" />
-				<p:password id="senha" value="#{loginView.usuario.senha}" />
+				<p:password id="senha" value="#{loginView.usuario.senha}" styleClass="input-login" />
 				<p:watermark for="senha" value="Senha" id="senhaW" />
-				<p:commandButton value="Entrar" action="#{loginView.login()}" />
+				<p:commandButton value="Entrar" action="#{loginView.login()}" styleClass="botao-login" />
 			</p:panelGrid>
 		</h:form>
 	</div>

@@ -12,8 +12,6 @@
 <h:body>
 	<ui:include src="../../menu.xhtml" />
 
-
-
 	<h:form id="alterarFuncionarioF">
 
 		<p:panelGrid columns="2">
@@ -118,7 +116,7 @@
 		</p:fieldset>
 
 		<p:commandButton value="Atualizar"
-			action="#{funcionarioController.atualizar(funcionarioController.funcionario)}">
+			action="#{funcionarioController.atualizar(funcionarioController.funcionario)}" update=":msg">
 		</p:commandButton>
 	</h:form>
 </h:body>

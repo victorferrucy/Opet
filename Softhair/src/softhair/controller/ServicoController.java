@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import softhair.model.Servico;
 import softhair.model.dao.ServicoDao;
@@ -78,13 +80,16 @@ public class ServicoController {
 	}
 
 	public void salvar() {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		servicoDao.salvar(servico);
 		servico = new Servico();
+		fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
 	}
 
 	public void atualizar(Servico servico) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		servicoDao.atualizar(servico);
-
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public List<Servico> buscar() {
@@ -95,7 +100,18 @@ public class ServicoController {
 	}
 
 	public void deletar(Servico servico) {
-		servicoDao.deletar(servico);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		boolean deletou;
+		
+		deletou = servicoDao.deletar(servico);
+		
+		if(deletou){
+			fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
+		} else {
+			fc.addMessage(null, new FacesMessage("Este serviço está sendo usado em uma comanda!"));
+		}
+		
 	}
 
 	/**

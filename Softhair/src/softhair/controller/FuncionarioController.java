@@ -3,8 +3,10 @@ package softhair.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import softhair.model.Contato;
 import softhair.model.Endereco;
@@ -63,16 +65,21 @@ public class FuncionarioController {
 	}
 
 	public void salvar() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+
 		funcionarioDao.salvar(funcionario);
 		setFuncionario(new Funcionario());
 		funcionario.setContato(new Contato());
 		funcionario.setEndereco(new Endereco());
 
+		fc.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+
 	}
 
 	public void atualizar(Funcionario funcionario) {
+		FacesContext fc = FacesContext.getCurrentInstance();
 		funcionarioDao.atualizar(funcionario);
-
+		fc.addMessage(null, new FacesMessage("Atualizado com sucesso!"));
 	}
 
 	public List<Funcionario> buscar() {
@@ -83,8 +90,16 @@ public class FuncionarioController {
 	}
 
 	public void deletar(Funcionario funcionario) {
-		funcionarioDao.deletar(funcionario);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		boolean deletou;
 
+		deletou = funcionarioDao.deletar(funcionario);
+
+		if (deletou) {
+			fc.addMessage(null, new FacesMessage("Deletado com sucesso!"));
+		} else {
+			fc.addMessage(null, new FacesMessage("Este funcionario está sendo usado em uma comanda!"));
+		}
 	}
 
 	/**

@@ -38,7 +38,7 @@
 
 				<p:commandButton id="addButton" value="Salvar"
 					action="#{usuarioController.novoUsuario()}"
-					oncomplete="PF('cadastrarUsuario').hide()" update=":tabelaUsuario:usuarios" />
+					oncomplete="PF('cadastrarUsuario').hide()" update=":tabelaUsuario:usuarios :msg" />
 
 			</h:panelGrid>
 		</h:form>
