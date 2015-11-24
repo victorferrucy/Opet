@@ -12,8 +12,6 @@
 <h:body>
 	<ui:include src="../menu.xhtml" />
 
-
-
 	<h:form id="alterarClienteF">
 		<h:panelGrid columns="2">
 			<h1>Alterar Cliente</h1>
@@ -22,11 +20,11 @@
 		</h:panelGrid>
 		<p:fieldset legend="Informações" styleClass="grupo-form">
 			<p:panelGrid id="infomacoes" columns="2">
-				<p:outputLabel value="nome" />
+				<p:outputLabel value="Nome" />
 				<p:inputText id="nome" maxlength="30"
 					value="#{clienteController.cliente.nome}" />
 
-				<p:outputLabel value="sobrenome" />
+				<p:outputLabel value="Sobrenome" />
 				<p:inputText id="sobrenome" maxlength="40"
 					value="#{clienteController.cliente.sobrenome}" />
 
@@ -34,7 +32,7 @@
 				<p:inputMask mask="999.999.999-99" id="cpf" maxlength="11"
 					value="#{clienteController.cliente.cpf}" />
 
-				<p:outputLabel for="sexo" value="sexo" />
+				<p:outputLabel for="sexo" value="Sexo" />
 				<p:selectOneRadio id="sexo"
 					value="#{clienteController.cliente.sexo}">
 					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />

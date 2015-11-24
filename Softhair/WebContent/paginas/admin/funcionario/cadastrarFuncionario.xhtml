@@ -21,11 +21,11 @@
 		</p:panelGrid>
 		<p:fieldset legend="Informações" styleClass="grupo-form">
 			<p:panelGrid id="informacoes" columns="2">
-				<p:outputLabel value="nome" />
+				<p:outputLabel value="Nome" />
 				<p:inputText id="nome" maxlength="30"
 					value="#{funcionarioController.funcionario.nome}" />
 
-				<p:outputLabel value="sobrenome" />
+				<p:outputLabel value="Sobrenome" />
 				<p:inputText id="sobrenome" maxlength="40"
 					value="#{funcionarioController.funcionario.sobrenome}" />
 
@@ -33,7 +33,7 @@
 				<p:inputMask mask="999.999.999-99" id="cpf" maxlength="11"
 					value="#{funcionarioController.funcionario.cpf}" />
 
-				<p:outputLabel for="sexo" value="sexo" />
+				<p:outputLabel for="sexo" value="Sexo" />
 				<p:selectOneRadio id="sexo"
 					value="#{funcionarioController.funcionario.sexo}">
 					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
