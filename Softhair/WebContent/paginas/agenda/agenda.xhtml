@@ -48,7 +48,7 @@
 		<p:schedule id="agenda" widgetVar="agenda"
 			value="#{agendaController.eventModel}" locale="pt_br"
 			timeZone="GMT-2" minTime="9" maxTime="20" axisFormat="H:mm"
-			timeFormat="H:mm" aspectRatio="2" styleClass="conteudo" resizable="false" draggable="false">
+			timeFormat="H:mm" aspectRatio="2" styleClass="conteudo" resizable="false" draggable="false" view="agendaWeek">
 			<p:ajax event="dateSelect"
 				listener="#{agendaController.onDateSelect}"
 				update=":detalhesHorario" oncomplete="PF('detalhesHorario').show();" />
