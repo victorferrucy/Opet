@@ -214,4 +214,8 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
+	<properties>
+  		<sonar.organization>victorferrucy</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	</properties>
 </project>
