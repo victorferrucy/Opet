@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.19.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -116,14 +116,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.19.RELEASE</version>
 		</dependency>
 
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.19.RELEASE</version>
 		</dependency>
 
 		<!-- Spring + aspects -->
@@ -137,27 +137,27 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.19.RELEASE</version>
 		</dependency>
 
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.0.1.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.0.1.RELEASE</version>
 		</dependency>
 
 		<!-- Spring Security JSP Taglib -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.0.1.RELEASE</version>
 		</dependency>
 
 		<dependency>
