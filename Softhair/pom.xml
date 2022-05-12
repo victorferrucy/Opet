@@ -116,14 +116,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.22.RELEASE</version>
 		</dependency>
 
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.22.RELEASE</version>
 		</dependency>
 
 		<!-- Spring + aspects -->
@@ -137,7 +137,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>5.2.22.RELEASE</version>
 		</dependency>
 
 		<!-- Spring Security -->
