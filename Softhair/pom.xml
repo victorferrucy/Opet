@@ -123,7 +123,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>6.0.0</version>
 		</dependency>
 
 		<!-- Spring + aspects -->
@@ -163,7 +163,7 @@
 		<dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>spring-faces</artifactId>
-			<version>2.4.2.RELEASE</version>
+			<version>3.0.1</version>
 		</dependency>
 
 		<!-- jstl for jsp page -->
